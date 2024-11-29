@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.app-con{
+    width: 390px;
+    height: 844px;
+    background-color: #FFF9CA;
+}
+
+body{
+    background-color: #1e1e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+
+    .footer-1{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FFDEBD;
+        height: 75px;
+    }
+
+    .footer-2{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FFDEBD;
+        height: 75px;
+        
+        & img{
+            &.go-back{
+                width: 70px;
+                height: 36.57px;
+                margin: 21px;
+                cursor: pointer;
+            }
+        }
+    }
+
+
+    & nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FFDEBD;
+        height: 75px;
+        
+        & img{
+            &.burger-tap
+            {
+            height: 38.64px;
+            width: 42px;
+            margin: 21px;
+            }
+            &.question-logo
+            {
+            height: 37px;
+            width: 37px;
+            margin: 21px;
+            }
+            
+        }
+    }
+    
+}
+
+.app-page{
+    display: none;
+}
+
+.app-page-1{
+    .body-1{
+        display: flex;
+        justify-content: center;
+
+        & img{
+            width: 330px;
+            height: 409px;
+            
+        }
+    }
+    .text-button{
+        
+        .button-1{
+            background-color: #C0E8BE;
+            padding: 30px;
+            display: flex;
+            justify-content: space-around;
+            margin: 32px 45px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        
+    }
+}
+
+.app-page-2{
+
+    .green{
+        display: flex;
+        justify-content: space-around;
+        padding: 15px;
+        margin: 72px 87px;
+        font-size: 45px;
+        font-weight: bold;
+        background-color: #C0E8BE;
+        border-radius: 47px;
+        color: #FFF;
+    }
+
+    .red{
+        display: flex;
+        justify-content: space-around;
+        background-color: #FFC0A5;
+        margin-top: 118px;
+        margin: 33px 41px;
+        padding: 10px;
+        font-size: 35px;
+        border-radius: 47px;
+        color: #FFF;
+        cursor: pointer;
+    }
+
+    .picturelogo{
+        display: flex;
+        justify-content: center;
+        width: 161.35px;
+        height: 200px;
+        margin: 64px 114px;
+    }
+
+    
+}
+
+
+        
+    
+
+
