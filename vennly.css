@@ -1,144 +1,130 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.app-con{
-    width: 390px;
-    height: 844px;
-    background-color: #FFF9CA;
-}
 
-body{
+body {
     background-color: #1e1e1e;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-
-
-    .footer-1{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #FFDEBD;
-        height: 75px;
-    }
-
-    .footer-2{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #FFDEBD;
-        height: 75px;
-        
-        & img{
-            &.go-back{
-                width: 70px;
-                height: 36.57px;
-                margin: 21px;
-                cursor: pointer;
-            }
-        }
-    }
-
-
-    & nav{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #FFDEBD;
-        height: 75px;
-        
-        & img{
-            &.burger-tap
-            {
-            height: 38.64px;
-            width: 42px;
-            margin: 21px;
-            }
-            &.question-logo
-            {
-            height: 37px;
-            width: 37px;
-            margin: 21px;
-            }
-            
-        }
-    }
-    
+    margin: 0;
 }
 
-.app-page{
+.app-con {
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFF9CA;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-page {
+    width: 100%;
+    height: 100%;
     display: none;
 }
 
-.app-page-1{
-    .body-1{
-        display: flex;
-        justify-content: center;
-
-        & img{
-            width: 330px;
-            height: 409px;
-            
-        }
-    }
-    .text-button{
-        
-        .button-1{
-            background-color: #C0E8BE;
-            padding: 30px;
-            display: flex;
-            justify-content: space-around;
-            margin: 32px 45px;
-            border-radius: 40px;
-            cursor: pointer;
-        }
-        
-    }
+.app-page-1, .app-page-2, .app-page-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
 }
 
-.app-page-2{
+.footer-1, .footer-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFDEBD;
+    height: 75px;
+    width: 100%;
+}
 
-    .green{
-        display: flex;
-        justify-content: space-around;
-        padding: 15px;
-        margin: 72px 87px;
-        font-size: 45px;
-        font-weight: bold;
-        background-color: #C0E8BE;
-        border-radius: 47px;
-        color: #FFF;
-    }
+.footer-2 img.go-back {
+    width: 70px;
+    height: 36.57px;
+    margin: 21px;
+    cursor: pointer;
+}
 
-    .red{
-        display: flex;
-        justify-content: space-around;
-        background-color: #FFC0A5;
-        margin-top: 118px;
-        margin: 33px 41px;
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFDEBD;
+    height: 75px;
+    width: 100%;
+}
+
+nav img.burger-tap, nav img.question-logo {
+    height: 38.64px;
+    width: 42px;
+    margin: 21px;
+}
+
+.app-page-1 .body-1 img {
+    width: 85%;
+    height: auto;
+}
+
+.app-page-1 .text-button .button-1 {
+    background-color: #C0E8BE;
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    margin: 5% auto;
+    border-radius: 40px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.app-page-2 .green {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    margin: 72px 87px;
+    font-size: 45px;
+    font-weight: bold;
+    background-color: #C0E8BE;
+    border-radius: 47px;
+    color: #FFF;
+}
+
+.app-page-2 .red {
+    display: flex;
+    justify-content: center;
+    background-color: #FFC0A5;
+    margin: 33px 41px;
+    padding: 10px;
+    font-size: 35px;
+    border-radius: 47px;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.app-page-2 .picturelogo {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    height: auto;
+    margin: 5% auto;
+}
+
+@media (max-width: 768px) {
+    .app-page-1 .text-button .button-1 {
         padding: 10px;
-        font-size: 35px;
-        border-radius: 47px;
-        color: #FFF;
-        cursor: pointer;
+        font-size: 16px;
     }
 
-    .picturelogo{
-        display: flex;
-        justify-content: center;
-        width: 161.35px;
-        height: 200px;
-        margin: 64px 114px;
+    .app-page-2 .green {
+        font-size: 30px;
     }
 
-    
+    .app-page-2 .red {
+        font-size: 28px;
+    }
 }
-
-
-        
-    
-
-
