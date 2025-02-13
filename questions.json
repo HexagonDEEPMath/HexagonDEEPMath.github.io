@@ -1,0 +1,22 @@
+[
+    { "text": "A ∩ B'", "answer": [1, 8] },
+    { "text": "B ∩ C'", "answer": [2, 4] },
+    { "text": "C ∩ A'", "answer": [32, 64] },
+    { "text": "(A ∪ B)'", "answer": [0, 64] },
+    { "text": "(A ∪ B ∪ C)'", "answer": [0] },
+    { "text": "A ∩ C'", "answer": [1, 2] },
+    { "text": "B ∩ A'", "answer": [4, 32] },
+    { "text": "C ∩ B'", "answer": [8,64] },
+    { "text": "A ∪ C", "answer": [1,2,8,16,32,64] },
+    { "text": "B ∪ C", "answer": [2, 4, 8, 16, 32, 64] },
+    { "text": "A ∪ B", "answer": [1, 2,4,8,16,32] },
+    { "text": "A ∩ B ∩ C", "answer": [16] },
+    { "text": "A' ∩ B ∩ C", "answer": [32] },
+    { "text": "A ∩ B' ∩ C", "answer": [8] },
+    { "text": "A ∪ (B ∩ C)", "answer": [1, 2, 8, 16, 32] },
+    { "text": "B ∪ (A ∩ C)", "answer": [2, 4, 8, 16, 32] },
+    { "text": "C ∪ (A ∩ B)", "answer": [2, 8, 16, 32, 64] },
+    { "text": "(A ∩ B) ∪ (B ∩ C)", "answer": [2,16, 32] },
+    { "text": "(A ∩ C) ∪ (B ∩ C)", "answer": [8, 16, 32] },
+    { "text": "(A ∪ B) ∩ C'", "answer": [1,2,4] }
+]
