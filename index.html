@@ -15,30 +15,31 @@
             fill: white;
         }
         .clicked {
-            fill: green !important; /* ✅ สีเขียว */
-        }
-        .correct {
-            fill: rgba(255, 255, 0, 0.5) !important; /* ✅ สีเหลืองโปร่งแสง */
+            fill: green !important;
         }
         text {
-            font-size: 12px;
+            font-size: 5px;
             font-weight: bold;
             fill: black;
             text-anchor: middle;
             pointer-events: none;
         }
+        text.universe{
+            font-size:8px;
+        }
+        
     </style>
 </head>
 <body>
 
-    <h2>Venn Diagram Quiz</h2>
+    <h2>Venn Diagram ทดสอบการทำงาน</h2>
     <p id="question-number">กำลังโหลด...</p>
+    <!-- <p id="questions-number">จำนวน</p> -->
     <p id="question">โจทย์: กำลังโหลด...</p>
     <p id="status">กรุณาเลือกพื้นที่ที่ตรงกับโจทย์</p>
 
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="25%" width="25%" viewBox="0 0 120 120">
         <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 0)" />
-
         <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
         <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
         <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
@@ -46,16 +47,18 @@
         <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
         <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
         <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
-
-        <text x="45" y="45">A</text>
-        <text x="75" y="45">B</text>
-        <text x="60" y="75">C</text>
+        
+        <text class="universe" x="112" y="10">U</text>
+        <text x="18" y="18">A</text>
+        <text x="102" y="18">B</text>
+        <text x="60" y="115">C</text>
+        
     </svg>
 
     <br>
-    <button onclick="submitAnswer()">Submit</button>
-    <button onclick="showAnswer()">Show Answer</button>
-
+    <button onclick="submitAnswer()" height="">Submit</button>
+    <!-- <button onclick="nextAnswer()" height="">GOGOGO</button>
+    <button onclick="backAnswer()" height="">BACKBACK</button> -->
     <script>
         let selectedState = 0;
         let questions = [];
@@ -68,76 +71,61 @@
                 showQuestion();
             } catch (error) {
                 console.error("Error loading questions:", error);
-                document.getElementById("question").innerText = "โหลดโจทย์ไม่สำเร็จ ❌";
+                document.getElementById("question").innerText = "โหลดโจทย์ไม่สำเร็จ";
             }
         }
 
         function showQuestion() {
             if (currentIndex >= questions.length) {
-                document.getElementById("question-number").innerText = "จบแบบทดสอบ ✅";
+                
                 document.getElementById("question").innerText = "คุณทำครบทุกข้อแล้ว!";
                 return;
             }
-            
             let currentQuestion = questions[currentIndex];
-
             document.getElementById("question-number").innerText = `ข้อที่ ${currentIndex + 1} / ${questions.length}`;
             document.getElementById("question").innerText = `โจทย์: ${currentQuestion.text}`;
             document.getElementById("status").innerText = "กรุณาเลือกพื้นที่ที่ตรงกับโจทย์";
-
             selectedState = 0;
             resetColors();
         }
 
         function toggleColor(element, value) {
-            if (element.classList.contains("correct")) {
-                element.classList.remove("correct"); // ✅ ลบสีเหลือง
-                element.classList.add("clicked");   // ✅ เปลี่ยนเป็นสีเขียว
-                selectedState |= value; // ✅ อัปเดตค่า selectedState
-            } else if (element.classList.contains("clicked")) {
-                element.classList.remove("clicked"); // ✅ ลบสีเขียวกลับเป็นขาว
-                selectedState &= ~value; // ✅ เอาออกจาก selectedState
+            if (element.classList.contains("clicked")) {
+                element.classList.remove("clicked");
+                selectedState &= ~value;
             } else {
-                element.classList.add("clicked"); // ✅ เปลี่ยนเป็นสีเขียว
-                selectedState |= value; // ✅ อัปเดตค่า selectedState
+                element.classList.add("clicked");
+                selectedState |= value;
             }
         }
 
         function resetColors() {
             document.querySelectorAll(".rect-clickable, path").forEach(el => {
-                el.classList.remove("clicked", "correct");
+                el.classList.remove("clicked");
             });
             selectedState = 0;
         }
 
         function submitAnswer() {
             if (currentIndex >= questions.length) return;
-            
             let correctAnswer = questions[currentIndex].answer.reduce((acc, val) => acc | val, 0);
-
             if (selectedState === correctAnswer) {
-                document.getElementById("status").innerText = "✅ ถูกต้อง!";
+                document.getElementById("status").innerText = "ถูกต้อง!";
                 currentIndex++;
                 setTimeout(showQuestion, 1000);
             } else {
-                document.getElementById("status").innerText = "❌ ลองอีกครั้ง!";
+                document.getElementById("status").innerText = "ลองอีกครั้ง!";
             }
         }
-
-        function showAnswer() {
-            if (currentIndex >= questions.length) return;
-
-            let correctAnswer = questions[currentIndex].answer;
-            resetColors(); // ✅ ล้างสีทั้งหมดเป็นขาวก่อน
-
-            document.querySelectorAll(".rect-clickable, path").forEach(el => {
-                let value = parseInt(el.getAttribute("onclick").match(/\d+/)[0]);
-                if (correctAnswer.includes(value)) {
-                    el.classList.add("correct"); // ✅ เปลี่ยนเป็นสีเหลืองโปร่งแสง
-                }
-            });
-
-            document.getElementById("status").innerText = "🔍 เฉลยแล้ว! (กดเลือกเป็นสีเขียวได้)";
+        function nextAnswer(){
+            currentIndex++;
+            showQuestion();
+        }
+        function backAnswer(){
+            if (currentIndex >= 1){
+                currentIndex--;
+                showQuestion();
+            }
         }
 
         window.onload = loadQuestions;
