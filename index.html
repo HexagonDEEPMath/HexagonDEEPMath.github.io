@@ -67,7 +67,8 @@
         let timer;  
         let seconds = 0;  
 
-        seconds = 0;
+        function start(){
+            seconds = 0;
             updateTimer();
 
             timer = setInterval(() => {
@@ -90,6 +91,7 @@
                 let response = await fetch("questions.json");
                 questions = await response.json();
                 showQuestion();
+                start();
             } catch (error) {
                 console.error("Error loading questions:", error);
                 document.getElementById("question").innerText = "โหลดโจทย์ไม่สำเร็จ";
