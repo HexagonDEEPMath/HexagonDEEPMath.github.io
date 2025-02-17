@@ -63,6 +63,26 @@
         let selectedState = 0;
         let questions = [];
         let currentIndex = 0;
+        let timer;  
+        let seconds = 0;  
+
+        seconds = 0;
+            updateTimer();
+
+            timer = setInterval(() => {
+                seconds++;
+                updateTimer();
+            }, 1000);
+        }
+        function formatTime(sec) {
+            let min = Math.floor(sec / 60);
+            let secRemain = sec % 60;
+            return `${String(min).padStart(2, '0')}:${String(secRemain).padStart(2, '0')}`;
+        }
+
+        function updateTimer() {
+            document.getElementById("timer").innerText = `เวลา: ${formatTime(seconds)}`;
+        }
 
         async function loadQuestions() {
             try {
@@ -79,6 +99,8 @@
             if (currentIndex >= questions.length) {
                 
                 document.getElementById("question").innerText = "คุณทำครบทุกข้อแล้ว!";
+                clearInterval(timer);
+            alert(`จบเกม! ใช้เวลา ${formatTime(seconds)}`);
                 return;
             }
             let currentQuestion = questions[currentIndex];
