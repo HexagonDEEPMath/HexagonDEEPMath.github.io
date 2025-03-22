@@ -3,11 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venn Diagram - Custom Quiz</title>
+    <title>Venn Diagram Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
+        html, body {
+            overflow: hidden;
+            margin: 0;
+            height: 844px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1e1e1e;
+            font-family: "Baloo 2", sans-serif;
+        }
+        body{
+            font-size: 25px;
+        }
+        .container{
+            width: 390px;
+            height: 844px;
+            overflow: hidden;
+            position: relative;
+        }
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+        .app-page{
+            height: 100%;
+            width: 100%;
+            background-color: #FFF9CA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+        .grid{
+            width: 305px;
+            height: 305px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .number{
+            border-radius: 23px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .number h1{
+            margin: 0px;
+        }
+        .number.locked {
+            cursor: not-allowed;
+            position: relative;
+        }
+        .number.locked::after {
+            content: "🔒";
+            position: absolute;
+            font-size: 18px;
+            bottom: 5px;
+            right: 5px;
+        }
+        .number.completed {
+            position: relative;
+        }
+        .number.completed::after {
+            content: "✓";
+            position: absolute;
+            font-size: 18px;
+            bottom: 5px;
+            right: 5px;
+            color: green;
+        }
+        .page1 .number{
+            background-color: #FFD9E1;
+            color: #FFA8C8;
+        }
+        .page2 .number{
+            background-color: #C0E3FF;
+            color: #5FA3FF;
+        }
+        .page3 .number{
+            background-color: #F0D5FF;
+            color: #C886F8;
+        }
+        
+        .venn-container {
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+        }
+        .venn-container h2 {
+            margin-top: 10px;
+            margin-bottom: 5px;
         }
         .rect-clickable, path {
             stroke: black;
@@ -15,122 +117,356 @@
             fill: white;
         }
         .clicked {
-            fill: green !important;
+            fill: #F0FFBD !important;
         }
-        text {
+        svg text {
             font-size: 5px;
             font-weight: bold;
             fill: black;
             text-anchor: middle;
             pointer-events: none;
         }
-        text.universe{
-            font-size:8px;
+        svg text.universe{
+            font-size: 8px;
         }
-        p{
-            font-size: 18px;
+        #submit-btn {
+            height: 60px;
+            width: 80%;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background-color: #FFD9E1;
+            border: none;
+            border-radius: 15px;
+            color: #FFA8C8;
+            cursor: pointer;
         }
-        h2{
-            font-size:24px;
+        #back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 15px;
+            background-color: #FFD9E1;
+            border: none;
+            border-radius: 10px;
+            color: #FFA8C8;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .question-info {
+            width: 100%;
+            text-align: center;
+        }
+        .question-info p {
+            margin: 5px 0;
+        }
+        #question {
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 20px; /* ขนาดเริ่มต้น */
+        }
+        .Replay{
+            background-color: #C0E3FF;
+            cursor: pointer;
+            position: absolute;
+            bottom: 50px;
+            border-radius: 23px;
+            h3{
+                margin: 20px;
             }
-        button{
-        height: 100px;
-        width: 60%;
-        font-size:40px;
-        font-weight:900;
-        
         }
+        .swiper-pagination {
+            position: absolute;
+            bottom: 20px;
+        }
+        .swiper-pagination-bullet{
+            background-color: #FFFFFF;
+            opacity: 0.5;
+        }
+        .swiper-pagination-bullet-active{
+            background-color: #FFAD7A;
+            opacity: 1;
+        }
+
+        
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="swiper mySwiper" id="menu-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="app-page page1">
+                        <div class="grid">
+                            <div class="number" onclick="tryGoToQuestion(1)"><h1>1</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(2)"><h1>2</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(3)"><h1>3</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(4)"><h1>4</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(5)"><h1>5</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(6)"><h1>6</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(7)"><h1>7</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(8)"><h1>8</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(9)"><h1>9</h1></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="app-page page2">
+                        <div class="grid">
+                            <div class="number locked" onclick="tryGoToQuestion(10)"><h1>1</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(11)"><h1>2</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(12)"><h1>3</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(13)"><h1>4</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(14)"><h1>5</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(15)"><h1>6</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(16)"><h1>7</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(17)"><h1>8</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(18)"><h1>9</h1></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="app-page page3">
+                        <div class="grid">
+                            <div class="number locked" onclick="tryGoToQuestion(19)"><h1>1</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(20)"><h1>2</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(21)"><h1>3</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(22)"><h1>4</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(23)"><h1>5</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(24)"><h1>6</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(25)"><h1>7</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(26)"><h1>8</h1></div>
+                            <div class="number locked" onclick="tryGoToQuestion(27)"><h1>9</h1></div>
+                        </div>
+                        <div class="Replay"><h3>ReStart naja</h3></div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
 
-    <h2>Venn Diagram ทดสอบการทำงาน</h2>
-    <p id="timer">เวลา: 00:00</p>
-    <p id="question-number">กำลังโหลด...</p>
-    <!---<p id="questions-number">จำนวน</p>--->
-    <p id="question">โจทย์: กำลังโหลด...</p>
-    <p id="status">กรุณาเลือกพื้นที่ที่ตรงกับโจทย์</p>
+        <!-- Venn Diagram Quiz Container -->
+        <div class="venn-container" id="quiz-container">
+            <button id="back-btn" onclick="goBackToMenu()">←</button>
+            
+            <div class="question-info">
+                <h2>Venn Diagram Quiz</h2>
+                <p id="question-number">กำลังโหลด...</p>
+                <p id="question">โจทย์: กำลังโหลด...</p>
+                <p id="status">กรุณาเลือกพื้นที่ที่ตรงกับโจทย์</p>
+            </div>
 
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="25%" width="25%" viewBox="0 0 120 120">
-        <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
-        <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
-        <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
-        <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
-        <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
-        <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
-        <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
-        <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
-        
-        <text class="universe" x="112" y="10">U</text>
-        <text x="18" y="18">A</text>
-        <text x="102" y="18">B</text>
-        <text x="60" y="115">C</text>
-        
-    </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="40%" width="80%" viewBox="0 0 120 120">
+                <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
+                <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
+                <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
+                <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
+                <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
+                <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
+                <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
+                <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
+                
+                <text class="universe" x="112" y="10">U</text>
+                <text x="18" y="18">A</text>
+                <text x="102" y="18">B</text>
+                <text x="60" y="115">C</text>
+            </svg>
 
-    <br>
-    <button onclick="submitAnswer()" height="">Submit</button>
-    <!---<button onclick="nextAnswer()" height="">GOGOGO</button>
-    <button onclick="backAnswer()" height="">BACKBACK</button>--->
+            <button id="submit-btn" onclick="submitAnswer()">Submit</button>
+        </div>
+    </div>
+
     <script>
+        // Swiper initialization
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            effect: "slide",
+            speed: 500,
+        });
+
+        // Venn Diagram Quiz Variables
         let selectedState = 0;
         let questions = [];
         let currentIndex = 0;
-        let timer;  
-        let seconds = 0;  
+        let isQuizActive = false;
+        
+        // Variables to track progress
+        let completedQuestions = {};
+        let highestUnlockedQuestion = 1; // Start with question 1 unlocked
+        
+        // References to containers
+        const menuContainer = document.getElementById("menu-container");
+        const quizContainer = document.getElementById("quiz-container");
 
-        function start(){
-            seconds = 0;
-            updateTimer();
+        
 
-            timer = setInterval(() => {
-                seconds++;
-                updateTimer();
-            }, 1000);
-        }
-        function formatTime(sec) {
-            let min = Math.floor(sec / 60);
-            let secRemain = sec % 60;
-            return `${String(min).padStart(2, '0')}:${String(secRemain).padStart(2, '0')}`;
-        }
-
-        function updateTimer() {
-            document.getElementById("timer").innerText = `เวลา: ${formatTime(seconds)}`;
-        }
-
+        // Load questions
         async function loadQuestions() {
             try {
                 let response = await fetch("questions.json");
                 questions = await response.json();
-                shuffleQuestions()
-                showQuestion();
-                start();
+                console.log("Questions loaded successfully:", questions);
             } catch (error) {
                 console.error("Error loading questions:", error);
-                document.getElementById("question").innerText = "โหลดโจทย์ไม่สำเร็จ";
+                console.log("Using mock questions:", questions);
+            }
+            
+            // Check for previously completed questions
+            loadProgress();
+            updateButtonStatus();
+        }
+        
+        // Save/Load progress
+        function saveProgress() {
+            localStorage.setItem('vennQuizCompleted', JSON.stringify(completedQuestions));
+            localStorage.setItem('vennQuizHighestUnlocked', highestUnlockedQuestion);
+        }
+        
+        function loadProgress() {
+            try {
+                const savedCompleted = localStorage.getItem('vennQuizCompleted');
+                const savedHighest = localStorage.getItem('vennQuizHighestUnlocked');
+                
+                if (savedCompleted) {
+                    completedQuestions = JSON.parse(savedCompleted);
+                }
+                
+                if (savedHighest) {
+                    highestUnlockedQuestion = parseInt(savedHighest);
+                }
+            } catch (e) {
+                console.error("Error loading saved progress:", e);
             }
         }
         
-        function shuffleQuestions() {
-    for (let i = questions.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [questions[i], questions[j]] = [questions[j], questions[i]];}
+        // Update button status (locked/unlocked/completed)
+        function updateButtonStatus() {
+            // For all questions
+            for (let i = 1; i <= 27; i++) {
+                // Find the button for this question
+                const questionIndex = i - 1;
+                const pageIndex = Math.floor(questionIndex / 9);
+                const buttonIndex = questionIndex % 9;
+                
+                const page = document.querySelector(`.app-page.page${pageIndex + 1}`);
+                if (!page) continue;
+                
+                const buttons = page.querySelectorAll('.number');
+                if (buttonIndex >= buttons.length) continue;
+                
+                const button = buttons[buttonIndex];
+                
+                // Update button state
+                button.classList.remove('locked', 'completed');
+                
+                if (completedQuestions[questionIndex]) {
+                    button.classList.add('completed');
+                } else if (i > highestUnlockedQuestion) {
+                    button.classList.add('locked');
+                }
+            }
         }
 
-        function showQuestion() {
-            if (currentIndex >= questions.length) {
-                
-                document.getElementById("question").innerText = "คุณทำครบทุกข้อแล้ว!";
-                clearInterval(timer);
-            alert(`จบเกม! ใช้เวลา ${formatTime(seconds)}`);
+        // Try to go to a question (checks if it's unlocked)
+        function tryGoToQuestion(questionNumber) {
+            if (questionNumber > highestUnlockedQuestion) {
+                alert("คุณยังไม่สามารถทำข้อนี้ได้ ต้องทำข้อก่อนหน้าให้เสร็จก่อน");
                 return;
             }
+            
+            goToQuestion(questionNumber);
+        }
+        
+        // Go to a question
+        function goToQuestion(questionNumber) {
+            if (!questions || questions.length === 0) {
+                alert("กำลังโหลดโจทย์ กรุณารอสักครู่");
+                return;
+            }
+            
+            // Adjust index to be zero-based
+            currentIndex = questionNumber - 1;
+            
+            if (currentIndex < 0 || currentIndex >= questions.length) {
+                alert("ไม่พบข้อนี้");
+                return;
+            }
+            
+            // Show quiz and hide menu
+            menuContainer.style.display = "none";
+            quizContainer.style.display = "flex";
+            
+            resetColors();
+            showQuestion();
+            
+            isQuizActive = true;
+        }
+        
+        function goBackToMenu() {
+            // Hide quiz and show menu
+            quizContainer.style.display = "none";
+            menuContainer.style.display = "block";
+            isQuizActive = false;
+            
+            // Update button states
+            updateButtonStatus();
+        }
+
+        // Quiz functions
+        function showQuestion() {
+            if (currentIndex >= questions.length) {
+                document.getElementById("question").innerText = "คุณทำครบทุกข้อแล้ว!";
+                alert("จบเกม! คุณทำครบทุกข้อแล้ว");
+                return;
+            }
+            
             let currentQuestion = questions[currentIndex];
             document.getElementById("question-number").innerText = `ข้อที่ ${currentIndex + 1} / ${questions.length}`;
-            document.getElementById("question").innerText = `โจทย์: ${currentQuestion.text}`;
+            
+            const questionElement = document.getElementById("question");
+            questionElement.innerText = `โจทย์: ${currentQuestion.text}`;
+            
+            // Adjust text size to fit in container
+            adjustTextSize(questionElement);
+            
             document.getElementById("status").innerText = "กรุณาเลือกพื้นที่ที่ตรงกับโจทย์";
-            selectedState = 0;
-            resetColors();
+            
+            // If this question was previously completed, show previous answer
+            if (completedQuestions[currentIndex]) {
+                selectedState = completedQuestions[currentIndex];
+                highlightSelectedAreas();
+            } else {
+                resetColors();
+            }
+        }
+        
+        // Adjust text size to fit in container
+        function adjustTextSize(element) {
+            const maxWidth = element.parentElement.clientWidth;
+            
+            // Start with 20px and reduce until it fits
+            let fontSize = 20;
+            element.style.fontSize = `${fontSize}px`;
+            
+            // If it's too long, reduce font size until it fits without wrapping
+            while (element.scrollWidth > maxWidth && fontSize > 12) {
+                fontSize -= 1;
+                element.style.fontSize = `${fontSize}px`;
+            }
+            
+            // If it's still too long at minimum font size, allow wrapping
+            if (element.scrollWidth > maxWidth) {
+                element.style.whiteSpace = "normal";
+            } else {
+                element.style.whiteSpace = "nowrap";
+            }
         }
 
         function toggleColor(element, value) {
@@ -149,31 +485,86 @@
             });
             selectedState = 0;
         }
+        
+        function highlightSelectedAreas() {
+            const elements = document.querySelectorAll(".rect-clickable, path");
+            elements.forEach(el => {
+                el.classList.remove("clicked");
+            });
+            
+            const values = [128, 1, 2, 4, 8, 16, 32, 64];
+            
+            elements.forEach((el, index) => {
+                if (index < values.length && (selectedState & values[index])) {
+                    el.classList.add("clicked");
+                }
+            });
+        }
 
         function submitAnswer() {
             if (currentIndex >= questions.length) return;
+            
             let correctAnswer = questions[currentIndex].answer.reduce((acc, val) => acc | val, 0);
             if (selectedState === correctAnswer) {
                 document.getElementById("status").innerText = "ถูกต้อง!";
-                currentIndex++;
-                setTimeout(showQuestion, 1000);
+                
+                // Save the correct answer
+                completedQuestions[currentIndex] = selectedState;
+                
+                // Unlock next question if applicable
+                if (currentIndex + 1 === highestUnlockedQuestion) {
+                    highestUnlockedQuestion++;
+                }
+                
+                // Save progress
+                saveProgress();
+                
+                // Go to next question
+                setTimeout(() => {
+                    if (currentIndex + 1 < questions.length && currentIndex + 1 < highestUnlockedQuestion) {
+                        currentIndex++;
+                        showQuestion();
+                    } else {
+                        goBackToMenu();
+                        if (currentIndex + 1 >= questions.length) {
+                            alert("ยินดีด้วย! คุณทำครบทุกข้อแล้ว");
+                        } else {
+                            alert("สำเร็จ! กลับไปเลือกข้อถัดไปได้เลย");
+                        }
+                    }
+                }, 1000);
             } else {
                 document.getElementById("status").innerText = "ลองอีกครั้ง!";
             }
         }
-        function nextAnswer(){
-            currentIndex++;
-            showQuestion();
-        }
-        function backAnswer(){
-            if (currentIndex >= 1){
-                currentIndex--;
-                showQuestion();
-            }
-        }
 
-        window.onload = loadQuestions;
+        // Load questions when page loads
+window.onload = function() {
+    loadQuestions();
+    // เพิ่ม event listener สำหรับปุ่ม Replay
+    document.querySelector('.Replay').addEventListener('click', resetGame);
+    };
+
+// ฟังก์ชันสำหรับรีเซ็ตเกมทั้งหมด
+function resetGame() {
+    // ลบข้อมูลที่บันทึกใน localStorage
+    localStorage.removeItem('vennQuizCompleted');
+    localStorage.removeItem('vennQuizHighestUnlocked');
+    
+    // รีเซ็ตตัวแปรที่เกี่ยวข้อง
+    completedQuestions = {};
+    highestUnlockedQuestion = 1; // เริ่มต้นที่ข้อ 1 เท่านั้น
+    
+    // อัพเดทสถานะปุ่มใหม่
+    updateButtonStatus();
+    
+    // แสดงข้อความยืนยัน
+    alert('เริ่มเกมใหม่เรียบร้อยแล้ว! คุณต้องเริ่มทำข้อ 1 ใหม่');
+    
+    // กลับไปหน้าแรก (ถ้าไม่ได้อยู่ที่หน้าแรกอยู่แล้ว)
+    swiper.slideTo(0);
+}
+        
     </script>
-
 </body>
 </html>
