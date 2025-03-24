@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venn Diagram Quiz</title>
+    <title>Vennly</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <style>
-        html, body {
-            overflow: hidden;
+        body{
+            background-color: #1e1e1e;
             margin: 0;
+            overflow: hidden;
             height: 844px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1e1e1e;
             font-family: "Baloo 2", sans-serif;
-        }
-        body{
             font-size: 25px;
+        }
+        .grid{
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            height: 305px;
+            width: 305px;
+            gap: 10px;
         }
         .container{
             width: 390px;
@@ -29,9 +36,9 @@
             overflow: hidden;
             position: relative;
         }
-        .swiper {
-            width: 100%;
+        .swiper{
             height: 100%;
+            width: 100%;
         }
         .app-page{
             height: 100%;
@@ -41,15 +48,6 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            position: relative;
-        }
-        .grid{
-            width: 305px;
-            height: 305px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 10px;
         }
         .number{
             border-radius: 23px;
@@ -61,28 +59,12 @@
         .number h1{
             margin: 0px;
         }
-        .number.locked {
+        .number.locked{
             cursor: not-allowed;
-            position: relative;
+            color: #737373 !important ;
+            background-color: #b6b6b6 !important ;
         }
-        .number.locked::after {
-            content: "🔒";
-            position: absolute;
-            font-size: 18px;
-            bottom: 5px;
-            right: 5px;
-        }
-        .number.completed {
-            position: relative;
-        }
-        .number.completed::after {
-            content: "✓";
-            position: absolute;
-            font-size: 18px;
-            bottom: 5px;
-            right: 5px;
-            color: green;
-        }
+        
         .page1 .number{
             background-color: #FFD9E1;
             color: #FFA8C8;
@@ -95,11 +77,11 @@
             background-color: #F0D5FF;
             color: #C886F8;
         }
-        
-        .venn-container {
+
+        .venn-container{
             width: 100%;
             height: 100%;
-            display: none;
+            display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
@@ -107,19 +89,15 @@
             box-sizing: border-box;
             background-color: white;
         }
-        .venn-container h2 {
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-        .rect-clickable, path {
-            stroke: black;
+        .rect-clickable, path{
             stroke-width: 1;
             fill: white;
+            stroke: black;
         }
         .clicked {
             fill: #F0FFBD !important;
         }
-        svg text {
+        svg text{
             font-size: 5px;
             font-weight: bold;
             fill: black;
@@ -129,53 +107,46 @@
         svg text.universe{
             font-size: 8px;
         }
-        #submit-btn {
-            height: 60px;
-            width: 80%;
+        #submit-btn{
+            height: 69px;
+            width: 133px;
             font-size: 24px;
             font-weight: 900;
-            margin-bottom: 20px;
-            background-color: #FFD9E1;
+            margin-bottom: 123px;
             border: none;
-            border-radius: 15px;
-            color: #FFA8C8;
+            border-radius: 23px;
+            background-color: #FF7A69;
+            color: white;
             cursor: pointer;
         }
-        #back-btn {
+        #back-btn{
             position: absolute;
-            top: 10px;
+            bottom: 10px;
             left: 10px;
             padding: 10px 15px;
             background-color: #FFD9E1;
             border: none;
             border-radius: 10px;
-            color: #FFA8C8;
+            color: #FF914D;
             font-weight: bold;
             cursor: pointer;
         }
-        .question-info {
+        #submit-btn:active, #back-btn:active ,.number:active{
+            transform: scale(0.95);
+        }
+        .question-info{
             width: 100%;
             text-align: center;
         }
         .question-info p {
             margin: 5px 0;
         }
-        #question {
+        #question{
             max-width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-size: 20px; /* ขนาดเริ่มต้น */
-        }
-        .Replay{
-            background-color: #C0E3FF;
-            cursor: pointer;
-            position: absolute;
-            top: 50px;
-            border-radius: 23px;
-            h3{
-                margin: 20px;
-            }
+            font-size: 20px;
         }
         .swiper-pagination {
             position: absolute;
@@ -190,7 +161,18 @@
             opacity: 1;
         }
 
-        
+
+        @keyframes shakeText {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .shake {
+            animation: shakeText 0.5s;
+        }
     </style>
 </head>
 <body>
@@ -200,62 +182,57 @@
                 <div class="swiper-slide">
                     <div class="app-page page1">
                         <div class="grid">
-                            <div class="number" onclick="tryGoToQuestion(1)"><h1>1</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(2)"><h1>2</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(3)"><h1>3</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(4)"><h1>4</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(5)"><h1>5</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(6)"><h1>6</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(7)"><h1>7</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(8)"><h1>8</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(9)"><h1>9</h1></div>
+                            <div class="number " onclick="trytogoQuestion(1)"><h1>1</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(2)"><h1>2</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(3)"><h1>3</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(4)"><h1>4</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(5)"><h1>5</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(6)"><h1>6</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(7)"><h1>7</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(8)"><h1>8</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(9)"><h1>9</h1></div>
                         </div>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="app-page page2">
                         <div class="grid">
-                            <div class="number locked" onclick="tryGoToQuestion(10)"><h1>1</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(11)"><h1>2</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(12)"><h1>3</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(13)"><h1>4</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(14)"><h1>5</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(15)"><h1>6</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(16)"><h1>7</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(17)"><h1>8</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(18)"><h1>9</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(10)"><h1>1</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(11)"><h1>2</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(12)"><h1>3</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(13)"><h1>4</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(14)"><h1>5</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(15)"><h1>6</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(16)"><h1>7</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(17)"><h1>8</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(18)"><h1>9</h1></div>
                         </div>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="app-page page3">
                         <div class="grid">
-                            <div class="number locked" onclick="tryGoToQuestion(19)"><h1>1</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(20)"><h1>2</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(21)"><h1>3</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(22)"><h1>4</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(23)"><h1>5</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(24)"><h1>6</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(25)"><h1>7</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(26)"><h1>8</h1></div>
-                            <div class="number locked" onclick="tryGoToQuestion(27)"><h1>9</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(19)"><h1>1</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(20)"><h1>2</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(21)"><h1>3</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(22)"><h1>4</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(23)"><h1>5</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(24)"><h1>6</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(25)"><h1>7</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(26)"><h1>8</h1></div>
+                            <div class="number locked" onclick="trytogoQuestion(27)"><h1>9</h1></div>
                         </div>
-                        <div class="Replay"><h3>ReStart naja</h3></div>
                     </div>
                 </div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
-
-        <!-- Venn Diagram Quiz Container -->
         <div class="venn-container" id="quiz-container">
-            <button id="back-btn" onclick="goBackToMenu()">←</button>
-            
+
             <div class="question-info">
-                <h2>Venn Diagram Quiz</h2>
                 <p id="question-number">กำลังโหลด...</p>
-                <p id="question">โจทย์: กำลังโหลด...</p>
-                <p id="status">กรุณาเลือกพื้นที่ที่ตรงกับโจทย์</p>
+                <p id="question">กำลังโหลดโจทย์...</p>
+                <p id="status">กรุณาเลือกพื้นที่ให้ตรงกับโจทย์</p>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="40%" width="80%" viewBox="0 0 120 120">
@@ -275,296 +252,223 @@
             </svg>
 
             <button id="submit-btn" onclick="submitAnswer()">Submit</button>
+            <button id="back-btn" onclick="goBack()">Go back</button>
         </div>
     </div>
-
-    <script>
-        // Swiper initialization
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            effect: "slide",
-            speed: 500,
-        });
-
-        // Venn Diagram Quiz Variables
-        let selectedState = 0;
-        let questions = [];
-        let currentIndex = 0;
-        let isQuizActive = false;
-        
-        // Variables to track progress
-        let completedQuestions = {};
-        let highestUnlockedQuestion = 1; // Start with question 1 unlocked
-        
-        // References to containers
-        const menuContainer = document.getElementById("menu-container");
-        const quizContainer = document.getElementById("quiz-container");
-
-        
-
-        // Load questions
-        async function loadQuestions() {
-            try {
-                let response = await fetch("questions.json");
-                questions = await response.json();
-                console.log("Questions loaded successfully:", questions);
-            } catch (error) {
-                console.error("Error loading questions:", error);
-                console.log("Using mock questions:", questions);
-            }
-            
-            // Check for previously completed questions
-            loadProgress();
-            updateButtonStatus();
-        }
-        
-        // Save/Load progress
-        function saveProgress() {
-            localStorage.setItem('vennQuizCompleted', JSON.stringify(completedQuestions));
-            localStorage.setItem('vennQuizHighestUnlocked', highestUnlockedQuestion);
-        }
-        
-        function loadProgress() {
-            try {
-                const savedCompleted = localStorage.getItem('vennQuizCompleted');
-                const savedHighest = localStorage.getItem('vennQuizHighestUnlocked');
-                
-                if (savedCompleted) {
-                    completedQuestions = JSON.parse(savedCompleted);
-                }
-                
-                if (savedHighest) {
-                    highestUnlockedQuestion = parseInt(savedHighest);
-                }
-            } catch (e) {
-                console.error("Error loading saved progress:", e);
-            }
-        }
-        
-        // Update button status (locked/unlocked/completed)
-        function updateButtonStatus() {
-            // For all questions
-            for (let i = 1; i <= 27; i++) {
-                // Find the button for this question
-                const questionIndex = i - 1;
-                const pageIndex = Math.floor(questionIndex / 9);
-                const buttonIndex = questionIndex % 9;
-                
-                const page = document.querySelector(`.app-page.page${pageIndex + 1}`);
-                if (!page) continue;
-                
-                const buttons = page.querySelectorAll('.number');
-                if (buttonIndex >= buttons.length) continue;
-                
-                const button = buttons[buttonIndex];
-                
-                // Update button state
-                button.classList.remove('locked', 'completed');
-                
-                if (completedQuestions[questionIndex]) {
-                    button.classList.add('completed');
-                } else if (i > highestUnlockedQuestion) {
-                    button.classList.add('locked');
-                }
-            }
-        }
-
-        // Try to go to a question (checks if it's unlocked)
-        function tryGoToQuestion(questionNumber) {
-            if (questionNumber > highestUnlockedQuestion) {
-                alert("คุณยังไม่สามารถทำข้อนี้ได้ ต้องทำข้อก่อนหน้าให้เสร็จก่อน");
-                return;
-            }
-            
-            goToQuestion(questionNumber);
-        }
-        
-        // Go to a question
-        function goToQuestion(questionNumber) {
-            if (!questions || questions.length === 0) {
-                alert("กำลังโหลดโจทย์ กรุณารอสักครู่");
-                return;
-            }
-            
-            // Adjust index to be zero-based
-            currentIndex = questionNumber - 1;
-            
-            if (currentIndex < 0 || currentIndex >= questions.length) {
-                alert("ไม่พบข้อนี้");
-                return;
-            }
-            
-            // Show quiz and hide menu
-            menuContainer.style.display = "none";
-            quizContainer.style.display = "flex";
-            
-            resetColors();
-            showQuestion();
-            
-            isQuizActive = true;
-        }
-        
-        function goBackToMenu() {
-            // Hide quiz and show menu
-            quizContainer.style.display = "none";
-            menuContainer.style.display = "block";
-            isQuizActive = false;
-            
-            // Update button states
-            updateButtonStatus();
-        }
-
-        // Quiz functions
-        function showQuestion() {
-            if (currentIndex >= questions.length) {
-                document.getElementById("question").innerText = "คุณทำครบทุกข้อแล้ว!";
-                alert("จบเกม! คุณทำครบทุกข้อแล้ว");
-                return;
-            }
-            
-            let currentQuestion = questions[currentIndex];
-            document.getElementById("question-number").innerText = `ข้อที่ ${currentIndex + 1} / ${questions.length}`;
-            
-            const questionElement = document.getElementById("question");
-            questionElement.innerText = `โจทย์: ${currentQuestion.text}`;
-            
-            // Adjust text size to fit in container
-            adjustTextSize(questionElement);
-            
-            document.getElementById("status").innerText = "กรุณาเลือกพื้นที่ที่ตรงกับโจทย์";
-            
-            // If this question was previously completed, show previous answer
-            if (completedQuestions[currentIndex]) {
-                selectedState = completedQuestions[currentIndex];
-                highlightSelectedAreas();
-            } else {
-                resetColors();
-            }
-        }
-        
-        // Adjust text size to fit in container
-        function adjustTextSize(element) {
-            const maxWidth = element.parentElement.clientWidth;
-            
-            // Start with 20px and reduce until it fits
-            let fontSize = 20;
-            element.style.fontSize = `${fontSize}px`;
-            
-            // If it's too long, reduce font size until it fits without wrapping
-            while (element.scrollWidth > maxWidth && fontSize > 12) {
-                fontSize -= 1;
-                element.style.fontSize = `${fontSize}px`;
-            }
-            
-            // If it's still too long at minimum font size, allow wrapping
-            if (element.scrollWidth > maxWidth) {
-                element.style.whiteSpace = "normal";
-            } else {
-                element.style.whiteSpace = "nowrap";
-            }
-        }
-
-        function toggleColor(element, value) {
-            if (element.classList.contains("clicked")) {
-                element.classList.remove("clicked");
-                selectedState &= ~value;
-            } else {
-                element.classList.add("clicked");
-                selectedState |= value;
-            }
-        }
-
-        function resetColors() {
-            document.querySelectorAll(".rect-clickable, path").forEach(el => {
-                el.classList.remove("clicked");
-            });
-            selectedState = 0;
-        }
-        
-        function highlightSelectedAreas() {
-            const elements = document.querySelectorAll(".rect-clickable, path");
-            elements.forEach(el => {
-                el.classList.remove("clicked");
-            });
-            
-            const values = [128, 1, 2, 4, 8, 16, 32, 64];
-            
-            elements.forEach((el, index) => {
-                if (index < values.length && (selectedState & values[index])) {
-                    el.classList.add("clicked");
-                }
-            });
-        }
-
-        function submitAnswer() {
-            if (currentIndex >= questions.length) return;
-            
-            let correctAnswer = questions[currentIndex].answer.reduce((acc, val) => acc | val, 0);
-            if (selectedState === correctAnswer) {
-                document.getElementById("status").innerText = "ถูกต้อง!";
-                
-                // Save the correct answer
-                completedQuestions[currentIndex] = selectedState;
-                
-                // Unlock next question if applicable
-                if (currentIndex + 1 === highestUnlockedQuestion) {
-                    highestUnlockedQuestion++;
-                }
-                
-                // Save progress
-                saveProgress();
-                
-                // Go to next question
-                setTimeout(() => {
-                    if (currentIndex + 1 < questions.length && currentIndex + 1 < highestUnlockedQuestion) {
-                        currentIndex++;
-                        showQuestion();
-                    } else {
-                        goBackToMenu();
-                        if (currentIndex + 1 >= questions.length) {
-                            alert("ยินดีด้วย! คุณทำครบทุกข้อแล้ว");
-                        } else {
-                            alert("สำเร็จ! กลับไปเลือกข้อถัดไปได้เลย");
-                        }
-                    }
-                }, 1000);
-            } else {
-                document.getElementById("status").innerText = "ลองอีกครั้ง!";
-            }
-        }
-
-        // Load questions when page loads
-window.onload = function() {
-    loadQuestions();
-    // เพิ่ม event listener สำหรับปุ่ม Replay
-    document.querySelector('.Replay').addEventListener('click', resetGame);
-    };
-
-// ฟังก์ชันสำหรับรีเซ็ตเกมทั้งหมด
-function resetGame() {
-    // ลบข้อมูลที่บันทึกใน localStorage
-    localStorage.removeItem('vennQuizCompleted');
-    localStorage.removeItem('vennQuizHighestUnlocked');
-    
-    // รีเซ็ตตัวแปรที่เกี่ยวข้อง
-    completedQuestions = {};
-    highestUnlockedQuestion = 1; // เริ่มต้นที่ข้อ 1 เท่านั้น
-    
-    // อัพเดทสถานะปุ่มใหม่
-    updateButtonStatus();
-    
-    // แสดงข้อความยืนยัน
-    alert('เริ่มเกมใหม่เรียบร้อยแล้ว! คุณต้องเริ่มทำข้อ 1 ใหม่');
-    
-    // กลับไปหน้าแรก (ถ้าไม่ได้อยู่ที่หน้าแรกอยู่แล้ว)
-    swiper.slideTo(0);
-}
-        
-    </script>
 </body>
+<script>
+    
+    var swiper = new Swiper(".mySwiper",{
+        slidePerView: 1,
+        spaceBetween: 0,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        effect: 'slide',
+        speed: 500,
+
+    });
+
+    const menuContainer = document.getElementById("menu-container");
+    const quizContainer = document.getElementById("quiz-container");
+
+    let selectedState = 0;
+    let completedQuestions = {};
+    let highestUnlockedQuestion = 1;
+    let questions = [];
+
+    async function loadQuestions(){
+        try{
+            let response = await fetch("questions.json");
+            questions = await response.json();
+            console.log("Questions loaded successfully: ",questions)
+        }
+        catch(error){
+            console.error("Error loading questions: ",error)
+            console.log("Using mock questions:", questions);
+        }
+        loadProgress();
+        updateButtonStatus();
+    }
+
+    function trytogoQuestion(questionNumber){
+        if(questionNumber>highestUnlockedQuestion){
+            alert("คุณไม่สามารถทำข้อนี้ได้ โปรดทำข้อก่อนหน้าให้เสร็จก่อน");
+            return;
+        }
+        gotoQuestion(questionNumber);
+    }
+
+    function gotoQuestion(questionNumber){
+        if(!questions || questions.length===0){
+            alert("โหลดโจทย์ไม่สำเร็จ");
+            return;
+        }
+        
+        currentIndex = questionNumber-1;
+
+        if(currentIndex < 0 || currentIndex>questions.length){
+            alert("ไม่พบข้อนี้");
+            return;
+        }
+
+        menuContainer.style.display = "none";
+        quizContainer.style.display = "flex";
+
+        resetColor();
+        showQuestions();
+    }
+
+    function goBack(){
+        menuContainer.style.display = "block";
+        quizContainer.style.display = "none";
+
+        updateButtonStatus();
+    }
+
+    function showQuestions(){
+        if(currentIndex>=questions.length){
+            document.getElementById('question').innerText="คุณทำครบทุกข้อแล้ว";
+            alert("เกมจบลงแล้ว")
+            return;
+        }
+
+        let currentQuestion = questions[currentIndex]
+        document.getElementById("question-number").innerText = `ข้อที่ ${currentIndex + 1}`;
+
+        document.getElementById('question').innerText = `โจทย์ ${currentQuestion.text}`;
+
+        document.getElementById('status').innerText = "กรุณาเลือกพื้นที่ให้ตรงกับโจทย์"
+        if(completedQuestions[currentIndex]){
+            selectedState =completedQuestions[currentIndex];
+            lockSelectedArea();
+        }
+        else{
+            resetColor();
+        }
+    }
+    function resetColor(){
+        document.querySelectorAll("path , .rect-clickable").forEach(el =>{
+            el.classList.remove("clicked");
+        });
+        selectedState = 0;
+    }
+    function lockSelectedArea(){
+        const elements = document.querySelectorAll("path , .rect-clickable");
+        const values = [ 128 , 1 , 2 , 4 , 8 , 16 , 32 , 64 ];
+
+        elements.forEach(el =>{
+            el.classList.remove("clicked");
+        });
+        elements.forEach((el, index) =>{
+            if(index<values.length && (selectedState & values[index])){
+                el.classList.add("clicked");
+            }
+        })
+
+    }
+
+    function toggleColor(element, value) {
+        if(element.classList.contains("clicked")){
+            element.classList.remove("clicked");
+            selectedState &= ~value;
+        }
+        else{
+            element.classList.add("clicked");
+            selectedState |= value
+        }
+    }
+
+    function submitAnswer(){
+        if(currentIndex>=questions.length) return;
+        let correctAnswer = questions[currentIndex].answer.reduce((acc,val)=> acc | val,0);
+        if (selectedState === correctAnswer){
+            document.getElementById('status').innerText="ถูกต้อง";
+
+            completedQuestions[currentIndex] = selectedState;
+
+            if(currentIndex+1 === highestUnlockedQuestion){
+                highestUnlockedQuestion++;
+            }
+
+            saveProgress();
+
+            setTimeout(()=>{
+                if(currentIndex+1 < questions.length && currentIndex+1 < highestUnlockedQuestion){
+                    currentIndex++;
+                    showQuestions();
+                }
+                else{
+                    if(currentIndex+1 >= questions.length){
+                        alert("คุณทำครบทุกข้อแล้ว");
+                        goBack();
+                        swiper.slideTo(2);
+                    }
+                    else{
+                        alert("error");
+                    }
+                }
+            },1000)
+        }
+        else{
+            document.getElementById('status').innerText='ลองอีกครั้ง'
+            document.getElementById('status').classList.remove('shake');
+            void document.getElementById('status').offsetWidth;
+            document.getElementById('status').classList.add('shake');
+        }
+
+    }
+
+    function updateButtonStatus(){
+        for(let i = 1 ; i <= 27 ; i++){
+            const questionIndex = i - 1;
+            const pageIndex = Math.floor(questionIndex / 9);
+            const buttonIndex = questionIndex % 9;
+
+            const page = document.querySelector(`.page${pageIndex+1}`);
+            if(!page) continue;
+
+            const buttons = page.querySelectorAll('.number');
+            if(buttonIndex >= buttons.length) continue;
+
+            const button = buttons[buttonIndex];
+
+            button.classList.remove('locked','completed');
+
+            if(completedQuestions[questionIndex]){
+                button.classList.add('completed');
+            }
+            else if(i > highestUnlockedQuestion){
+                button.classList.add('locked');
+            }
+        }
+    }
+
+    function saveProgress(){
+        localStorage.setItem('vennQuizCompleted',JSON.stringify(completedQuestions));
+        localStorage.setItem('vennQuizHighestUnlocked', highestUnlockedQuestion);
+    }
+
+    function loadProgress(){
+        try{
+            const savedCompleted = localStorage.getItem('vennQuizCompleted')
+            const savedHighest = localStorage.getItem('vennQuizHighestUnlocked')
+
+            if (savedCompleted){
+                completedQuestions = JSON.parse(savedCompleted);
+            }
+            if (savedHighest) {
+                highestUnlockedQuestion = parseInt(savedHighest);
+            }
+        }
+        catch (e){
+            console.error('Error loading saved progress:', e);
+        }
+    }
+
+window.onload = function(){
+    loadQuestions();
+}
+</script>
 </html>
