@@ -80,19 +80,19 @@
             color: #C886F8;
         }
         .venn-container {
-            position: absolute; /* เปลี่ยนจาก default เป็น absolute */
+            position: absolute; 
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 20; /* ให้อยู่ด้านบนสุด */
-            display: none; /* ซ่อนไว้ก่อน */
+            z-index: 20; 
+            display: none;
             background-color: white;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
             box-sizing: border-box;
+            background-color: #FFF9CA;
         }
         .rect-clickable, path{
             stroke-width: 1;
@@ -103,14 +103,14 @@
             fill: #F0FFBD !important;
         }
         svg text{
-            font-size: 5px;
+            font-size: 7px;
             font-weight: bold;
             fill: black;
             text-anchor: middle;
             pointer-events: none;
         }
         svg text.universe{
-            font-size: 8px;
+            font-size: 10px;
         }
         #submit-btn{
             height: 69px;
@@ -123,27 +123,39 @@
             color: white;
             cursor: pointer;
         }
-        #back-btn{
-            padding: 0;
-            height: 50px;
-            width: 100px;
-            margin-right: 180px;
-            background-color: #FFD9E1;
-            border: none;
-            border-radius: 10px;
-            color: #FF914D;
-            font-weight: bold;
-            cursor: pointer;
-        }
         #submit-btn:active, #back-btn:active ,.number:active{
             transform: scale(0.95);
         }
         .question-info{
-            width: 100%;
-            text-align: center;
+            width: 302px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        .question-info p {
-            margin: 5px 0;
+        .question-info-row{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .question-info-row #question-number,.question-info-row #status{
+            width: 133px;
+            height: 69px;
+            margin: 0;
+            font-size: 25px;
+            font-weight: bold;
+            border-radius: 23px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .question-info-row #question-number{
+            background-color: #FFC0A5;
+        }
+        .question-info-row #status{
+            background-color: #AEB4FF;
         }
         #question{
             max-width: 100%;
@@ -151,6 +163,17 @@
             overflow: hidden;
             text-overflow: ellipsis;
             font-size: 20px;
+            background-color: #FFD481;
+            width: 100%;
+            height: 69px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 23px;
+            color: white;
+            font-weight: bold;
+            margin-top: 42px;
+            margin-bottom: 0;
         }
         .swiper-pagination {
             position: absolute;
@@ -167,6 +190,7 @@
         nav{
             background-color: #FFDEBD;
             height: 75px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -221,6 +245,7 @@
             height: 75px;
             display: flex;
             align-items: center;
+            width: 100%;
         }
         footer img{
             height: 38.64px;
@@ -322,14 +347,20 @@
             <img src="go-back.png" alt="">
         </footer>
         <div class="venn-container" id="quiz-container">
+            <nav>
+                <img src="burger-tap.png" alt="">
+                <img src="question-logo.png" alt="">
+            </nav>
 
             <div class="question-info">
-                <p id="question-number">กำลังโหลด...</p>
-                <p id="question">กำลังโหลดโจทย์...</p>
-                <p id="status">กรุณาเลือกพื้นที่ให้ตรงกับโจทย์</p>
+                <div class="question-info-row">
+                    <p id="question-number">Stage ...</p>
+                    <p id="status">3 Sets</p>
+                </div>
+                <p id="question">Question ...</p>
             </div>
 
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="40%" width="80%" viewBox="0 0 120 120">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
                 <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
                 <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
                 <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
@@ -346,7 +377,9 @@
             </svg>
 
             <button id="submit-btn" onclick="submitAnswer()">Submit</button>
-            <button id="back-btn" onclick="goBack()">Go back</button>
+            <footer>
+                <img src="go-back.png" alt="" id="back-btn" onclick="goBack()">
+            </footer>
         </div>
     </div>
 </body>
@@ -429,11 +462,11 @@
         }
 
         let currentQuestion = questions[currentIndex]
-        document.getElementById("question-number").innerText = `ข้อที่ ${currentIndex + 1}`;
+        document.getElementById("question-number").innerText = `Stage ${(currentIndex + 1)%9}`;
 
-        document.getElementById('question').innerText = `โจทย์ ${currentQuestion.text}`;
+        document.getElementById('question').innerText = `${currentQuestion.text}`;
 
-        document.getElementById('status').innerText = "กรุณาเลือกพื้นที่ให้ตรงกับโจทย์"
+        setTimeout(()=>{document.getElementById('status').innerText = "3 Sets"},750)
         if(completedQuestions[currentIndex]){
             selectedState =completedQuestions[currentIndex];
             lockSelectedArea();
