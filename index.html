@@ -504,8 +504,7 @@
         }
         document.getElementById('question').innerText = `${currentQuestion.text}`;
         
-
-        setTimeout(()=>{document.getElementById('status').innerText = "3 Sets"},750)
+        document.getElementById('status').innerText = "3 Sets"
         if(completedQuestions[currentIndex]){
             selectedState =completedQuestions[currentIndex];
             lockSelectedArea();
