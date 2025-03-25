@@ -21,6 +21,7 @@
             align-items: center;
             font-family: "Baloo 2", sans-serif;
             font-size: 25px;
+            position: relative;
         }
         .grid{
             display: grid;
@@ -33,8 +34,10 @@
         .container{
             width: 390px;
             height: 844px;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         .swiper{
             height: 100%;
@@ -45,7 +48,6 @@
             width: 100%;
             background-color: #FFF9CA;
             display: flex;
-            justify-content: center;
             align-items: center;
             flex-direction: column;
         }
@@ -77,17 +79,20 @@
             background-color: #F0D5FF;
             color: #C886F8;
         }
-
-        .venn-container{
+        .venn-container {
+            position: absolute; /* เปลี่ยนจาก default เป็น absolute */
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            display: flex;
+            z-index: 20; /* ให้อยู่ด้านบนสุด */
+            display: none; /* ซ่อนไว้ก่อน */
+            background-color: white;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
-            background-color: white;
         }
         .rect-clickable, path{
             stroke-width: 1;
@@ -111,8 +116,7 @@
             height: 69px;
             width: 133px;
             font-size: 24px;
-            font-weight: 900;
-            margin-bottom: 123px;
+            font-weight: 900;   
             border: none;
             border-radius: 23px;
             background-color: #FF7A69;
@@ -120,10 +124,10 @@
             cursor: pointer;
         }
         #back-btn{
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            padding: 10px 15px;
+            padding: 0;
+            height: 50px;
+            width: 100px;
+            margin-right: 180px;
             background-color: #FFD9E1;
             border: none;
             border-radius: 10px;
@@ -160,8 +164,69 @@
             background-color: #FFAD7A;
             opacity: 1;
         }
-
-
+        nav{
+            background-color: #FFDEBD;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav img{
+            height: 38.64px;
+            margin: 21px;
+            cursor: pointer;
+        }
+        .content-text{
+            width: 305px;
+            display: flex;
+            flex-direction: row;
+            color: white;
+            font-weight: bold;
+            align-items: center;
+            margin: 50px;
+            justify-content: space-between;
+        }
+        .content-text .stage{
+            background-color: #FFC0A5;
+            border-radius: 23px;
+            padding: 20px 33px;
+            font-size: 25px;
+            height: 29px;
+            width: 67px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-text .level{
+            background-color: #FFD9E1;
+            border-radius: 23px;
+            font-size: 40px;
+            width: 164px;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: -1px -1px 0 #FFA8C8,1px -1px 0 #FFA8C8,-1px 1px 0 #FFA8C8,1px 1px 0 #FFA8C8;
+        }
+        .gridLogo{
+            display: flex;
+            justify-content: center;
+        }
+        .gridLogo img{
+            height: 138px;
+            margin-top: 32px;
+        }
+        footer{
+            background-color: #FFDEBD;
+            height: 75px;
+            display: flex;
+            align-items: center;
+        }
+        footer img{
+            height: 38.64px;
+            margin: 21px;
+            cursor: pointer;
+        }
         @keyframes shakeText {
             0% { transform: translateX(0); }
             25% { transform: translateX(-5px); }
@@ -173,14 +238,23 @@
         .shake {
             animation: shakeText 0.5s;
         }
+
     </style>
 </head>
 <body>
     <div class="container">
+        <nav>
+            <img src="img/burger-tap.png" alt="">
+            <img src="img/question-logo.png" alt="">
+        </nav>
         <div class="swiper mySwiper" id="menu-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="app-page page1">
+                        <div class="content-text">
+                            <div class="stage">Stage</div>
+                            <div class="level">Newbie</div>
+                        </div>
                         <div class="grid">
                             <div class="number " onclick="trytogoQuestion(1)"><h1>1</h1></div>
                             <div class="number locked" onclick="trytogoQuestion(2)"><h1>2</h1></div>
@@ -192,10 +266,17 @@
                             <div class="number locked" onclick="trytogoQuestion(8)"><h1>8</h1></div>
                             <div class="number locked" onclick="trytogoQuestion(9)"><h1>9</h1></div>
                         </div>
+                        <div class="gridLogo">
+                            <img src="img/logo.png" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="app-page page2">
+                        <div class="content-text">
+                            <div class="stage">Stage</div>
+                            <div class="level">Practice</div>
+                        </div>
                         <div class="grid">
                             <div class="number locked" onclick="trytogoQuestion(10)"><h1>1</h1></div>
                             <div class="number locked" onclick="trytogoQuestion(11)"><h1>2</h1></div>
@@ -207,10 +288,17 @@
                             <div class="number locked" onclick="trytogoQuestion(17)"><h1>8</h1></div>
                             <div class="number locked" onclick="trytogoQuestion(18)"><h1>9</h1></div>
                         </div>
+                        <div class="gridLogo">
+                            <img src="img/logo.png" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="app-page page3">
+                        <div class="content-text">
+                            <div class="stage">Stage</div>
+                            <div class="level">Expert</div>
+                        </div>
                         <div class="grid">
                             <div class="number locked" onclick="trytogoQuestion(19)"><h1>1</h1></div>
                             <div class="number locked" onclick="trytogoQuestion(20)"><h1>2</h1></div>
@@ -222,11 +310,17 @@
                             <div class="number locked" onclick="trytogoQuestion(26)"><h1>8</h1></div>
                             <div class="number locked" onclick="trytogoQuestion(27)"><h1>9</h1></div>
                         </div>
+                        <div class="gridLogo">
+                            <img src="img/logo.png" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
+        <footer>
+            <img src="img/go-back.png" alt="">
+        </footer>
         <div class="venn-container" id="quiz-container">
 
             <div class="question-info">
