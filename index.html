@@ -123,7 +123,7 @@
             color: white;
             cursor: pointer;
         }
-        #submit-btn:active, #back-btn:active ,.number:active{
+        #submit-btn:active, #back-btn:active ,.number:active,.question-logo:active{
             transform: scale(0.95);
         }
         .question-info{
@@ -199,6 +199,7 @@
             height: 38.64px;
             margin: 21px;
             cursor: pointer;
+            vertical-align: middle;
         }
         .content-text{
             width: 305px;
@@ -269,8 +270,8 @@
 <body>
     <div class="container">
         <nav>
-            <img src="burger-tap.png" alt="">
-            <img src="question-logo.png" alt="">
+            <img src="burger-tap.png" alt="" onclick="wtf()">
+            <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
         </nav>
         <div class="swiper mySwiper" id="menu-container">
             <div class="swiper-wrapper">
@@ -344,12 +345,12 @@
             <div class="swiper-pagination"></div>
         </div>
         <footer>
-            <img src="go-back.png" alt="">
+            <img src="go-back.png" alt="" onclick="wtf()">
         </footer>
         <div class="venn-container" id="quiz-container">
             <nav>
                 <img src="burger-tap.png" alt="">
-                <img src="question-logo.png" alt="">
+                <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
             </nav>
 
             <div class="question-info">
@@ -592,6 +593,10 @@
         catch (e){
             console.error('Error loading saved progress:', e);
         }
+    }
+
+    function wtf(){
+        alert('กดทำไม ยังไม่เสร็จ😡😡😡')
     }
 
 window.onload = function(){
