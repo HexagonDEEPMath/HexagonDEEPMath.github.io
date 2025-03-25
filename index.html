@@ -223,7 +223,6 @@
             align-items: center;
         }
         .content-text .level{
-            background-color: #FFD9E1;
             border-radius: 23px;
             font-size: 40px;
             width: 164px;
@@ -231,7 +230,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+        .page1 .level{
+            background-color: #FFD9E1;
             text-shadow: -1px -1px 0 #FFA8C8,1px -1px 0 #FFA8C8,-1px 1px 0 #FFA8C8,1px 1px 0 #FFA8C8;
+        }
+        .page2 .level{
+            background-color: #C0E3FF;
+            text-shadow: -1px -1px 0 #5FA3FF,1px -1px 0 #5FA3FF,-1px 1px 0 #5FA3FF,1px 1px 0 #5FA3FF;
+        }
+        .page3 .level{
+            background-color: #F0D5FF;
+            text-shadow: -1px -1px 0 #C886F8,1px -1px 0 #C886F8,-1px 1px 0 #C886F8,1px 1px 0 #C886F8;
         }
         .gridLogo{
             display: flex;
@@ -247,12 +257,25 @@
             display: flex;
             align-items: center;
             width: 100%;
+            position: relative;
         }
         footer img{
             height: 38.64px;
             margin: 21px;
             cursor: pointer;
         }
+        footer .div-text-level{
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            p{
+                font-weight: bold;
+                font-size: 35px;
+            }
+        }
+        
         @keyframes shakeText {
             0% { transform: translateX(0); }
             25% { transform: translateX(-5px); }
@@ -349,7 +372,7 @@
         </footer>
         <div class="venn-container" id="quiz-container">
             <nav>
-                <img src="burger-tap.png" alt="">
+                <img src="burger-tap.png" alt="" onclick="wtf()">
                 <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
             </nav>
 
@@ -380,6 +403,7 @@
             <button id="submit-btn" onclick="submitAnswer()">Submit</button>
             <footer>
                 <img src="go-back.png" alt="" id="back-btn" onclick="goBack()">
+                <div class="div-text-level"><p id="text-level">loading level...</p></div>
             </footer>
         </div>
     </div>
@@ -463,9 +487,23 @@
         }
 
         let currentQuestion = questions[currentIndex]
-        document.getElementById("question-number").innerText = `Stage ${(currentIndex + 1)%9}`;
-
+        if(((currentIndex+1)%9)=== 0){
+            document.getElementById("question-number").innerText = `Stage ${((currentIndex )%9)+1}`;
+        }
+        else{
+            document.getElementById("question-number").innerText = `Stage ${((currentIndex + 1)%9)}`;
+        }
+        if((currentIndex+1)<=9 && (currentIndex+1)>0){
+            document.getElementById('text-level').innerText = "Newbie"
+        }
+        else if((currentIndex+1)<=18 && (currentIndex+1)>9){
+            document.getElementById('text-level').innerText = "Practice"
+        }
+        else if((currentIndex+1)<=27 && (currentIndex+1)>18){
+            document.getElementById('text-level').innerText = "Expert"
+        }
         document.getElementById('question').innerText = `${currentQuestion.text}`;
+        
 
         setTimeout(()=>{document.getElementById('status').innerText = "3 Sets"},750)
         if(completedQuestions[currentIndex]){
