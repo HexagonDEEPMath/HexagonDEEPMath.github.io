@@ -571,6 +571,7 @@
         a{
             text-decoration: none;
         }
+        
     </style>
 </head>
 <body>
@@ -1070,6 +1071,7 @@
         document.querySelector(".tPage2").style.display="none";
         document.querySelector(".tPage1").style.display="flex";
 
+        stopTimer();
         loadBestTimer();
         document.getElementById("highestTime").innerText = displayTime(bestTime);
     }
@@ -1084,7 +1086,7 @@
         }
     }
     function showTimerQuestions(){
-        if(correctTimerQuestions >= 1){
+        if(correctTimerQuestions >= 10){
             alert("ทำครบแล้ว");
             stopTimer();
             goTimerMenu();
@@ -1125,7 +1127,7 @@
         clearInterval(timerInterval);
         nowTime = Date.now() - startTime;
         elapsedTime = 0;
-        saveBestTimer();
+        if(correctTimerQuestions >= 10){saveBestTimer();}
         isRunning = false;
         displayTime(0);
     }
@@ -1136,7 +1138,6 @@
         isRunning = false;
     }
     function updateTimer(){
-        console.log(timerInterval)
         const currentTime = Date.now() - startTime;
         displayTime(currentTime);
     }
@@ -1182,7 +1183,7 @@
     function resetTimerMode(){
         const isConfirmed = confirm("คุณต้องการรีเซ็ตเวลาที่ดีที่สุดใช่หรือไม่?");
         if(isConfirmed){    
-            localStorage.removeItem("bestTime");
+            localStorage.removeItem("bestTimer");
             bestTime = 0;
             document.getElementById("highestTime").innerText = "00 : 00";
         }
@@ -1192,8 +1193,10 @@
         document.querySelector(".menu").style.display="none";
         document.querySelector(".stage-container").style.display="none";
         document.querySelector(".timer-container").style.display="flex";
+
         loadBestTimer();
         document.getElementById("highestTime").innerText = displayTime(bestTime);
+
     }
     function gotoMenuGame(){
         document.querySelector(".menuPage1").style.display="none";
