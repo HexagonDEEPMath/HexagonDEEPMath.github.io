@@ -37,6 +37,12 @@
             position: relative;
             overflow: hidden;
             display: flex;
+            flex-direction: row;
+        }
+        .stage-container{
+            width: 100%;
+            height: 100%;
+            display: flex;
             flex-direction: column;
         }
         .swiper{
@@ -288,123 +294,514 @@
             animation: shakeText 0.5s;
         }
 
+        .timer-container{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .text-timer-all{
+            width: 100%;
+            display: flex;
+            position: relative;
+            justify-content: center;
+            height: auto;
+        }
+        .app-page .text-timer{
+            display: flex;
+            background-color: #C0E8BE;
+            color: white;
+            border-radius: 47px;
+            font-weight: bold;
+            width: 134px;
+            height: 57px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 23px;
+            left: 22px;
+            align-self: flex-start;
+            position: absolute;
+        }
+        .app-page .big-logo-timer-page{
+            width: 264px;
+            height: 329px;
+            margin-top: 62px;
+        }
+        .text-sets3{
+            background-color: #AEB4FF;
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+            width: 133px;
+            height: 59px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 23px;
+            position: relative;
+        }
+        .text-sets3{
+            margin-top: 31px;
+        }
+        .bestTime{
+            display: flex;
+            flex-direction: row;
+            margin-top: 35px;
+            width: 266px;
+            height: 39px;
+        }
+        .bestTime p{
+            margin: 0;
+            color: #FF914D;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .whitebar-bestTime{
+            background-color: white;
+            height: 38px;
+            width: 132px;
+            display: flex;
+            border-radius: 21px;
+            margin-left: 5px;
+            justify-content: center;
+            align-items: center;
+        }
+        .whitebar-bestTime p{
+            text-align: center;
+        }
+        .timer-start{
+            background-color: #FF7A69;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 35px 0;
+            width: 155px;
+            height: 69px;
+            border-radius: 23px;
+            cursor: pointer;
+        }
+        .twoTab{ 
+            height: 29px;
+        }
+        .timerStatus{
+            display: flex;
+            flex-direction: row;
+            width: 87px;
+            height: 17px;
+            font-size: 10px;
+            align-items: center;
+            gap: 7px;
+            color: #FFAD7A;
+            margin: 10px 0px 33px 15px;
+        }
+        .timerStatus img{
+            width: 17px;
+        }
+        .timer-info{
+            display: flex;
+            font-size: 25px;
+            font-weight: bold;
+            color: white;
+            flex-direction: column;
+            width: 302px;
+            height: 180px;
+            justify-self: center;
+
+        }
+        .timer-info-row{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 42px;
+        }
+        .timer-info-row .timer-text{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFC0A5;
+            margin: 0;
+            width: 133px;
+            height: 69px;
+            border-radius: 23px;
+        }
+        .question-return-info{
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            align-items: center;
+        }
+        .tPage2 #status-timer{
+            background-color: #AEB4FF;
+            margin: 0;
+            width: 133px;
+            height: 69px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 23px;
+        }
+        #timerQuestion{
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFD481;
+            width: 277px;
+            height: 69px;
+            border-radius: 23px;
+        }
+        .question-return-info img{
+            height: 50px;
+            position: absolute;
+            right: 0;
+            cursor: pointer;
+        }
+        .venn-diagram-timer{
+            display: flex;
+            margin: 29px 0 38px 0;
+            justify-content: center;
+        }
+        .tPage2-endtab{
+            width: 80%;
+            height: 69px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            justify-content: center;
+            margin-bottom: 38.024px;
+            justify-self: center;
+        }
+
+        .tPage2-endtab div{
+            width: 55px;
+            height: 47px;
+            position: absolute;
+            right: 0;
+            justify-content: center;
+        }
+        .tPage2-endtab img{
+            height: 32px;
+            display: flex;
+            justify-self: center;
+            cursor: pointer;
+        }
+        .tPage2-endtab p{
+            width: 55px;
+            font-size: 10px;
+            color: #EABBD3;
+            margin: 2px;
+        }
+        .stage-container , .timer-container{
+            display: none;
+        }
+        .menu{
+            height: 100%;
+            width: 100%;
+        }
+        .munuPage2{
+            display: none;
+        }
+        .menu .body{
+            height: 694px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .menuPage1 .body img{
+            height: 409px;
+            width: 330px;
+        }
+        .menuPage1Button{
+            height: 188px;
+            width: 300px;
+            margin-top: 32px;
+        }
+        .menuPage1Button .button{
+            border-radius: 40px;
+            padding: 12px 97.5px;
+            display: flex;
+            background-color: #C0E8BE;
+            justify-self: center;
+            color: white;
+            font-weight: bold;
+            font-size: 40px;
+            margin-bottom: 28px;
+            cursor: pointer;
+        }
+        .text-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 45px;
+            width: 216px;
+            height: 82.5px;
+            color: white;
+            background-color: #C0E8BE;
+            border-radius: 47px;
+            margin-top: 72px;
+            margin-bottom: 115.5px;
+        }
+        .menuPage2Button{
+            height: 135px;
+            width: 307px;
+            margin-bottom: 64px;
+        }
+        .menuPage2Button .button-2{
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFC0A5;
+            border-radius: 47px;
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 31px;
+            cursor: pointer;
+        }
+        .logo-menuPage2 img{
+            height: 200px;
+        }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <nav>
-            <img src="burger-tap.png" alt="" onclick="wtf()">
-            <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
-        </nav>
-        <div class="swiper mySwiper" id="menu-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="app-page page1">
-                        <div class="content-text">
-                            <div class="stage">Stage</div>
-                            <div class="level">Newbie</div>
-                        </div>
-                        <div class="grid">
-                            <div class="number " onclick="trytogoQuestion(1)"><h1>1</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(2)"><h1>2</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(3)"><h1>3</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(4)"><h1>4</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(5)"><h1>5</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(6)"><h1>6</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(7)"><h1>7</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(8)"><h1>8</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(9)"><h1>9</h1></div>
-                        </div>
-                        <div class="gridLogo">
-                            <img src="logo.png" alt="">
-                        </div>
+        <div class="menu">
+            <div class="app-page menuPage1">
+                <nav>
+                    <img src="burger-tap.png" alt="" onclick="wtf()">
+                    <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
+                </nav>
+                <div class="body">
+                    <img src="logo.png" alt="">
+                    <div class="menuPage1Button">
+                        <a href="https://www.wikipedia.org/"><div class="button">Learn</div></a>
+                        <div class="button" onclick="gotoMenuGame()">Game</div>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="app-page page2">
-                        <div class="content-text">
-                            <div class="stage">Stage</div>
-                            <div class="level">Practice</div>
-                        </div>
-                        <div class="grid">
-                            <div class="number locked" onclick="trytogoQuestion(10)"><h1>1</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(11)"><h1>2</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(12)"><h1>3</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(13)"><h1>4</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(14)"><h1>5</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(15)"><h1>6</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(16)"><h1>7</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(17)"><h1>8</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(18)"><h1>9</h1></div>
-                        </div>
-                        <div class="gridLogo">
-                            <img src="logo.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="app-page page3">
-                        <div class="content-text">
-                            <div class="stage">Stage</div>
-                            <div class="level">Expert</div>
-                        </div>
-                        <div class="grid">
-                            <div class="number locked" onclick="trytogoQuestion(19)"><h1>1</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(20)"><h1>2</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(21)"><h1>3</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(22)"><h1>4</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(23)"><h1>5</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(24)"><h1>6</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(25)"><h1>7</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(26)"><h1>8</h1></div>
-                            <div class="number locked" onclick="trytogoQuestion(27)"><h1>9</h1></div>
-                        </div>
-                        <div class="gridLogo">
-                            <img src="logo.png" alt="">
-                        </div>
-                    </div>
-                </div>
+                <footer>
+                    
+                </footer>
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="app-page menuPage2">
+                <nav>
+                    <img src="burger-tap.png" alt="" onclick="wtf()">
+                    <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
+                </nav>
+                <div class="body">
+                    <div class="text-box">
+                        Game
+                    </div>
+                    <div class="menuPage2Button">
+                        <div class="button-2" onclick="goStageMode()">Stage</div>
+                        <div class="button-2" onclick="goTimerMode()">Timer</div>
+                    </div>
+                    <div class="logo-menuPage2">
+                        <img src="logo.png" alt="">
+                    </div>
+                </div>
+                <footer>
+                    <img src="go-back.png" alt="" onclick="gobackMenuGame()">
+                </footer>
+            </div>  
         </div>
-        <footer>
-            <img src="go-back.png" alt="" onclick="wtf()">
-        </footer>
-        <div class="venn-container" id="quiz-container">
+        <div class="stage-container">
             <nav>
                 <img src="burger-tap.png" alt="" onclick="wtf()">
                 <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
             </nav>
-
-            <div class="question-info">
-                <div class="question-info-row">
-                    <p id="question-number">Stage ...</p>
-                    <p id="status">3 Sets</p>
+            <div class="swiper mySwiper" id="menu-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="app-page page1">
+                            <div class="content-text">
+                                <div class="stage">Stage</div>
+                                <div class="level">Newbie</div>
+                            </div>
+                            <div class="grid">
+                                <div class="number " onclick="trytogoQuestion(1)"><h1>1</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(2)"><h1>2</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(3)"><h1>3</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(4)"><h1>4</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(5)"><h1>5</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(6)"><h1>6</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(7)"><h1>7</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(8)"><h1>8</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(9)"><h1>9</h1></div>
+                            </div>
+                            <div class="gridLogo">
+                                <img src="logo.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="app-page page2">
+                            <div class="content-text">
+                                <div class="stage">Stage</div>
+                                <div class="level">Practice</div>
+                            </div>
+                            <div class="grid">
+                                <div class="number locked" onclick="trytogoQuestion(10)"><h1>1</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(11)"><h1>2</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(12)"><h1>3</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(13)"><h1>4</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(14)"><h1>5</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(15)"><h1>6</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(16)"><h1>7</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(17)"><h1>8</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(18)"><h1>9</h1></div>
+                            </div>
+                            <div class="gridLogo">
+                                <img src="logo.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="app-page page3">
+                            <div class="content-text">
+                                <div class="stage">Stage</div>
+                                <div class="level">Expert</div>
+                            </div>
+                            <div class="grid">
+                                <div class="number locked" onclick="trytogoQuestion(19)"><h1>1</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(20)"><h1>2</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(21)"><h1>3</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(22)"><h1>4</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(23)"><h1>5</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(24)"><h1>6</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(25)"><h1>7</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(26)"><h1>8</h1></div>
+                                <div class="number locked" onclick="trytogoQuestion(27)"><h1>9</h1></div>
+                            </div>
+                            <div class="gridLogo">
+                                <img src="logo.png" alt="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p id="question">Question ...</p>
+                <div class="swiper-pagination"></div>
+            </div>
+            <footer>
+                <img src="go-back.png" alt="" onclick="gotoMenu()">
+            </footer>
+            <div class="venn-container" id="quiz-container">
+                <nav>
+                    <img src="burger-tap.png" alt="" onclick="wtf()">
+                    <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
+                </nav>
+
+                <div class="question-info">
+                    <div class="question-info-row">
+                        <p id="question-number">Stage ...</p>
+                        <p id="status">3 Sets</p>
+                    </div>
+                    <p id="question">Question ...</p>
+                </div>
+
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
+                    <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
+                    <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
+                    <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
+                    <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
+                    <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
+                    <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
+                    <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
+                    <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
+                    
+                    <text class="universe" x="112" y="10">U</text>
+                    <text x="18" y="18">A</text>
+                    <text x="102" y="18">B</text>
+                    <text x="60" y="115">C</text>
+                </svg>
+
+                <button id="submit-btn" onclick="submitAnswer()">Submit</button>
+                <footer>
+                    <img src="go-back.png" alt="" id="back-btn" onclick="goBack()">
+                    <div class="div-text-level"><p id="text-level">loading level...</p></div>
+                </footer>
+            </div>
+        </div>
+        <div class="timer-container">
+            <div class="app-page tPage1" >
+                <nav>
+                    <img src="burger-tap.png" alt="" onclick="resetTimerMode()">
+                    <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
+                </nav>
+
+                <div class="text-timer-all">
+                    <div class="text-timer">Timer</div>
+                    <img src="logo.png" alt="" class="big-logo-timer-page">
+                </div>
+                <div class="text-sets3">
+                    3 Sets
+                </div>
+                <div class="bestTime">
+                    <p>BEST TIME : </p>
+                    <div class="whitebar-bestTime"><p id="highestTime">00 : 00</p></div>
+                </div>
+                <div class="timer-start" onclick="goTimerGame()">start</div>
+
+                <footer>
+                    <img src="go-back.png" alt="" onclick="gotoMenu()">
+                </footer>
+            </div>
+            <div class="app-page tPage2">
+                <nav>
+                    <img src="two-tap.png" alt="" onclick="pauseTimer()" class="twoTab">
+                    <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
+                </nav>
+                <div class="timerStatus" >
+                    <img src="clock.png" alt="">
+                    <div class="game-timer" id="game-timer-tab">00 : 00</div>
+                </div>
+                <div class="timer-info">
+                    <div class="timer-info-row">
+                        <p class="timer-text" id="number-correct">Timer</p>
+                        <p id="status-timer">3 Sets</p>
+                    </div>
+                    <div class="question-return-info">
+                        <p id="timerQuestion">Question...</p>
+                        <img src="newRandom.png" alt="" onclick="newQuestion()">
+                    </div>
+                </div>
+                <div class="venn-diagram-timer">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
+                        <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
+                        <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
+                        <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
+                        <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
+                        <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
+                        <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
+                        <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
+                        <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
+                        
+                        <text class="universe" x="112" y="10">U</text>
+                        <text x="18" y="18">A</text>
+                        <text x="102" y="18">B</text>
+                        <text x="60" y="115">C</text>
+                    </svg>
+                </div>
+                <div class="tPage2-endtab">
+                    <button id="submit-btn" onclick="submitAnswerTimer()">Enter</button>
+                    <div class="img-clear" onclick="resetColor()">
+                        <img src="clearBoard.png" alt="">
+                        <p>clear board</p>
+                    </div>
+                </div>
+                <footer>
+                    <img src="go-back.png" alt="" id="back-btn" onclick="goTimerMenu()">
+                </footer>
             </div>
 
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
-                <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
-                <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
-                <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
-                <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
-                <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
-                <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
-                <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
-                <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
-                
-                <text class="universe" x="112" y="10">U</text>
-                <text x="18" y="18">A</text>
-                <text x="102" y="18">B</text>
-                <text x="60" y="115">C</text>
-            </svg>
-
-            <button id="submit-btn" onclick="submitAnswer()">Submit</button>
-            <footer>
-                <img src="go-back.png" alt="" id="back-btn" onclick="goBack()">
-                <div class="div-text-level"><p id="text-level">loading level...</p></div>
-            </footer>
         </div>
     </div>
 </body>
@@ -430,18 +827,43 @@
     let highestUnlockedQuestion = 1;
     let questions = [];
 
+    let questionsTimer = [];
+    let currentQuestionTimerIndex = 0;
+    let randomQuestionsTimer = [];
+    let correctTimerQuestions = 0;
+
+    let elapsedTime = 0;
+    let isRunning = false;
+    let startTime;
+    let timerInterval;
+    let nowTime =0;
+    let bestTime = 0;
+
     async function loadQuestions(){
         try{
             let response = await fetch("questions.json");
             questions = await response.json();
             console.log("Questions loaded successfully: ",questions)
+
         }
         catch(error){
             console.error("Error loading questions: ",error)
             console.log("Using mock questions:", questions);
+
         }
         loadProgress();
         updateButtonStatus();
+    }
+    async function loadTimerQuestion() {
+        try{
+            let timerRespone = await fetch("questionsTimer.json");
+            questionsTimer = await timerRespone.json();
+            console.log("Questions timer loaded successfully: ",questionsTimer); 
+        }   
+        catch(error){
+            console.log("Error loading questions timer: ",error);x
+            console.log("Using mock questions timer", questionsTimer);
+        }   
     }
 
     function trytogoQuestion(questionNumber){
@@ -581,6 +1003,7 @@
             document.getElementById('status').classList.remove('shake');
             void document.getElementById('status').offsetWidth;
             document.getElementById('status').classList.add('shake');
+            resetColor();
         }
 
     }
@@ -632,12 +1055,171 @@
         }
     }
 
+    function goTimerGame(){
+        document.querySelector(".tPage1").style.display="none";
+        document.querySelector(".tPage2").style.display="block";
+
+        correctTimerQuestions = 0;
+        currentQuestionTimerIndex = 0;
+        resetColor();
+        changeOrder();
+        showTimerQuestions();
+        startTimer();
+    }
+    function goTimerMenu(){
+        document.querySelector(".tPage2").style.display="none";
+        document.querySelector(".tPage1").style.display="flex";
+
+        loadBestTimer();
+        document.getElementById("highestTime").innerText = displayTime(bestTime);
+    }
+    function changeOrder(){
+        if(!randomQuestionsTimer.length || randomQuestionsTimer.length === questionsTimer.length){
+            randomQuestionsTimer = [...questionsTimer];
+        }
+
+        for(let i = randomQuestionsTimer.length - 1 ; i >= 0 ; i--){
+            const j = Math.floor(Math.random() * (i + 1));
+            [randomQuestionsTimer[i], randomQuestionsTimer[j]] = [randomQuestionsTimer[j], randomQuestionsTimer[i]];
+        }
+    }
+    function showTimerQuestions(){
+        if(correctTimerQuestions >= 1){
+            alert("ทำครบแล้ว");
+            stopTimer();
+            goTimerMenu();
+            
+        }
+        document.getElementById("timerQuestion").innerText = (randomQuestionsTimer[currentQuestionTimerIndex].text);
+        document.getElementById("status-timer").innerText = "3 Sets"
+        document.getElementById("number-correct").innerText = "Timer"
+
+    }
+    function submitAnswerTimer(){
+        let correctAnswerTimer = randomQuestionsTimer[currentQuestionTimerIndex].answer.reduce((acc,val)=> acc|val,0);
+        if(selectedState === correctAnswerTimer){
+            document.getElementById("status-timer").innerText = "ถูกต้อง"
+            correctTimerQuestions++;
+            document.getElementById("number-correct").innerText = `${correctTimerQuestions} / 10`
+            setTimeout(()=>{
+                currentQuestionTimerIndex++;
+                showTimerQuestions();
+                resetColor();
+            },1000)
+        }
+        else{
+            document.getElementById("status-timer").innerText = "ลองอีกครั้ง";
+            document.getElementById("status-timer").classList.remove('shake');
+            void document.getElementById("status-timer").offsetWidth;
+            document.getElementById("status-timer").classList.add("shake");
+            resetColor();
+        }
+    }
+    function startTimer(){
+        if(isRunning) return;
+        startTime = Date.now() - elapsedTime;
+        timerInterval = setInterval(updateTimer, 10);
+        isRunning = true;
+    }
+    function stopTimer(){
+        clearInterval(timerInterval);
+        nowTime = Date.now() - startTime;
+        elapsedTime = 0;
+        saveBestTimer();
+        isRunning = false;
+        displayTime(0);
+    }
+    function pauseTimer(){
+        if(!isRunning) return;
+        clearInterval(timerInterval);
+        elapsedTime = Date.now() - startTime;
+        isRunning = false;
+    }
+    function updateTimer(){
+        console.log(timerInterval)
+        const currentTime = Date.now() - startTime;
+        displayTime(currentTime);
+    }
+    function displayTime(time){
+        const milliseconds = time;
+        const seconds = Math.floor((time / 1000) % 60);
+        const minutes = Math.floor((time / (1000 * 60)) % 60);
+
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+        const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+        
+        document.getElementById("game-timer-tab").innerText = `${formattedMinutes} : ${formattedSeconds}`;
+        return `${formattedMinutes} : ${formattedSeconds}`;
+        
+    }
+    function newQuestion(){
+        currentQuestionTimerIndex++;
+        resetColor();
+        showTimerQuestions();
+        if(currentQuestionTimerIndex+1 >= randomQuestionsTimer.length){
+            changeOrder();
+            currentQuestionTimerIndex = 0;
+        }
+    }
+    function saveBestTimer(){
+        if(nowTime < bestTime || !bestTime){
+            bestTime = nowTime;
+            localStorage.setItem('bestTimer' , bestTime);
+        }
+        return;
+    }
+    function loadBestTimer(){
+        try{
+            const savedBestTimer = localStorage.getItem('bestTimer');
+            if(savedBestTimer){
+                bestTime = parseInt(savedBestTimer);
+            }
+        }
+        catch(e){
+            console.error('Error loading saved progress:', e);
+        }
+    }
+    function resetTimerMode(){
+        const isConfirmed = confirm("คุณต้องการรีเซ็ตเวลาที่ดีที่สุดใช่หรือไม่?");
+        if(isConfirmed){    
+            localStorage.removeItem("bestTime");
+            bestTime = 0;
+            document.getElementById("highestTime").innerText = "00 : 00";
+        }
+    }
+
+    function goTimerMode(){
+        document.querySelector(".menu").style.display="none";
+        document.querySelector(".stage-container").style.display="none";
+        document.querySelector(".timer-container").style.display="flex";
+        loadBestTimer();
+        document.getElementById("highestTime").innerText = displayTime(bestTime);
+    }
+    function gotoMenuGame(){
+        document.querySelector(".menuPage1").style.display="none";
+        document.querySelector(".menuPage2").style.display="block";
+    }
+    function gobackMenuGame(){
+        document.querySelector(".menuPage2").style.display="none";
+        document.querySelector(".menuPage1").style.display="flex";
+    }
+    function gotoMenu(){
+        document.querySelector(".menu").style.display="flex";
+        document.querySelector(".stage-container").style.display="none";
+        document.querySelector(".timer-container").style.display="none";
+    }
+    function goStageMode(){
+        document.querySelector(".stage-container").style.display="flex";
+        document.querySelector(".timer-container").style.display="none";
+        document.querySelector(".menu").style.display="none";
+    }
     function wtf(){
         alert('กดทำไม ยังไม่เสร็จ😡😡😡')
     }
 
 window.onload = function(){
     loadQuestions();
+    loadTimerQuestion();
 }
 </script>
 </html>
