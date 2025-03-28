@@ -402,6 +402,12 @@
         .timerStatus img{
             width: 17px;
         }
+        .timer-info-center , .endtab-center{
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
         .timer-info{
             display: flex;
             font-size: 25px;
@@ -411,7 +417,6 @@
             width: 302px;
             height: 180px;
             justify-self: center;
-
         }
         .timer-info-row{
             display: flex;
@@ -764,14 +769,16 @@
                     <img src="clock.png" alt="">
                     <div class="game-timer" id="game-timer-tab">00 : 00</div>
                 </div>
-                <div class="timer-info">
-                    <div class="timer-info-row">
-                        <p class="timer-text" id="number-correct">Timer</p>
-                        <p id="status-timer">3 Sets</p>
-                    </div>
-                    <div class="question-return-info">
-                        <p id="timerQuestion">Question...</p>
-                        <img src="newRandom.png" alt="" onclick="newQuestion()">
+                <div class="timer-info-center">
+                    <div class="timer-info">
+                        <div class="timer-info-row">
+                            <p class="timer-text" id="number-correct">Timer</p>
+                            <p id="status-timer">3 Sets</p>
+                        </div>
+                        <div class="question-return-info">
+                            <p id="timerQuestion">Question...</p>
+                            <img src="newRandom.png" alt="" onclick="newQuestion()">
+                        </div>
                     </div>
                 </div>
                 <div class="venn-diagram-timer">
@@ -791,11 +798,13 @@
                         <text x="60" y="115">C</text>
                     </svg>
                 </div>
-                <div class="tPage2-endtab">
-                    <button id="submit-btn" onclick="submitAnswerTimer()">Enter</button>
-                    <div class="img-clear" onclick="resetColor()">
-                        <img src="clearBoard.png" alt="">
-                        <p>clear board</p>
+                <div class="endtab-center">
+                    <div class="tPage2-endtab">
+                        <button id="submit-btn" onclick="submitAnswerTimer()">Enter</button>
+                        <div class="img-clear" onclick="resetColor()">
+                            <img src="clearBoard.png" alt="">
+                            <p>clear board</p>
+                        </div>
                     </div>
                 </div>
                 <footer>
