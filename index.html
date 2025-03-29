@@ -402,7 +402,7 @@
         .timerStatus img{
             width: 17px;
         }
-        .timer-info-center , .endtab-center{
+        .full-to-center{
             display: flex;
             width: 100%;
             justify-content: center;
@@ -437,8 +437,11 @@
         .question-return-info{
             display: flex;
             flex-direction: row;
-            position: relative;
+            position: absolute;
             align-items: center;
+            margin-top: 111px;
+            width: 302px;
+            z-index: 1;
         }
         .tPage2 #status-timer{
             background-color: #AEB4FF;
@@ -575,6 +578,71 @@
         }
         a{
             text-decoration: none;
+        }  
+        .popup-full-to-center{
+            background-color: rgba(0,0,0, 0.2);
+            height: 100%;
+            width: 390px;
+            display: none;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            
+        }
+        .timer-pop-up{ 
+            height: 257px;
+            width: 250px;
+            background-color: #FFDEBD;
+            display: flex;
+            justify-content: center;
+            border-radius: 29px;
+            flex-wrap: wrap;
+        } 
+        .headTimerPopUp{
+            background-color: #FF914D;
+            border-radius: 29px 29px 0 0;
+            width: 250px;
+            height: 56px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            color: #FFDEBD;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .headTimerPopUp .p2{
+            font-size: 31px;
+        }
+        .button-pop-up{
+            display: flex;
+            justify-content: space-evenly;
+            height: 201px;
+            width: 250px;
+            flex-direction: column;
+        }
+        .button-pop-up .line{
+            background-color: #FFAD7A;
+            height: 1px;
+            width: 171.9px;
+            justify-self: center;
+            align-self: center;
+        }
+        .restart-btn , .continue-btn{
+            font-size: 31px;
+            font-weight: bold;
+            color: #FF5757;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .continue-btn{
+            color: #C886F8;
+            
         }
         
     </style>
@@ -761,15 +829,28 @@
                 </footer>
             </div>
             <div class="app-page tPage2">
+                <div class="popup-full-to-center">
+                    <div class="timer-pop-up">
+                        <div class="headTimerPopUp">
+                                <div class="p1">pause</div>
+                                <div class="p2">Vennly</div>
+                        </div>
+                        <div class="button-pop-up">
+                            <div class="restart-btn" onclick="goTimerGame()">Restart</div>
+                            <div class="line"></div>
+                            <div class="continue-btn" onclick="showTimerPopup()">Continue</div>
+                        </div>
+                    </div>
+                </div>
                 <nav>
-                    <img src="two-tap.png" alt="" onclick="pauseTimer()" class="twoTab">
+                    <img src="two-tap.png" alt="" onclick="showTimerPopup()" class="twoTab">
                     <a href="https://www.wikipedia.org/"><img src="question-logo.png" alt="" class="question-logo"></a>
                 </nav>
                 <div class="timerStatus" >
                     <img src="clock.png" alt="">
                     <div class="game-timer" id="game-timer-tab">00 : 00</div>
                 </div>
-                <div class="timer-info-center">
+                <div class="full-to-center">
                     <div class="timer-info">
                         <div class="timer-info-row">
                             <p class="timer-text" id="number-correct">Timer</p>
@@ -798,7 +879,7 @@
                         <text x="60" y="115">C</text>
                     </svg>
                 </div>
-                <div class="endtab-center">
+                <div class="full-to-center">
                     <div class="tPage2-endtab">
                         <button id="submit-btn" onclick="submitAnswerTimer()">Enter</button>
                         <div class="img-clear" onclick="resetColor()">
@@ -848,6 +929,8 @@
     let timerInterval;
     let nowTime =0;
     let bestTime = 0;
+
+    let timerPopupRunning = false;
 
     async function loadQuestions(){
         try{
@@ -1069,12 +1152,17 @@
         document.querySelector(".tPage1").style.display="none";
         document.querySelector(".tPage2").style.display="block";
 
+        if(timerPopupRunning){
+            stopTimer();
+            showTimerPopup();
+        }
         correctTimerQuestions = 0;
         currentQuestionTimerIndex = 0;
         resetColor();
         changeOrder();
         showTimerQuestions();
         startTimer();
+
     }
     function goTimerMenu(){
         document.querySelector(".tPage2").style.display="none";
@@ -1141,10 +1229,14 @@
         displayTime(0);
     }
     function pauseTimer(){
-        if(!isRunning) return;
-        clearInterval(timerInterval);
-        elapsedTime = Date.now() - startTime;
-        isRunning = false;
+        if(!isRunning){
+            startTimer();
+        }
+        else if(isRunning){
+            clearInterval(timerInterval);
+            elapsedTime = Date.now() - startTime;
+            isRunning = false;
+        }
     }
     function updateTimer(){
         const currentTime = Date.now() - startTime;
@@ -1224,6 +1316,17 @@
         document.querySelector(".stage-container").style.display="flex";
         document.querySelector(".timer-container").style.display="none";
         document.querySelector(".menu").style.display="none";
+    }
+    function showTimerPopup(){
+        if(!timerPopupRunning){
+            document.querySelector(".popup-full-to-center").style.display="flex"
+            timerPopupRunning = true;
+        }
+        else if(timerPopupRunning){
+            document.querySelector(".popup-full-to-center").style.display="none"
+            timerPopupRunning = false;
+        }
+        pauseTimer();
     }
     function wtf(){
         alert('กดทำไม ยังไม่เสร็จ😡😡😡')
