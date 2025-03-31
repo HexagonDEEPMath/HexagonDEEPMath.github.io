@@ -665,10 +665,124 @@
             display: flex;
             
         }
+        .tabBurger{
+            display: none;
+            z-index: 999;
+        }
+        .mainTabBurger{
+            width: 114px;
+            height: 176px;
+            border-radius: 20px;
+            opacity: 0.79;
+            background-color: white;
+            position: absolute;
+            display: flex;
+            top: 77px;
+            left: 9px;
+            font-size: 30px;
+            font-weight: bold;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .mainTabBurger .Text-page{
+            color: #5271FF;
+            cursor: pointer;
+        }
+        .mainTabBurger .Text-reset{
+            color: #FF5757;
+            cursor: pointer;
+        }
+        .mainTabBurger .line{
+            height: 1px;
+            width: 84px;
+            opacity: 0.35;
+            background-color: black;
+        }
+        .PageSmallTab{
+            position: absolute;
+            gap: 1px;
+            left: 124px;
+            top: 84px;
+        }
+        .triangle{
+            width: 16px;
+            height: 26px;
+            opacity: 0.79;
+            background-color: #5271FF;
+            clip-path: polygon(0 0 ,100% 100%,100% 0);
+            margin-top: 39px;
+        }
+        .Page-box-container{
+            background-color: rgba(82,133,255, 0.79);
+            display: flex;
+            border-radius: 10px;
+            width: 98px;
+            height: 138px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            cursor: pointer;
+        }
+        .Page-box{
+            opacity: 100%;
+            background-color: #82B1FF;
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            width: 86px;
+            height: 27px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ResetSmallTab{
+            position: absolute;
+            gap: 1px;
+            left: 124px;
+            top: 172px;
+        }
+        .ResetSmallTab .triangle{
+            background-color: #FF3131;
+            margin-top: 39px;
+        }
+        .ResetSmallTab .Page-box-container{
+            background-color: rgba(255, 49, 49, 0.79);
+            width: 98px;
+            height: 105px;
+        }
+        .ResetSmallTab .Page-box{
+            background-color: #FEBDBD;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="tabBurger">
+            <div class="mainTabBurger">
+                <div class="Text-page" onclick="openPageTab()">Page</div>
+                <div class="line"></div>
+                <div class="Text-reset" onclick="openResetTab()">Reset</div>
+            </div>
+            <div class="PageSmallTab">
+                <div class="triangle"></div>
+                <div class="Page-box-container">
+                    <div class="Page-box" onclick="gobackMenuGame()">Home</div>
+                    <div class="Page-box" onclick="goStageMode()">Stage</div>
+                    <div class="Page-box" onclick="goTimerMode()">Timer</div>
+                    <div class="Page-box" onclick="wtf()">Learn</div>
+                </div>
+            </div>
+            <div class="ResetSmallTab">
+                <div class="triangle"></div>
+                <div class="Page-box-container">
+                    <div class="Page-box" onclick="resetStageMode();resetTimerMode();">All</div>
+                    <div class="Page-box" onclick="resetStageMode()">Stage</div>
+                    <div class="Page-box" onclick="resetTimerMode()">Timer</div>
+                </div>
+            </div>
+        </div>
         <div class="gif" onclick="dontUseGif()">
             <H1>How to play</H1>
             <img src="Vennly.gif" alt="">
@@ -676,13 +790,13 @@
         <div class="menu">
             <div class="app-page menuPage1">
                 <nav>
-                    <img src="burger-tap.png" alt="" onclick="wtf()">
+                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                     <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                 </nav>
                 <div class="body">
                     <img src="logo.png" alt="">
                     <div class="menuPage1Button">
-                        <a href="https://www.wikipedia.org/"><div class="button">Learn</div></a>
+                        <div class="button" onclick="wtf()">Learn</div>
                         <div class="button" onclick="gotoMenuGame()">Game</div>
                     </div>
                 </div>
@@ -692,7 +806,7 @@
             </div>
             <div class="app-page menuPage2">
                 <nav>
-                    <img src="burger-tap.png" alt="" onclick="wtf()">
+                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                     <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                 </nav>
                 <div class="body">
@@ -714,7 +828,7 @@
         </div>
         <div class="stage-container">
             <nav>
-                <img src="burger-tap.png" alt="" onclick="wtf()">
+                <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                 <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
             </nav>
             <div class="swiper mySwiper" id="menu-container">
@@ -793,7 +907,7 @@
             </footer>
             <div class="venn-container" id="quiz-container">
                 <nav>
-                    <img src="burger-tap.png" alt="" onclick="wtf()">
+                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                     <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                 </nav>
 
@@ -831,7 +945,7 @@
         <div class="timer-container">
             <div class="app-page tPage1" >
                 <nav>
-                    <img src="burger-tap.png" alt="" onclick="resetTimerMode()">
+                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                     <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                 </nav>
 
@@ -955,6 +1069,7 @@
     let bestTime = 0;
 
     let timerPopupRunning = false;
+    let burgerRunning = false;
 
     async function loadQuestions(){
         try{
@@ -1187,6 +1302,9 @@
         showTimerQuestions();
         startTimer();
 
+        document.querySelector(".tabBurger").style.display="none";
+        burgerRunning = false;
+
     }
     function goTimerMenu(){
         document.querySelector(".tPage2").style.display="none";
@@ -1195,6 +1313,9 @@
         stopTimer();
         loadBestTimer();
         document.getElementById("highestTime").innerText = displayTime(bestTime);
+
+        document.querySelector(".tabBurger").style.display="none";
+        burgerRunning = false;
     }
     function changeOrder(){
         if(!randomQuestionsTimer.length || randomQuestionsTimer.length === questionsTimer.length){
@@ -1306,11 +1427,20 @@
         }
     }
     function resetTimerMode(){
-        const isConfirmed = confirm("คุณต้องการรีเซ็ตเวลาที่ดีที่สุดใช่หรือไม่?");
+        const isConfirmed = confirm("คุณต้องการเริ่มต้นเวลาที่ดีที่สุดใหม่ใน Timer ใช่หรือไม่?");
         if(isConfirmed){    
             localStorage.removeItem("bestTimer");
             bestTime = 0;
             document.getElementById("highestTime").innerText = "00 : 00";
+        }
+    }
+    function resetStageMode(){
+        const ConfirmStage = confirm("คุณต้องการเริ่มต้นใหม่ในโหมด Stage ใช่หรือไม่?")
+        if(ConfirmStage){
+            localStorage.removeItem('vennQuizCompleted');
+            localStorage.removeItem('vennQuizHighestUnlocked');
+            highestUnlockedQuestion = 1;
+            completedQuestions = {};
         }
     }
 
@@ -1322,24 +1452,38 @@
         loadBestTimer();
         document.getElementById("highestTime").innerText = displayTime(bestTime);
 
+        document.querySelector(".tabBurger").style.display="none";
+        burgerRunning = false;
     }
     function gotoMenuGame(){
         document.querySelector(".menuPage1").style.display="none";
         document.querySelector(".menuPage2").style.display="block";
+
+        document.querySelector(".tabBurger").style.display="none";
+        burgerRunning = false;
     }
     function gobackMenuGame(){
         document.querySelector(".menuPage2").style.display="none";
         document.querySelector(".menuPage1").style.display="flex";
+        
+        document.querySelector(".tabBurger").style.display="none";
+        burgerRunning = false;
     }
     function gotoMenu(){
         document.querySelector(".menu").style.display="flex";
         document.querySelector(".stage-container").style.display="none";
         document.querySelector(".timer-container").style.display="none";
+
+        document.querySelector(".tabBurger").style.display="none";
+        burgerRunning = false;
     }
     function goStageMode(){
         document.querySelector(".stage-container").style.display="flex";
         document.querySelector(".timer-container").style.display="none";
         document.querySelector(".menu").style.display="none";
+
+        document.querySelector(".tabBurger").style.display="none";
+        burgerRunning = false;
     }
     function showTimerPopup(){
         if(!timerPopupRunning){
@@ -1361,8 +1505,28 @@
     function dontUseGif(){
         document.querySelector(".gif").style.display="none";
     }
+    function showBurgerTab(){
+        if(!burgerRunning){
+            document.querySelector(".tabBurger").style.display="flex";
+            document.querySelector(".PageSmallTab").style.display="none";
+            document.querySelector(".ResetSmallTab").style.display="none";
+            burgerRunning = true;
+        }
+        else if(burgerRunning){
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
+        }
+    }
+    function openPageTab(){
+        document.querySelector(".PageSmallTab").style.display="flex";
+        document.querySelector(".ResetSmallTab").style.display="none";
+    }
+    function openResetTab(){
+        document.querySelector(".PageSmallTab").style.display="none";
+        document.querySelector(".ResetSmallTab").style.display="flex";
+    }
     function wtf(){
-        alert('กดทำไม ยังไม่เสร็จ😡😡😡')
+        alert("กำลังพัฒนา")
     }
 
 window.onload = function(){
