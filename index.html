@@ -132,6 +132,9 @@
         #submit-btn:active, #back-btn:active ,.number:active,.question-logo:active{
             transform: scale(0.95);
         }
+        .venn-container .body{
+            justify-content: space-evenly;
+        }
         .question-info{
             width: 302px;
             display: flex;
@@ -402,6 +405,11 @@
         .timerStatus img{
             width: 17px;
         }
+        .full-to-start{
+            display: flex;
+            align-items: flex-start;
+            width: 390px;
+        }
         .full-to-center{
             display: flex;
             width: 100%;
@@ -515,7 +523,8 @@
         .munuPage2{
             display: none;
         }
-        .menu .body{
+        .body{
+            width: 390px;
             height: 694px;
             display: flex;
             flex-direction: column;
@@ -755,6 +764,11 @@
         .ResetSmallTab .Page-box{
             background-color: #FEBDBD;
         }
+        .LearnPage{
+            display: none;
+            width: 390px;
+            background-color: #FFF9CA;
+        }
     </style>
 </head>
 <body>
@@ -768,10 +782,10 @@
             <div class="PageSmallTab">
                 <div class="triangle"></div>
                 <div class="Page-box-container">
-                    <div class="Page-box" onclick="gobackMenuGame()">Home</div>
+                    <div class="Page-box" onclick="gotoMenu();gobackMenuGame();">Home</div>
                     <div class="Page-box" onclick="goStageMode()">Stage</div>
                     <div class="Page-box" onclick="goTimerMode()">Timer</div>
-                    <div class="Page-box" onclick="wtf()">Learn</div>
+                    <div class="Page-box" onclick="gotoLearn()">Learn</div>
                 </div>
             </div>
             <div class="ResetSmallTab">
@@ -796,7 +810,7 @@
                 <div class="body">
                     <img src="logo.png" alt="">
                     <div class="menuPage1Button">
-                        <div class="button" onclick="wtf()">Learn</div>
+                        <div class="button" onclick="gotoLearn()">Learn</div>
                         <div class="button" onclick="gotoMenuGame()">Game</div>
                     </div>
                 </div>
@@ -835,67 +849,73 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="app-page page1">
-                            <div class="content-text">
-                                <div class="stage">Stage</div>
-                                <div class="level">Newbie</div>
-                            </div>
-                            <div class="grid">
-                                <div class="number " onclick="trytogoQuestion(1)"><h1>1</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(2)"><h1>2</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(3)"><h1>3</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(4)"><h1>4</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(5)"><h1>5</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(6)"><h1>6</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(7)"><h1>7</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(8)"><h1>8</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(9)"><h1>9</h1></div>
-                            </div>
-                            <div class="gridLogo">
-                                <img src="logo.png" alt="">
+                            <div class="body">
+                                <div class="content-text">
+                                    <div class="stage">Stage</div>
+                                    <div class="level">Newbie</div>
+                                </div>
+                                <div class="grid">
+                                    <div class="number " onclick="trytogoQuestion(1)"><h1>1</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(2)"><h1>2</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(3)"><h1>3</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(4)"><h1>4</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(5)"><h1>5</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(6)"><h1>6</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(7)"><h1>7</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(8)"><h1>8</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(9)"><h1>9</h1></div>
+                                </div>
+                                <div class="gridLogo">
+                                    <img src="logo.png" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="app-page page2">
-                            <div class="content-text">
-                                <div class="stage">Stage</div>
-                                <div class="level">Practice</div>
-                            </div>
-                            <div class="grid">
-                                <div class="number locked" onclick="trytogoQuestion(10)"><h1>1</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(11)"><h1>2</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(12)"><h1>3</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(13)"><h1>4</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(14)"><h1>5</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(15)"><h1>6</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(16)"><h1>7</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(17)"><h1>8</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(18)"><h1>9</h1></div>
-                            </div>
-                            <div class="gridLogo">
-                                <img src="logo.png" alt="">
+                            <div class="body">
+                                <div class="content-text">
+                                    <div class="stage">Stage</div>
+                                    <div class="level">Practice</div>
+                                </div>
+                                <div class="grid">
+                                    <div class="number locked" onclick="trytogoQuestion(10)"><h1>1</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(11)"><h1>2</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(12)"><h1>3</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(13)"><h1>4</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(14)"><h1>5</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(15)"><h1>6</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(16)"><h1>7</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(17)"><h1>8</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(18)"><h1>9</h1></div>
+                                </div>
+                                <div class="gridLogo">
+                                    <img src="logo.png" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="app-page page3">
-                            <div class="content-text">
-                                <div class="stage">Stage</div>
-                                <div class="level">Expert</div>
-                            </div>
-                            <div class="grid">
-                                <div class="number locked" onclick="trytogoQuestion(19)"><h1>1</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(20)"><h1>2</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(21)"><h1>3</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(22)"><h1>4</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(23)"><h1>5</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(24)"><h1>6</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(25)"><h1>7</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(26)"><h1>8</h1></div>
-                                <div class="number locked" onclick="trytogoQuestion(27)"><h1>9</h1></div>
-                            </div>
-                            <div class="gridLogo">
-                                <img src="logo.png" alt="">
+                            <div class="body">
+                                <div class="content-text">
+                                    <div class="stage">Stage</div>
+                                    <div class="level">Expert</div>
+                                </div>
+                                <div class="grid">
+                                    <div class="number locked" onclick="trytogoQuestion(19)"><h1>1</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(20)"><h1>2</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(21)"><h1>3</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(22)"><h1>4</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(23)"><h1>5</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(24)"><h1>6</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(25)"><h1>7</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(26)"><h1>8</h1></div>
+                                    <div class="number locked" onclick="trytogoQuestion(27)"><h1>9</h1></div>
+                                </div>
+                                <div class="gridLogo">
+                                    <img src="logo.png" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -910,32 +930,33 @@
                     <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                     <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                 </nav>
-
-                <div class="question-info">
-                    <div class="question-info-row">
-                        <p id="question-number">Stage ...</p>
-                        <p id="status">3 Sets</p>
+                <div class="body">
+                    <div class="question-info">
+                        <div class="question-info-row">
+                            <p id="question-number">Stage ...</p>
+                            <p id="status">3 Sets</p>
+                        </div>
+                        <p id="question">Question ...</p>
                     </div>
-                    <p id="question">Question ...</p>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
+                        <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
+                        <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
+                        <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
+                        <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
+                        <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
+                        <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
+                        <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
+                        <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
+                        
+                        <text class="universe" x="112" y="10">U</text>
+                        <text x="18" y="18">A</text>
+                        <text x="102" y="18">B</text>
+                        <text x="60" y="115">C</text>
+                    </svg>
+
+                    <button id="submit-btn" onclick="submitAnswer()">Submit</button>
                 </div>
-
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
-                    <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
-                    <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
-                    <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
-                    <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
-                    <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
-                    <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
-                    <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
-                    <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
-                    
-                    <text class="universe" x="112" y="10">U</text>
-                    <text x="18" y="18">A</text>
-                    <text x="102" y="18">B</text>
-                    <text x="60" y="115">C</text>
-                </svg>
-
-                <button id="submit-btn" onclick="submitAnswer()">Submit</button>
                 <footer>
                     <img src="go-back.png" alt="" id="back-btn" onclick="goBack()">
                     <div class="div-text-level"><p id="text-level">loading level...</p></div>
@@ -948,20 +969,20 @@
                     <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                     <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                 </nav>
-
-                <div class="text-timer-all">
-                    <div class="text-timer">Timer</div>
-                    <img src="logo.png" alt="" class="big-logo-timer-page">
+                <div class="body">
+                    <div class="text-timer-all">
+                        <div class="text-timer">Timer</div>
+                        <img src="logo.png" alt="" class="big-logo-timer-page">
+                    </div>
+                    <div class="text-sets3">
+                        3 Sets
+                    </div>
+                    <div class="bestTime">
+                        <p>BEST TIME : </p>
+                        <div class="whitebar-bestTime"><p id="highestTime">00 : 00</p></div>
+                    </div>
+                    <div class="timer-start" onclick="goTimerGame()">start</div>
                 </div>
-                <div class="text-sets3">
-                    3 Sets
-                </div>
-                <div class="bestTime">
-                    <p>BEST TIME : </p>
-                    <div class="whitebar-bestTime"><p id="highestTime">00 : 00</p></div>
-                </div>
-                <div class="timer-start" onclick="goTimerGame()">start</div>
-
                 <footer>
                     <img src="go-back.png" alt="" onclick="gotoMenu()">
                 </footer>
@@ -984,45 +1005,49 @@
                     <img src="two-tap.png" alt="" onclick="showTimerPopup()" class="twoTab">
                     <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                 </nav>
-                <div class="timerStatus" >
-                    <img src="clock.png" alt="">
-                    <div class="game-timer" id="game-timer-tab">00 : 00</div>
-                </div>
-                <div class="full-to-center">
-                    <div class="timer-info">
-                        <div class="timer-info-row">
-                            <p class="timer-text" id="number-correct">Timer</p>
-                            <p id="status-timer">3 Sets</p>
-                        </div>
-                        <div class="question-return-info">
-                            <p id="timerQuestion">Question...</p>
-                            <img src="newRandom.png" alt="" onclick="newQuestion()">
+                <div class="body">
+                    <div class="full-to-start">
+                        <div class="timerStatus" >
+                            <img src="clock.png" alt="">
+                            <div class="game-timer" id="game-timer-tab">00 : 00</div>
                         </div>
                     </div>
-                </div>
-                <div class="venn-diagram-timer">
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
-                        <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
-                        <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
-                        <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
-                        <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
-                        <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
-                        <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
-                        <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
-                        <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
-                        
-                        <text class="universe" x="112" y="10">U</text>
-                        <text x="18" y="18">A</text>
-                        <text x="102" y="18">B</text>
-                        <text x="60" y="115">C</text>
-                    </svg>
-                </div>
-                <div class="full-to-center">
-                    <div class="tPage2-endtab">
-                        <button id="submit-btn" onclick="submitAnswerTimer()">Enter</button>
-                        <div class="img-clear" onclick="resetColor()">
-                            <img src="clearBoard.png" alt="">
-                            <p>clear board</p>
+                    <div class="full-to-center">
+                        <div class="timer-info">
+                            <div class="timer-info-row">
+                                <p class="timer-text" id="number-correct">Timer</p>
+                                <p id="status-timer">3 Sets</p>
+                            </div>
+                            <div class="question-return-info">
+                                <p id="timerQuestion">Question...</p>
+                                <img src="newRandom.png" alt="" onclick="newQuestion()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="venn-diagram-timer">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
+                            <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
+                            <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
+                            <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
+                            <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
+                            <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
+                            <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
+                            <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
+                            <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
+                            
+                            <text class="universe" x="112" y="10">U</text>
+                            <text x="18" y="18">A</text>
+                            <text x="102" y="18">B</text>
+                            <text x="60" y="115">C</text>
+                        </svg>
+                    </div>
+                    <div class="full-to-center">
+                        <div class="tPage2-endtab">
+                            <button id="submit-btn" onclick="submitAnswerTimer()">Enter</button>
+                            <div class="img-clear" onclick="resetColor()">
+                                <img src="clearBoard.png" alt="">
+                                <p>clear board</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1030,8 +1055,12 @@
                     <img src="go-back.png" alt="" id="back-btn" onclick="goTimerMenu()">
                 </footer>
             </div>
-
         </div>
+    </div>
+    <div class="LearnPage">
+        <div class="say-hi">Let's Learn</div>
+        <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias illum exercitationem beatae voluptate tempora, voluptates qui quisquam doloremque aspernatur tempore! Iusto saepe ad eum quia aperiam cupiditate illo accusantium pariatur veritatis architecto, eligendi expedita odit, facilis molestias eius excepturi ipsa quibusdam itaque aut quod vel ratione! Error asperiores at harum maxime reprehenderit magnam libero nesciunt ipsam nam exercitationem qui modi voluptates ut debitis velit aspernatur corporis officiis impedit, necessitatibus voluptas corrupti blanditiis. Voluptas temporibus asperiores blanditiis. Est, beatae? Dolorum, accusantium quaerat? Modi quaerat at similique ratione ut tempore, sint quae officiis. Quidem ea quia voluptas eligendi perferendis quos, magni eum et sapiente minima exercitationem nihil repellendus, dicta obcaecati praesentium dolores fugit voluptates officia facere reiciendis vel porro excepturi? Minima totam repellat veritatis. Consectetur, quam? Quam aliquid, sit harum ex odit, distinctio impedit alias, iusto cum officiis odio! Quo, pariatur voluptate? Nulla recusandae, quam atque quisquam possimus ullam laudantium laboriosam debitis a officia rerum eligendi quidem dolore modi fuga consectetur neque praesentium doloremque aspernatur tenetur, exercitationem reiciendis nemo ipsam voluptate. Aperiam saepe alias, blanditiis eligendi doloribus illum quas labore ipsum provident dolores ratione, sunt placeat distinctio aspernatur excepturi qui modi ipsa suscipit eaque facere neque quaerat. Culpa ipsam voluptates perspiciatis eum, quia aspernatur iusto mollitia dolorem, tenetur, est fugit sequi beatae quo illo laudantium qui ipsum rerum! Soluta rerum cupiditate fuga esse ipsum expedita, corrupti aliquid est quia neque sapiente, perferendis impedit illo nostrum! Quaerat doloremque, obcaecati accusamus quisquam quia odit ad veniam eius eaque repudiandae earum autem inventore beatae iusto voluptas minima ea dolorem, fuga, voluptates incidunt vel animi ducimus sunt saepe! Aliquam obcaecati, delectus officia soluta suscipit voluptate saepe, aperiam reprehenderit porro est sit architecto, vero blanditiis nihil cupiditate laborum ut nobis assumenda. Dolore reprehenderit officia velit optio vero. Fugit, rem nemo possimus autem animi nulla quod tempora consequuntur voluptates voluptate ullam optio, ipsum, exercitationem iure enim ducimus at. Molestiae placeat repudiandae quibusdam suscipit cupiditate labore laudantium cumque soluta harum nam consequuntur enim dolore itaque hic explicabo quam accusamus, unde voluptates pariatur eaque modi. Dolores numquam ullam perspiciatis illo cupiditate similique mollitia exercitationem magni repellat laboriosam saepe quam cum dolore atque voluptatum, asperiores id sed quia consequatur libero officiis labore aut velit? Esse rem corporis deleniti magnam doloremque alias, laboriosam ratione. Perferendis sunt ea error, similique nulla praesentium beatae dolores, eligendi, libero ipsa sapiente autem consequatur facere doloremque illum officiis. Tempora, temporibus distinctio dignissimos est, eum rem incidunt modi libero illo necessitatibus repellendus consequatur deserunt sapiente debitis velit esse omnis et dolor, in error quasi ab. Error autem repellat doloribus voluptate sint nesciunt, quisquam fuga eum ut repellendus dignissimos? Quo aspernatur ratione, numquam omnis quidem voluptates ullam tenetur vero adipisci! Ducimus fugiat beatae unde ipsam ipsa nulla facilis sapiente, quas fuga ab distinctio quis explicabo excepturi perferendis modi alias sequi eaque quidem molestias molestiae voluptate ex vel saepe quaerat! Atque, accusamus praesentium voluptas quod obcaecati aliquid deserunt? Labore recusandae ipsum minus hic suscipit doloribus. Facilis unde eligendi maiores esse cumque harum reprehenderit neque qui suscipit. Numquam rem ut quidem doloribus assumenda. Magnam voluptate repellat at. Enim non in ad voluptates iure alias est accusamus eius modi fugit. Veritatis rem optio dignissimos nisi aspernatur similique culpa non aut sint, sunt doloribus, consectetur voluptates obcaecati repudiandae vero fugiat cum quisquam nam eligendi natus! Voluptatem, alias aut aliquid distinctio ullam quae fugit tempora accusamus beatae debitis minima nulla, rem, explicabo iusto consectetur libero amet nam aperiam cum consequatur! Minus autem sunt cumque dolor beatae. Placeat adipisci modi quas vel impedit sunt consequatur dolor ex nobis doloremque ipsum exercitationem ad eum fugiat numquam sed quidem eaque cupiditate, error odit sapiente! Vel non deserunt dicta dignissimos excepturi quas facere harum ullam quasi. A dolor eaque neque ipsa modi earum rem perferendis, incidunt possimus pariatur velit cupiditate et maxime beatae nisi aspernatur. Consequatur quod ut suscipit ea accusamus doloremque, corporis voluptates a rem, corrupti error autem inventore totam exercitationem velit nulla neque reprehenderit repellendus laudantium minima fugiat eius numquam eos repudiandae! Ullam, quidem itaque ipsa labore atque ipsam, quisquam iste, illo nesciunt debitis praesentium? Temporibus cum, asperiores repellendus dolores officiis iusto velit suscipit laudantium, alias exercitationem aperiam tempore nam illum animi incidunt iure eum eaque praesentium nostrum doloribus tenetur ea autem deserunt! Repudiandae, quibusdam cumque. Quidem obcaecati necessitatibus maxime tempore asperiores reprehenderit eius labore corrupti natus rerum unde nam nostrum neque dolores at quae omnis, minima magni! Consectetur beatae blanditiis incidunt nemo eos atque. Ullam esse incidunt praesentium quia odio ipsum, tempore corporis sit explicabo eaque, accusamus asperiores aut veritatis doloribus vero ad dignissimos laudantium qui ducimus itaque reiciendis consequatur? Qui sed animi voluptatum, at rerum possimus. Alias iure, maiores quo sunt aliquid perspiciatis enim illo rerum unde repellendus quisquam rem aspernatur? Delectus accusamus dignissimos minima ducimus quos exercitationem voluptates aliquam. Maiores ipsa veritatis porro sit esse illum nihil consequatur impedit ducimus culpa dignissimos, unde ea delectus natus voluptates voluptate dolores? Alias aspernatur asperiores pariatur maiores nesciunt tempora assumenda, fuga dicta. Magni quasi cumque tempora provident officiis, sapiente maxime neque adipisci deserunt? Impedit delectus possimus tempora obcaecati, molestiae distinctio, recusandae illum ipsam quidem suscipit saepe ducimus porro ut libero sunt totam nisi alias dignissimos maxime quia itaque omnis fuga. Repellendus corrupti iure temporibus iusto deleniti, asperiores ducimus nesciunt dolor eos voluptatum illum ratione quibusdam rerum sit minima eaque voluptas! Nesciunt, necessitatibus. Laborum qui suscipit accusamus, est aspernatur omnis enim dignissimos. Maxime id inventore optio voluptate expedita maiores blanditiis obcaecati fugit. Libero pariatur obcaecati, fugit eius eligendi perferendis eum non vero voluptatem, accusamus ad incidunt perspiciatis tempora dignissimos temporibus impedit. Praesentium, officia eum. Laboriosam optio illum amet sapiente maxime ullam obcaecati consequatur deleniti earum impedit! Esse quae nobis eveniet harum ad dolorem illo aspernatur delectus atque quibusdam laboriosam voluptatibus nesciunt animi eum minus odio rerum molestias, quas aut voluptate adipisci quos ipsa aliquam rem. Accusamus, nulla facilis id animi itaque inventore assumenda veritatis nostrum expedita? Esse quisquam blanditiis ipsa velit, aperiam quas odit ullam quibusdam omnis harum architecto perferendis ab voluptate facilis quia laborum eius tempore tempora incidunt ipsam provident dolores. Dolores qui minima voluptas adipisci?</h1>
     </div>
 </body>
 <script>
@@ -1448,6 +1477,7 @@
         document.querySelector(".menu").style.display="none";
         document.querySelector(".stage-container").style.display="none";
         document.querySelector(".timer-container").style.display="flex";
+        document.querySelector(".LearnPage").style.display="none";
 
         loadBestTimer();
         document.getElementById("highestTime").innerText = displayTime(bestTime);
@@ -1473,6 +1503,7 @@
         document.querySelector(".menu").style.display="flex";
         document.querySelector(".stage-container").style.display="none";
         document.querySelector(".timer-container").style.display="none";
+        document.querySelector(".LearnPage").style.display="none";
 
         document.querySelector(".tabBurger").style.display="none";
         burgerRunning = false;
@@ -1481,6 +1512,7 @@
         document.querySelector(".stage-container").style.display="flex";
         document.querySelector(".timer-container").style.display="none";
         document.querySelector(".menu").style.display="none";
+        document.querySelector(".LearnPage").style.display="none";
 
         document.querySelector(".tabBurger").style.display="none";
         burgerRunning = false;
@@ -1498,6 +1530,9 @@
     }
     function showGif(){
         document.querySelector(".gif").style.display="flex";
+        document.querySelector(".tabBurger").style.display="none";
+        
+        burgerRunning = false;
         if(isRunning){
             showTimerPopup();
         }
@@ -1524,6 +1559,14 @@
     function openResetTab(){
         document.querySelector(".PageSmallTab").style.display="none";
         document.querySelector(".ResetSmallTab").style.display="flex";
+    }
+    function gotoLearn(){
+        document.querySelector(".LearnPage").style.display="flex"
+        document.querySelector(".menu").style.display="none"
+        document.querySelector(".stage-container").style.display="none";
+        document.querySelector(".timer-container").style.display="none";
+        document.querySelector(".tabBurger").style.display="none";
+        burgerRunning = false;
     }
     function wtf(){
         alert("กำลังพัฒนา")
