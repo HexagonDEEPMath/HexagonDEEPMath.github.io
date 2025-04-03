@@ -857,11 +857,6 @@
         .nonBackground .ex , .intersection .ex{
             color: #C886F8;
         }
-        .main-picture{
-            width: 33%;
-            align-self: center;
-            margin: 10px;
-        }
         .warning{
             font-size: 9.5px;
             text-align: center;
@@ -871,10 +866,9 @@
             text-decoration: underline;
         }
         .intersection{
-            margin: 0 17.5px;
             background-color: #ffdede;
-            border-radius: 15px 15px 0 0;
-            padding: 0;
+            border-radius: 10px 10px 0 0;
+            padding: 10px;
             display: flex;
             flex-direction: column;
         }
@@ -889,9 +883,6 @@
         .intersection .detail{
             text-indent: 0;
             font-size: 16px;
-        }
-        .define{
-            color: black;
         }
         .intersection .detail .red{
             font-size: 14px;
@@ -908,56 +899,20 @@
             align-self: center;
             margin: 10px;
         }
-        .orange{
-            color: #FF863C;
-        }
         .LearnPage img{
-            width: 105px;
+            width: 190px;
             margin: 10px 18px 0 10px;
-            align-self: flex-end;
-        }
-        .exclusive{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-        }
-        .path-of-union{
-            background-color: #f0ffcc;
-            height: 48px;
-            width: 157px;
-            align-self: flex-end;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            padding-left: 10px;
-            align-items: flex-end;
-        }
-        .path-of-union .liner{
-            color: #FF6100;
-            padding: 2px;
-        }
-        .real-intersection{
-            padding: 10px 10px 0 10px;
+            align-self: center;
         }
         .union {
             background-color: #f0ffcc;
-            border-radius: 0 10px 0px 0px;
+            border-radius: 10px 10px 0px 0px;
             padding: 0 10px 10px 10px;
             display: flex;
             flex-direction: column;
         }
         .union .detail{
             text-indent: 0;
-        }
-        .light-orange{
-            color: #ff863c;
-        }
-        .edit-union{
-            background-color: #ffdede;
-            margin: 0 17.5px;
-            border-radius: 0 0 10px 10px;
-        }
-        .orange{
-            color: #ff7927;
         }
         .complement{
             background-color: #ffebc9;
@@ -967,18 +922,12 @@
             display: flex;
             flex-direction: column;
         }
-        .complement .liner{
-            font-size: 18px;
-            font-weight: bold;
-            color: #0F27FF;
-        }
-        .edit-complement{
-            background-color: #f0ffcc;
+        .edit{
             margin: 0 17.5px;
         }
-        .edit-difference{
-            background-color: #ffebc9;
-            margin:  0 17.5px 20px 17.5px;
+        .LearnPage .edit-difference{
+            background-color: #ffebc9; 
+            margin-bottom: 20px;
             border-radius: 0 0 10px 10px;
         }
         .difference{
@@ -987,11 +936,6 @@
             border-radius: 10px;
             display: flex;
             flex-direction: column;
-        }
-        .difference .liner{
-            font-size: 18px;
-            font-weight: bold;
-            color: #18c429;
         }
         .property{
             display: flex;
@@ -1016,6 +960,11 @@
         ol{
             padding: 0 0 0 20px;
             margin: 0;
+        }
+        .liner-section{
+            text-decoration: underline;
+            font-size: 18px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -1342,12 +1291,12 @@
         
         <div class="red warning" >** ในการเขียนเซตจะต้องกำหนดเขตที่บ่งบอกถึงขอบเขตของสิ่งที่จะพิจารณา เรียกเซตกำหนดเขตนี้ว่า <span class="liner">เอกภพสัมพัทธ์ (Relative Universe)</span> ซึ่งมักเขียนแทนด้วย U</div>
         <div class="section">การดำเนินการระหว่างเซต ( Operation on Set )</div>
-        <div class="intersection">
-            <div class="real-intersection">
+        <div class="edit">
+            <div class="intersection">
                 <div class="detail">
-                    <div class="liner">อินเตอร์เซกชัน( intersection )</div>
+                    <div class="liner-section" style="color: #8c52ff;">อินเตอร์เซกชัน( intersection )</div>
                     <div class="light-blue">เขียนแทนด้วย A ∩ B</div>
-                    <div class="define">มีบทนิยามว่า   A ∩ B = { x | x ∈ A และ x ∈ B }</div>
+                    <div style="color: black;">มีบทนิยามว่า   A ∩ B = { x | x ∈ A และ x ∈ B }</div>
                     <div class="red">( x อยู่ในเซต A และเซต B )</div>
                 </div>
                 <div class="ex">Example</div>
@@ -1355,22 +1304,20 @@
                     สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของทั้งเซต A และ B  ด้วยพื้นที่ที่มองเห็นบริเวณที่ซ้อนทับกันระหว่างเซต A และ B คือ 2 และ 4 จะเห็นว่า 2 และ 4 เป็นสมาชิกของทั้งเซต A และ B ดังภาพ
                     เขียนแทนด้วย  A ∩ B
                 </div>
-            </div>
-            <div class="exclusive">
-                <div class="path-of-union"><div class="liner">ยูเนียน (union)</div></div>
-                <img src="diagram2.png" alt="">
-            </div>
+            <img src="diagram2.png" alt="">
         </div>
-        <div class="edit-union">
+        </div>
+        <div class="edit" style="background-color: #ffdede;">
             <div class="union">
                 <div class="detail">
-                    <div class="light-orange">เขียนแทนด้วย A ∪ B</div>
-                    <div class="define">มีบทนิยามว่า  A ∪ B = { x | x ∈ A หรือ x ∈ B }</div>
+                    <div class="liner-section" style="color: #ff6100;">ยูเนียน (union)</div>
+                    <div style="color: #ff863c;">เขียนแทนด้วย A ∪ B</div>
+                    <div style="color: black;">มีบทนิยามว่า  A ∪ B = { x | x ∈ A หรือ x ∈ B }</div>
                     <div class="red">( x อยู่ในเซต A หรือเซต B )</div>
                 </div>
-                <div class="ex orange">Example</div>
+                <div class="ex" style="color: #ff7927;">Example</div>
                 <div class="sub-detail">
-                    <span class="light-orange">
+                    <span style="color: #ff863c;">
                         <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 } </p>
                         สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของเซต A หรือ B  ด้วยพื้นที่ที่มองเห็นบริเวณของเซต A และ B คือ 1,2,3,4,6และ 8
                         จะเห็นว่า 1,2,3,4,6 และ 8 เป็นสมาชิกของเซต A หรือ B ดังภาพ
@@ -1380,17 +1327,17 @@
                 <img src="diagram3.png" alt="">
             </div>
         </div>
-        <div class="edit-complement">
+        <div class="edit" style="background-color: #f0ffcc;">
             <div class="complement">
-                <div class="liner">คอมพลีเมนต์ (complement)</div>
+                <div class="liner-section" style="color: #0F27FF;">คอมพลีเมนต์ (complement)</div>
                 <div class="detail" style="text-indent: 0;">
                     <div style="color: #2985FF;">เขียนแทนด้วย A′</div>
-                    <div class="define">มีบทนิยามว่า   A′ = { x | x ∈ U และ x ∉ A } </div>
+                    <div style="color: black;">มีบทนิยามว่า   A′ = { x | x ∈ U และ x ∉ A } </div>
                     <div class="red">( x ไม่อยู่ในเซต A)</div>
                 </div>
                 <div class="ex" style="color: #2985ff;">Example</div>
                 <div class="sub-detail">
-                    <span style="color: #72a0eb;">
+                    <span style="color: #3c4ce4;">
                         <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 }</p>
                         สร้างแผนภาพเวนน์ - ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่ไม่เป็นสมาชิกของเซต A ด้วยพื้นที่ที่มองเห็นบริเวณที่ไม่ซ้อนทับกับเซต A และ B คือ 6 และ 8 จะเห็นว่า 6 และ 8 ไม่เป็นสมาชิกของเซต A ดังภาพ
                         เขียนแทนด้วย A′
@@ -1399,17 +1346,17 @@
                 <img src="diagram4.png" alt="">
             </div>
         </div>
-        <div class="edit-difference">
+        <div class="edit edit-difference" >
             <div class="difference">
-                <div class="liner">ผลต่างระหว่างเซต (difference of sets)</div>
+                <div class="liner-section" style="color: #ff1c7c;">ผลต่างระหว่างเซต (difference of sets)</div>
                 <div class="detail" style="text-indent: 0;">
-                    <div style="color: #86c242;">เขียนแทนด้วย A - B</div>
-                    <div class="define">มีบทนิยามว่า   A - B = { x | x ∈ A และ x ∉ B }</div>
+                    <div style="color: #ff70c5;">เขียนแทนด้วย A - B</div>
+                    <div style="color: black;">มีบทนิยามว่า   A - B = { x | x ∈ A และ x ∉ B }</div>
                     <div class="red">( x อยู่ในเซต A แต่ไม่อยู่ในเซต B )</div>
                 </div>
-                <div class="ex" style="color: #62d41d;">Example</div>
+                <div class="ex" style="color: #ff3fb2;">Example</div>
                 <div class="sub-detail">
-                    <span style="color: #7fd158;">
+                    <span style="color: #ff3fb2;">
                         <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 }</p>
                         สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของเซต A 
                         แต่ไม่เป็นสมาชิกของเซต B  ด้วยพื้นที่ที่มองเห็นบริเวณของเซต A แต่ไม่ซ้อนทับกับบริเวณของเซต B คือ 1 และ 3 จะเห็นว่า 1 และ 3 เป็นสมาชิกของเซต A หรือ B ดังภาพ
@@ -1473,8 +1420,8 @@
                 </div>
             </div>
             <div class="property-box" style="background-color: #d5f5ff;">
-                <div class="property-liner" style="color: #18c429;">สมบัติของผลต่าง</div>
-                <div class="property-detail" style="color: #62d41d;">กำหนดให้ A และ B เป็นสับเซตเอกภพสัมพัทธ์ U แล้ว</div>
+                <div class="property-liner" style="color: #ff1c7c;">สมบัติของผลต่าง</div>
+                <div class="property-detail" style="color: #ff3fb2;">กำหนดให้ A และ B เป็นสับเซตเอกภพสัมพัทธ์ U แล้ว</div>
                 <div class="property-list">
                     <ol>
                         <li> A - B ⊂ A</li>
