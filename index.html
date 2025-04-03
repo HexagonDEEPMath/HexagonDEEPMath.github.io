@@ -808,6 +808,7 @@
             text-decoration: underline;
             font-size: 15px;
             font-weight: 500;
+            margin-top: 3px;
         }
         .detailSets{
             background-color: #FFE1BF;
@@ -840,6 +841,7 @@
         .sub-detail{
             color: #72a0eb;
             font-size: 14px;
+            line-height: 1.3;
         }
         p{
             margin: 0;
@@ -872,7 +874,7 @@
             margin: 0 17.5px;
             background-color: #ffdede;
             border-radius: 15px 15px 0 0;
-            padding: 10px;
+            padding: 0;
             display: flex;
             flex-direction: column;
         }
@@ -906,9 +908,56 @@
             color: #FF863C;
         }
         .LearnPage img{
-            align-self: flex-end;
-            margin: 10px 10px 0 0;
+            margin: 10px;
             width: 105px;
+        }
+        .exclusive{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-right: 28px;
+        }
+        .path-of-union{
+            background-color: #f0ffcc;
+            height: 48px;
+            width: 157px;
+            align-self: flex-end;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            padding-left: 10px;
+            align-items: flex-end;
+        }
+        .path-of-union .liner{
+            color: #FF6100;
+            padding: 2px;
+        }
+        .real-intersection{
+            padding: 10px 10px 0 10px;
+        }
+        .union {
+            background-color: #f0ffcc;
+            border-radius: 0 10px 10px 10px;
+            padding: 0 10px 10px 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .union .detail{
+            text-indent: 0;
+        }
+        .light-orange{
+            color: #ff863c;
+        }
+        .edit-union{
+            background-color: #ffdede;
+            margin: 0 17.5px;
+            border-radius: 0 0 10px 10px;
+        }
+        .union img{
+            margin: 10px 28px 0 10px;
+            align-self: flex-end;
+        }
+        .orange{
+            color: #ff7927;
         }
     </style>
 </head>
@@ -1236,18 +1285,42 @@
         <div class="red warning" >** ในการเขียนเซตจะต้องกำหนดเขตที่บ่งบอกถึงขอบเขตของสิ่งที่จะพิจารณา เรียกเซตกำหนดเขตนี้ว่า <span class="liner">เอกภพสัมพัทธ์ (Relative Universe)</span> ซึ่งมักเขียนแทนด้วย U</div>
         <div class="section">การดำเนินการระหว่างเซต ( Operation on Set )</div>
         <div class="intersection">
+            <div class="real-intersection">
                 <div class="detail">
                     <div class="liner">อินเตอร์เซกชัน( intersection )</div>
                     <div class="light-blue">เขียนแทนด้วย A ∩ B</div>
                     <div class="define">มีบทนิยามว่า   A ∩ B = { x | x ∈ A และ x ∈ B }</div>
-                    <div class="red">( x อยู่ทั้งในเซต A และเซต B )</div>
+                    <div class="red">( x อยู่ในเซต A และเซต B )</div>
                 </div>
                 <div class="ex">Example</div>
                 <div class="sub-detail"><p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 } </p>
                     สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของทั้งเซต A และ B  ด้วยพื้นที่ที่มองเห็นบริเวณที่ซ้อนทับกันระหว่างเซต A และ B คือ 2 และ 4 จะเห็นว่า 2 และ 4 เป็นสมาชิกของทั้งเซต A และ B ดังภาพ
                     เขียนแทนด้วย  A ∩ B
                 </div>
+            </div>
+            <div class="exclusive">
+                <div class="path-of-union"><div class="liner">ยูเนียน (union)</div></div>
                 <img src="diagram2.png" alt="">
+            </div>
+        </div>
+        <div class="edit-union">
+            <div class="union">
+                <div class="detail">
+                    <div class="light-orange">เขียนแทนด้วย A ∪ B</div>
+                    <div class="define">มีบทนิยามว่า  A ∪ B = { x | x ∈ A หรือ x ∈ B }</div>
+                    <div class="red">( x อยู่ในเซต A หรือเซต B )</div>
+                </div>
+                <div class="ex orange">Example</div>
+                <div class="sub-detail">
+                    <span class="light-orange">
+                        <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 } </p>
+                        สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของเซต A หรือ B  ด้วยพื้นที่ที่มองเห็นบริเวณของเซต A และ B คือ 1,2,3,4,6และ 8
+                        จะเห็นว่า 1,2,3,4,6และ 8 เป็นสมาชิกของเซต A หรือ B ดังภาพ
+                        เขียนแทนด้วย  A ∪ B
+                    </span>
+                </div>
+                <img src="diagram3.png" alt="">
+            </div>
         </div>
     </div>
 </body>
