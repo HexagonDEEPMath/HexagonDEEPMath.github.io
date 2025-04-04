@@ -22,6 +22,7 @@
             font-family: "Baloo 2", sans-serif;
             font-size: 25px;
             position: relative;
+            min-height: 100vh;
         }
         .grid{
             display: grid;
@@ -32,7 +33,8 @@
             gap: 10px;
         }
         .container{
-            width: 390px;
+            width: 100%;
+            max-width: 390px;
             height: auto;
             position: relative;
             overflow: hidden;
@@ -50,8 +52,9 @@
             width: 100%;
         }
         .app-page{
-            height: 844px;
+            height: 100vh;
             width: 100%;
+            max-width: 390px;
             background-color: #FFF9CA;
             display: flex;
             align-items: center;
@@ -126,7 +129,16 @@
             color: white;
             cursor: pointer;
         }
-        #submit-btn:active, #back-btn:active ,.number:active, .timer-info img:active , .img-clear:active , .button:active , .button-2:active, footer img:active , nav img:active{
+        #submit-btn:active ,
+        #back-btn:active ,
+        .number:active, 
+        .timer-info img:active , 
+        .img-clear:active , 
+        .button:active , 
+        .button-2:active , 
+        footer img:active , 
+        nav img:active , 
+        .gobackLearn:active{
             transform: scale(0.95);
         }
         
@@ -407,7 +419,8 @@
         .full-to-start{
             display: flex;
             align-items: flex-start;
-            width: 390px;
+            width: 100%;
+            max-width: 390px;
         }
         .full-to-center{
             display: flex;
@@ -526,7 +539,8 @@
             display: none;
         }
         .body{
-            width: 390px;
+            width: 100%;
+            max-width: 390px;
             height: 694px;
             display: flex;
             flex-direction: column;
@@ -596,7 +610,8 @@
         .popup-full-to-center{
             background-color: rgba(0,0,0, 0.2);
             height: 100%;
-            width: 390px;
+            width: 100%;
+            max-width: 390px;
             display: none;
             position: absolute;
             justify-content: center;
@@ -663,7 +678,8 @@
         .gif{
             background-color: rgba(0,0,0, 0.3);
             height: 100%;
-            width: 390px;
+            width: 100%;
+            max-width: 390px;
             display: none;
             position: absolute;
             justify-content: center;
@@ -771,7 +787,8 @@
         }
         .LearnPage{
             display: none;
-            width: 390px;
+            width: 100%;
+            max-width: 390px;
             background-color: #FFF9CA;
             font-family: "Itim";
             flex-direction: column;
@@ -965,6 +982,13 @@
             text-decoration: underline;
             font-size: 18px;
             font-weight: bold;
+        }
+        .LearnPage .gobackLearn{
+            height: 38px;
+            margin: 20px;
+            width: auto;
+            align-self: flex-start;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -1439,6 +1463,7 @@
                 </div>
             </div>
         </div>
+        <img src="go-back.png" alt="" class="gobackLearn" onclick="closeLearn()">
     </div>
 </body>
 <script>
@@ -1949,6 +1974,10 @@
         document.querySelector(".LearnPage").style.display="flex"
         document.querySelector(".container").style.display="none"
         burgerRunning = false;
+    }
+    function closeLearn(){
+        document.querySelector(".LearnPage").style.display="none"
+        document.querySelector(".container").style.display="flex"
     }
     function wtf(){
         alert("กำลังพัฒนา")
