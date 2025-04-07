@@ -1933,7 +1933,12 @@
         pauseTimer();
     }
     function showGif(){
-        document.querySelector(".gif").style.display="flex";
+        document.querySelector(".gif").style.display = "flex";
+        
+        if (document.querySelector(".gif img")) {
+            document.querySelector(".gif img").setAttribute("src", document.querySelector(".gif img").getAttribute("src").split('?')[0] + '?t=' + new Date().getTime());
+        }        
+
         document.querySelector(".tabBurger").style.display="none";
         
         burgerRunning = false;
@@ -1972,6 +1977,8 @@
     function closeLearn(){
         document.querySelector(".LearnPage").style.display="none"
         document.querySelector(".container").style.display="flex"
+        document.querySelector(".tabBurger").style.display="none";
+        burgerRunning = false;
     }
     function wtf(){
         alert("กำลังพัฒนา")
