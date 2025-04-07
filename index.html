@@ -1933,12 +1933,10 @@
         pauseTimer();
     }
     function showGif(){
-        document.querySelector(".gif").style.display = "flex";
-        
         if (document.querySelector(".gif img")) {
             document.querySelector(".gif img").setAttribute("src", document.querySelector(".gif img").getAttribute("src").split('?')[0] + '?t=' + new Date().getTime());
         }        
-
+        document.querySelector(".gif").style.display = "flex";
         document.querySelector(".tabBurger").style.display="none";
         
         burgerRunning = false;
