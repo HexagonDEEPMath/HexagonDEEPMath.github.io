@@ -1933,9 +1933,9 @@
         pauseTimer();
     }
     function showGif(){
-        if (document.querySelector(".gif img")) {
+        setTimeout(()=>{
             document.querySelector(".gif img").setAttribute("src", document.querySelector(".gif img").getAttribute("src").split('?')[0] + '?t=' + new Date().getTime());
-        }        
+        },10)
         document.querySelector(".gif").style.display = "flex";
         document.querySelector(".tabBurger").style.display="none";
         
