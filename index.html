@@ -194,6 +194,9 @@
             margin-top: 42px;
             margin-bottom: 0;
         }
+        .swiper .app-page{
+            display: block;
+        }
         .swiper-pagination {
             position: absolute;
             bottom: 20px;
@@ -984,6 +987,10 @@
             align-self: flex-start;
             cursor: pointer;
         }
+        .stage-container .body{
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
@@ -1064,7 +1071,7 @@
                                 <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                                 <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                             </nav>
-                            <div class="body" style="justify-content: space-evenly;">
+                            <div class="body">
                                 <div class="content-text">
                                     <div class="stage">Stage</div>
                                     <div class="level">Newbie</div>
@@ -1095,7 +1102,7 @@
                                 <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                                 <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                             </nav>
-                            <div class="body" style="justify-content: space-evenly;">
+                            <div class="body">
                                 <div class="content-text">
                                     <div class="stage">Stage</div>
                                     <div class="level">Practice</div>
@@ -1126,7 +1133,7 @@
                                 <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
                                 <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
                             </nav>
-                            <div class="body" style="justify-content: space-evenly;">
+                            <div class="body">
                                 <div class="content-text">
                                     <div class="stage">Stage</div>
                                     <div class="level">Expert</div>
@@ -1755,10 +1762,9 @@
     }
     function showTimerQuestions(){
         if(correctTimerQuestions >= 10){
-            alert("ทำครบแล้ว");
             stopTimer();
+            alert("ทำครบแล้ว");
             goTimerMenu();
-            
         }
         document.getElementById("timerQuestion").innerText = (randomQuestionsTimer[currentQuestionTimerIndex].text);
         document.getElementById("status-timer").innerText = "3 Sets"
@@ -1913,7 +1919,7 @@
         burgerRunning = false;
     }
     function goStageMode(){
-        document.querySelector(".stage-container").style.display="flex";
+        document.querySelector(".stage-container").style.display="block";
         document.querySelector(".timer-container").style.display="none";
         document.querySelector(".menu").style.display="none";
         document.querySelector(".LearnPage").style.display="none";
