@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Itim&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+        <!--เนื้อ footer menu หายเมื่อเปิดในโทรศัพท์-->
     <style>
         body{
             background-color: #1e1e1e;
@@ -55,7 +56,6 @@
             max-height: 844px;
             width: 100%;
             max-width: 390px;
-            /* background-color: #FFF9CA; */
             display: flex;
             align-items: center;
             flex-direction: column;
@@ -169,12 +169,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        .question-info-row #question-number{
-            background-color: #FFC0A5;
-        }
-        .question-info-row #status{
-            background-color: #AEB4FF;
         }
         #question{
             max-width: 100%;
@@ -291,10 +285,8 @@
             left: 50%;
             transform: translateX(-50%);
             color: white;
-            p{
-                font-weight: bold;
-                font-size: 35px;
-            }
+            font-weight: bold;
+            font-size: 35px;
         }
         
         @keyframes shakeText {
@@ -414,9 +406,6 @@
             color: #FFAD7A;
             margin: 10px 0px 33px 15px;
         }
-        .timerStatus img{
-            width: 17px;
-        }
         .full-to-start{
             display: flex;
             align-items: flex-start;
@@ -463,9 +452,6 @@
             margin-top: 111px;
             width: 302px;
             z-index: 1;
-        }
-        .tPage2{
-            display: none;
         }
         .tPage2 #status-timer{
             background-color: #AEB4FF;
@@ -529,15 +515,12 @@
             color: #EABBD3;
             margin: 2px;
         }
-        .stage-container , .timer-container{
+        .stage-container , .timer-container , .menuPage2 , .tPage2 , .tabBurger{
             display: none;
         }
         .menu{
             height: 100%;
             width: 100%;
-        }
-        .munuPage2{
-            display: none;
         }
         .body{
             width: 100%;
@@ -575,9 +558,6 @@
             color: white;
             background-color: #C0E8BE;
             border-radius: 47px;
-        }
-        .menuPage2{
-            display: none;
         }
         .menuPage2 .body{
             justify-content: space-around;
@@ -668,10 +648,6 @@
             align-items: center;
             cursor: pointer;
         }
-        .continue-btn{
-            color: #C886F8;
-            
-        }
         .gif{
             background-color: rgba(0,0,0, 0.3);
             height: 100%;
@@ -691,10 +667,6 @@
             height: auto;
             display: flex;
             
-        }
-        .tabBurger{
-            display: none;
-            z-index: 999;
         }
         .mainTabBurger{
             width: 114px;
@@ -795,7 +767,7 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        .LearnPage::-webkit-scrollbar {
+        .LearnPage::-webkit-scrollbar  , .container::-webkit-scrollbar{
             display: none;
         }
         .head-text{
@@ -995,7 +967,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="tabBurger">
+        <div class="tabBurger" style="z-index: 999;">
             <div class="mainTabBurger">
                 <div class="Text-page" onclick="openPageTab()">Page</div>
                 <div class="line"></div>
@@ -1027,23 +999,23 @@
             <div class="app-page menuPage1">
                 <nav>
                     <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                    <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
+                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
                 </nav>
                 <div class="body" style="justify-content: space-between;">
-                    <img src="logo.png" alt="">
+                    <img src="logo.png" alt="logo">
                     <div class="menuPage1Button">
                         <div class="button" onclick="gotoLearn()">Learn</div>
                         <div class="button" onclick="gotoMenuGame()">Game</div>
                     </div>
                 </div>
                 <footer>
-                    
+                    <div style="height: 75px;"></div>
                 </footer>
             </div>
             <div class="app-page menuPage2">
                 <nav>
                     <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                    <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
+                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
                 </nav>
                 <div class="body">
                     <div class="text-box">
@@ -1054,7 +1026,7 @@
                         <div class="button-2" onclick="goTimerMode()">Timer</div>
                     </div>
                     <div class="logo-menuPage2">
-                        <img src="logo.png" alt="">
+                        <img src="logo.png" alt="logo" style="height: 200px;">
                     </div>
                 </div>
                 <footer>
@@ -1069,7 +1041,7 @@
                         <div class="app-page page1">
                             <nav>
                                 <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                                <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
+                                <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
                             </nav>
                             <div class="body">
                                 <div class="content-text">
@@ -1088,7 +1060,7 @@
                                     <div class="number locked" onclick="trytogoQuestion(9)"><h1>9</h1></div>
                                 </div>
                                 <div class="gridLogo">
-                                    <img src="logo.png" alt="">
+                                    <img src="logo.png" alt="logo">
                                 </div>
                             </div>
                             <footer>
@@ -1100,7 +1072,7 @@
                         <div class="app-page page2">
                             <nav>
                                 <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                                <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
+                                <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
                             </nav>
                             <div class="body">
                                 <div class="content-text">
@@ -1119,7 +1091,7 @@
                                     <div class="number locked" onclick="trytogoQuestion(18)"><h1>9</h1></div>
                                 </div>
                                 <div class="gridLogo">
-                                    <img src="logo.png" alt="">
+                                    <img src="logo.png" alt="logo">
                                 </div>
                             </div>
                             <footer>
@@ -1131,7 +1103,7 @@
                         <div class="app-page page3">
                             <nav>
                                 <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                                <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
+                                <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
                             </nav>
                             <div class="body">
                                 <div class="content-text">
@@ -1150,7 +1122,7 @@
                                     <div class="number locked" onclick="trytogoQuestion(27)"><h1>9</h1></div>
                                 </div>
                                 <div class="gridLogo">
-                                    <img src="logo.png" alt="">
+                                    <img src="logo.png" alt="logo">
                                 </div>
                             </div>
                             <footer>
@@ -1164,13 +1136,13 @@
             <div class="venn-container" id="quiz-container">
                 <nav>
                     <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                    <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
+                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
                 </nav>
                 <div class="body">
                     <div class="question-info">
                         <div class="question-info-row">
-                            <p id="question-number">Stage ...</p>
-                            <p id="status">3 Sets</p>
+                            <p id="question-number" style="background-color: #FFC0A5;">Stage ...</p>
+                            <p id="status" style="background-color: #AEB4FF;">3 Sets</p>
                         </div>
                         <p id="question">Question ...</p>
                     </div>
@@ -1203,12 +1175,12 @@
             <div class="app-page tPage1" >
                 <nav>
                     <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                    <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
+                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
                 </nav>
                 <div class="body">
                     <div class="text-timer-all">
                         <div class="text-timer">Timer</div>
-                        <img src="logo.png" alt="" class="big-logo-timer-page">
+                        <img src="logo.png" alt="logo" class="big-logo-timer-page">
                     </div>
                     <div class="text-sets3">
                         3 Sets
@@ -1233,18 +1205,18 @@
                         <div class="button-pop-up">
                             <div class="restart-btn" onclick="goTimerGame()">Restart</div>
                             <div class="line"></div>
-                            <div class="continue-btn" onclick="showTimerPopup()">Continue</div>
+                            <div class="continue-btn" onclick="showTimerPopup()" style="color: #C886F8;">Continue</div>
                         </div>
                     </div>
                 </div>
                 <nav>
-                    <img src="two-tap.png" alt="" onclick="showTimerPopup()" class="twoTab">
-                    <img src="question-logo.png" alt="" class="question-logo" onclick="showGif()">
+                    <img src="two-tap.png" alt="pause" onclick="showTimerPopup()" class="twoTab">
+                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
                 </nav>
                 <div class="body">
                     <div class="full-to-start">
                         <div class="timerStatus" >
-                            <img src="clock.png" alt="">
+                            <img src="clock.png" alt="" style="width: 17px;">
                             <div class="game-timer" id="game-timer-tab">00 : 00</div>
                         </div>
                     </div>
