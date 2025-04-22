@@ -1,1238 +1,1178 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vennly</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Itim&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vennly</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Itim&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-        <!--เนื้อ footer menu หายเมื่อเปิดในโทรศัพท์-->
-    <style>
-        body{
-            background-color: #1e1e1e;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: "Baloo 2", sans-serif;
-            font-size: 25px;
-            position: relative;
-            min-height: 100vh;
-        }
-        .grid{
-            display: grid;
-            grid-template-rows: repeat(3, 1fr);
-            grid-template-columns: repeat(3, 1fr);
-            height: 305px;
-            width: 305px;
-            gap: 10px;
-        }
-        .container{
-            width: 390px;
-            height: 844px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: row;
-        }
-        .stage-container{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .swiper{
-            height: 100%;
-            width: 100%;
-        }
-        .app-page{
-            height: 100vh;
-            max-height: 844px;
-            width: 100%;
-            max-width: 390px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-        }
-        .number{
-            border-radius: 23px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        .number h1{
-            margin: 0px;
-        }
-        .number.locked{
-            cursor: not-allowed;
-            color: #737373 !important ;
-            background-color: #b6b6b6 !important ;
-        }
-        
-        .page1 .number{
-            background-color: #FFD9E1;
-            color: #FFA8C8;
-        }
-        .page2 .number{
-            background-color: #C0E3FF;
-            color: #5FA3FF;
-        }
-        .page3 .number{
-            background-color: #F0D5FF;
-            color: #C886F8;
-        }
-        .venn-container {
-            width: 100%;
-            height: 100%;
-            z-index: 20; 
-            display: none;
-            background-color: white;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            box-sizing: border-box;
-            background-color: #FFF9CA;
-        }
-        .rect-clickable, path{
-            stroke-width: 1;
-            fill: white;
-            stroke: black;
-        }
-        .clicked {
-            fill: #F0FFBD !important;
-        }
-        svg text{
-            font-size: 7px;
-            font-weight: bold;
-            fill: black;
-            text-anchor: middle;
-            pointer-events: none;
-        }
-        svg text.universe{
-            font-size: 10px;
-        }
-        #submit-btn{
-            height: 69px;
-            width: 133px;
-            font-size: 24px;
-            font-weight: 900;   
-            border: none;
-            border-radius: 23px;
-            background-color: #FF7A69;
-            color: white;
-            cursor: pointer;
-        }
-        #submit-btn:active ,
-        #back-btn:active ,
-        .number:active, 
-        .timer-info img:active , 
-        .img-clear:active , 
-        .button:active , 
-        .button-2:active , 
-        footer img:active , 
-        nav img:active , 
-        .gobackLearn:active{
-            transform: scale(0.95);
-        }
-        
-        .venn-container .body{
-            justify-content: space-evenly;
-        }
-        .question-info{
-            width: 302px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .question-info-row{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100%;
-        }
-        .question-info-row #question-number,.question-info-row #status{
-            width: 133px;
-            height: 69px;
-            margin: 0;
-            font-size: 25px;
-            font-weight: bold;
-            border-radius: 23px;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #question{
-            max-width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 20px;
-            background-color: #FFD481;
-            width: 100%;
-            height: 69px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 23px;
-            color: white;
-            font-weight: bold;
-            margin-top: 42px;
-            margin-bottom: 0;
-        }
-        .swiper .app-page{
-            display: block;
-        }
-        .swiper-pagination {
-            position: absolute;
-            bottom: 20px;
-            margin-bottom: 65px;
-        }
-        .swiper-pagination-bullet{
-            background-color: #FFFFFF;
-            opacity: 0.5;
-        }
-        .swiper-pagination-bullet-active{
-            background-color: #FFAD7A;
-            opacity: 1;
-        }
-        nav{
-            background-color: #FFDEBD;
-            height: 75px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        nav img{
-            height: 38.64px;
-            margin: 21px;
-            cursor: pointer;
-            vertical-align: middle;
-        }
-        .content-text{
-            width: 305px;
-            display: flex;
-            flex-direction: row;
-            color: white;
-            font-weight: bold;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .content-text .stage{
-            background-color: #FFC0A5;
-            border-radius: 23px;
-            padding: 20px 33px;
-            font-size: 25px;
-            height: 29px;
-            width: 67px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .content-text .level{
-            border-radius: 23px;
-            font-size: 40px;
-            width: 164px;
-            height: 90px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .page1 .level{
-            background-color: #FFD9E1;
-            text-shadow: -1px -1px 0 #FFA8C8,1px -1px 0 #FFA8C8,-1px 1px 0 #FFA8C8,1px 1px 0 #FFA8C8;
-        }
-        .page2 .level{
-            background-color: #C0E3FF;
-            text-shadow: -1px -1px 0 #5FA3FF,1px -1px 0 #5FA3FF,-1px 1px 0 #5FA3FF,1px 1px 0 #5FA3FF;
-        }
-        .page3 .level{
-            background-color: #F0D5FF;
-            text-shadow: -1px -1px 0 #C886F8,1px -1px 0 #C886F8,-1px 1px 0 #C886F8,1px 1px 0 #C886F8;
-        }
-        .gridLogo{
-            display: flex;
-            justify-content: center;
-        }
-        .gridLogo img{
-            height: 138px;
-        }
-        footer{
-            background-color: #FFDEBD;
-            height: 75px;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            position: relative;
-        }
-        footer img{
-            height: 38.64px;
-            margin: 21px;
-            cursor: pointer;
-        }
-        footer .div-text-level{
-            margin: 0;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-weight: bold;
-            font-size: 35px;
-        }
-        
-        @keyframes shakeText {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
-
-        .shake {
-            animation: shakeText 0.5s;
-        }
-
-        .timer-container{
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-        .text-timer-all{
-            width: 100%;
-            display: flex;
-            position: relative;
-            justify-content: center;
-            height: auto;
-        }
-        .app-page .text-timer{
-            display: flex;
-            background-color: #C0E8BE;
-            color: white;
-            border-radius: 47px;
-            font-weight: bold;
-            width: 134px;
-            height: 57px;
-            align-items: center;
-            justify-content: center;
-            margin-top: 23px;
-            left: 22px;
-            align-self: flex-start;
-            position: absolute;
-        }
-        .app-page .big-logo-timer-page{
-            width: 264px;
-            height: 329px;
-            margin-top: 62px;
-        }
-        .text-sets3{
-            background-color: #AEB4FF;
-            color: white;
-            font-size: 25px;
-            font-weight: bold;
-            width: 133px;
-            height: 59px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 23px;
-            position: relative;
-        }
-        .text-sets3{
-            margin-top: 31px;
-        }
-        .bestTime{
-            display: flex;
-            flex-direction: row;
-            margin-top: 35px;
-            width: 266px;
-            height: 39px;
-        }
-        .bestTime p{
-            margin: 0;
-            color: #FF914D;
-            font-size: 25px;
-            font-weight: bold;
-        }
-        .whitebar-bestTime{
-            background-color: white;
-            height: 38px;
-            width: 132px;
-            display: flex;
-            border-radius: 21px;
-            margin-left: 5px;
-            justify-content: center;
-            align-items: center;
-        }
-        .whitebar-bestTime p{
-            text-align: center;
-        }
-        .timer-start{
-            background-color: #FF7A69;
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 35px 0;
-            width: 155px;
-            height: 69px;
-            border-radius: 23px;
-            cursor: pointer;
-        }
-        .twoTab{ 
-            height: 29px;
-        }
-        .timerStatus{
-            display: flex;
-            flex-direction: row;
-            width: 87px;
-            height: 17px;
-            font-size: 10px;
-            align-items: center;
-            gap: 7px;
-            color: #FFAD7A;
-            margin: 10px 0px 33px 15px;
-        }
-        .full-to-start{
-            display: flex;
-            align-items: flex-start;
-            width: 100%;
-            max-width: 390px;
-        }
-        .full-to-center{
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-        }
-        .timer-info{
-            display: flex;
-            font-size: 25px;
-            font-weight: bold;
-            color: white;
-            flex-direction: column;
-            width: 302px;
-            height: 180px;
-            justify-self: center;
-        }
-        .timer-info-row{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            margin-bottom: 42px;
-        }
-        .timer-info-row .timer-text{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #FFC0A5;
-            margin: 0;
-            width: 133px;
-            height: 69px;
-            border-radius: 23px;
-        }
-        .question-return-info{
-            display: flex;
-            flex-direction: row;
-            position: absolute;
-            align-items: center;
-            margin-top: 111px;
-            width: 302px;
-            z-index: 1;
-        }
-        .tPage2 #status-timer{
-            background-color: #AEB4FF;
-            margin: 0;
-            width: 133px;
-            height: 69px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 23px;
-        }
-        #timerQuestion{
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #FFD481;
-            width: 277px;
-            height: 69px;
-            border-radius: 23px;
-        }
-        .question-return-info img{
-            height: 50px;
-            position: absolute;
-            right: 0;
-            cursor: pointer;
-        }
-        .venn-diagram-timer{
-            display: flex;
-            margin: 29px 0 38px 0;
-            justify-content: center;
-        }
-        .tPage2-endtab{
-            width: 80%;
-            height: 69px;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            position: relative;
-            justify-content: center;
-            margin-bottom: 38.024px;
-            justify-self: center;
-        }
-
-        .tPage2-endtab div{
-            width: 55px;
-            height: 47px;
-            position: absolute;
-            right: 0;
-            justify-content: center;
-        }
-        .tPage2-endtab img{
-            height: 32px;
-            display: flex;
-            justify-self: center;
-            cursor: pointer;
-        }
-        .tPage2-endtab p{
-            width: 55px;
-            font-size: 10px;
-            color: #EABBD3;
-            margin: 2px;
-        }
-        .stage-container , .timer-container , .menuPage2 , .tPage2 , .tabBurger{
-            display: none;
-        }
-        .menu{
-            height: 100%;
-            width: 100%;
-        }
-        .body{
-            width: 100%;
-            max-width: 390px;
-            height: 694px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #FFF9CA;
-        }
-        .menuPage1 .body img{
-            height: 409px;
-            width: 330px;
-        }
-        .menuPage1Button .button{
-            border-radius: 40px;
-            padding: 12px 97.5px;
-            display: flex;
-            background-color: #C0E8BE;
-            justify-self: center;
-            color: white;
-            font-weight: bold;
-            font-size: 40px;
-            margin-bottom: 28px;
-            cursor: pointer;
-        }
-        .text-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 45px;
-            width: 216px;
-            height: 82.5px;
-            color: white;
-            background-color: #C0E8BE;
-            border-radius: 47px;
-        }
-        .menuPage2 .body{
-            justify-content: space-around;
-        }
-        .menuPage2Button{
-            height: 135px;
-            width: 307px;
-        }
-        .menuPage2Button .button-2{
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #FFC0A5;
-            border-radius: 47px;
-            font-size: 35px;
-            font-weight: bold;
-            margin-bottom: 31px;
-            cursor: pointer;
-        }
-        .logo-menuPage2 img{
-            height: 200px;
-        }
-        a{
-            text-decoration: none;
-        }  
-        .popup-full-to-center{
-            background-color: rgba(0,0,0, 0.2);
-            height: 100%;
-            width: 100%;
-            max-width: 390px;
-            display: none;
-            position: absolute;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
+            <!--เนื้อ footer menu หายเมื่อเปิดในโทรศัพท์-->
+        <style>
+            body{
+                background-color: #1e1e1e;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: "Baloo 2", sans-serif;
+                font-size: 25px;
+                position: relative;
+                min-height: 100vh;
+            }
+            .grid{
+                display: grid;
+                grid-template-rows: repeat(3, 1fr);
+                grid-template-columns: repeat(3, 1fr);
+                height: 305px;
+                width: 305px;
+                gap: 10px;
+            }
+            .container{
+                width: 390px;
+                height: 844px;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: row;
+            }
+            .stage-container{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            .swiper{
+                height: 100%;
+                width: 100%;
+            }
+            .app-page{
+                height: 100vh;
+                max-height: 844px;
+                width: 100%;
+                max-width: 390px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
+            .number{
+                border-radius: 23px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+            .number h1{
+                margin: 0px;
+            }
+            .number.locked{
+                cursor: not-allowed;
+                color: #737373 !important ;
+                background-color: #b6b6b6 !important ;
+            }
             
-        }
-        .timer-pop-up{ 
-            height: 257px;
-            width: 250px;
-            background-color: #FFDEBD;
-            display: flex;
-            justify-content: center;
-            border-radius: 29px;
-            flex-wrap: wrap;
-            margin-top: 236px;
-            align-self: flex-start;
-        } 
-        .headTimerPopUp{
-            background-color: #FF914D;
-            border-radius: 29px 29px 0 0;
-            width: 250px;
-            height: 56px;
-
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            color: #FFDEBD;
-            font-weight: bold;
-            font-size: 20px;
-        }
-        .headTimerPopUp .p2{
-            font-size: 31px;
-        }
-        .button-pop-up{
-            display: flex;
-            justify-content: space-evenly;
-            height: 201px;
-            width: 250px;
-            flex-direction: column;
-        }
-        .button-pop-up .line{
-            background-color: #FFAD7A;
-            height: 1px;
-            width: 171.9px;
-            justify-self: center;
-            align-self: center;
-        }
-        .restart-btn , .continue-btn{
-            font-size: 31px;
-            font-weight: bold;
-            color: #FF5757;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        .gif{
-            background-color: rgba(0,0,0, 0.3);
-            height: 100%;
-            width: 100%;
-            max-width: 390px;
-            display: none;
-            position: absolute;
-            justify-content: center;
-            align-items: center;
-            z-index: 50;
-            flex-direction: column;
-            color: white;
-            font-style: italic;
-        }
-        .gif img{
-            width: 350px;
-            height: auto;
-            display: flex;
+            .page1 .number{
+                background-color: #FFD9E1;
+                color: #FFA8C8;
+            }
+            .page2 .number{
+                background-color: #C0E3FF;
+                color: #5FA3FF;
+            }
+            .page3 .number{
+                background-color: #F0D5FF;
+                color: #C886F8;
+            }
+            .venn-container {
+                width: 100%;
+                height: 100%;
+                z-index: 20; 
+                display: none;
+                background-color: white;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                box-sizing: border-box;
+                background-color: #FFF9CA;
+            }
+            .rect-clickable, path{
+                stroke-width: 1;
+                fill: white;
+                stroke: black;
+            }
+            .clicked {
+                fill: #F0FFBD !important;
+            }
+            svg text{
+                font-size: 7px;
+                font-weight: bold;
+                fill: black;
+                text-anchor: middle;
+                pointer-events: none;
+            }
+            svg text.universe{
+                font-size: 10px;
+            }
+            #submit-btn{
+                height: 69px;
+                width: 133px;
+                font-size: 24px;
+                font-weight: 900;   
+                border: none;
+                border-radius: 23px;
+                background-color: #FF7A69;
+                color: white;
+                cursor: pointer;
+            }
+            #submit-btn:hover ,
+            #back-btn:hover ,
+            .restart-btn:hover,
+            .continue-btn:hover,
+            .number:hover, 
+            .timer-info img:hover , 
+            .img-clear:hover , 
+            .button:hover , 
+            .button-2:hover , 
+            footer img:hover , 
+            nav img:hover , 
+            .gobackLearn:hover,
+            .timer-start:hover,
+            .Text-page:hover,
+            .Text-reset:hover,
+            .Page-box:hover
+            {
+                transform: scale(1.05);
+                filter: brightness(95%);
+            }
+            #submit-btn:active ,
+            #back-btn:active ,
+            .restart-btn:active,
+            .continue-btn:active,
+            .number:active, 
+            .timer-info img:active , 
+            .img-clear:active , 
+            .button:active , 
+            .button-2:active , 
+            footer img:active , 
+            nav img:active , 
+            .gobackLearn:active,
+            .timer-start:active,
+            .Text-page:active,
+            .Text-reset:active,
+            .Page-box:active
+            {
+                transform: scale(0.95);
+            }
+            .venn-container .body{
+                justify-content: space-evenly;
+            }
+            .question-info{
+                width: 302px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            .question-info-row{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+            }
+            .question-info-row #question-number,.question-info-row #status{
+                width: 133px;
+                height: 69px;
+                margin: 0;
+                font-size: 25px;
+                font-weight: bold;
+                border-radius: 23px;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #question{
+                max-width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 20px;
+                background-color: #FFD481;
+                width: 100%;
+                height: 69px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 23px;
+                color: white;
+                font-weight: bold;
+                margin-top: 42px;
+                margin-bottom: 0;
+            }
+            .swiper .app-page{
+                display: block;
+            }
+            .swiper-pagination {
+                position: absolute;
+                bottom: 20px;
+                margin-bottom: 65px;
+            }
+            .swiper-pagination-bullet{
+                background-color: #FFFFFF;
+                opacity: 0.5;
+            }
+            .swiper-pagination-bullet-active{
+                background-color: #FFAD7A;
+                opacity: 1;
+            }
+            nav{
+                background-color: #FFDEBD;
+                height: 75px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            nav img{
+                height: 38.64px;
+                margin: 21px;
+                cursor: pointer;
+                vertical-align: middle;
+            }
+            .content-text{
+                width: 305px;
+                display: flex;
+                flex-direction: row;
+                color: white;
+                font-weight: bold;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .content-text .stage{
+                background-color: #FFC0A5;
+                border-radius: 23px;
+                padding: 20px 33px;
+                font-size: 25px;
+                height: 29px;
+                width: 67px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .content-text .level{
+                border-radius: 23px;
+                font-size: 40px;
+                width: 164px;
+                height: 90px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .page1 .level{
+                background-color: #FFD9E1;
+                text-shadow: -1px -1px 0 #FFA8C8,1px -1px 0 #FFA8C8,-1px 1px 0 #FFA8C8,1px 1px 0 #FFA8C8;
+            }
+            .page2 .level{
+                background-color: #C0E3FF;
+                text-shadow: -1px -1px 0 #5FA3FF,1px -1px 0 #5FA3FF,-1px 1px 0 #5FA3FF,1px 1px 0 #5FA3FF;
+            }
+            .page3 .level{
+                background-color: #F0D5FF;
+                text-shadow: -1px -1px 0 #C886F8,1px -1px 0 #C886F8,-1px 1px 0 #C886F8,1px 1px 0 #C886F8;
+            }
+            .gridLogo{
+                display: flex;
+                justify-content: center;
+            }
+            .gridLogo img{
+                height: 138px;
+            }
+            footer{
+                background-color: #FFDEBD;
+                height: 75px;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                position: relative;
+            }
+            footer img{
+                height: 38.64px;
+                margin: 21px;
+                cursor: pointer;
+            }
+            footer .div-text-level{
+                margin: 0;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                color: white;
+                font-weight: bold;
+                font-size: 35px;
+            }
             
-        }
-        .mainTabBurger{
-            width: 114px;
-            height: 176px;
-            border-radius: 20px;
-            opacity: 0.79;
-            background-color: white;
-            position: absolute;
-            display: flex;
-            top: 77px;
-            left: 9px;
-            font-size: 30px;
-            font-weight: bold;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-        }
-        .mainTabBurger .Text-page{
-            color: #5271FF;
-            cursor: pointer;
-        }
-        .mainTabBurger .Text-reset{
-            color: #FF5757;
-            cursor: pointer;
-        }
-        .mainTabBurger .line{
-            height: 1px;
-            width: 84px;
-            opacity: 0.35;
-            background-color: black;
-        }
-        .PageSmallTab{
-            position: absolute;
-            gap: 1px;
-            left: 124px;
-            top: 84px;
-        }
-        .triangle{
-            width: 16px;
-            height: 26px;
-            opacity: 0.79;
-            background-color: #5271FF;
-            clip-path: polygon(0 0 ,100% 100%,100% 0);
-            margin-top: 39px;
-        }
-        .Page-box-container{
-            background-color: rgba(82,133,255, 0.79);
-            display: flex;
-            border-radius: 10px;
-            width: 98px;
-            height: 138px;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-evenly;
-            cursor: pointer;
-        }
-        .Page-box{
-            opacity: 100%;
-            background-color: #82B1FF;
-            border-radius: 10px;
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            width: 86px;
-            height: 27px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .ResetSmallTab{
-            position: absolute;
-            gap: 1px;
-            left: 124px;
-            top: 172px;
-        }
-        .ResetSmallTab .triangle{
-            background-color: #FF3131;
-            margin-top: 39px;
-        }
-        .ResetSmallTab .Page-box-container{
-            background-color: rgba(255, 49, 49, 0.79);
-            width: 98px;
-            height: 105px;
-        }
-        .ResetSmallTab .Page-box{
-            background-color: #FEBDBD;
-        }
-        .LearnPage{
-            display: none;
-            width: 100%;
-            max-width: 390px;
-            background-color: #FFF9CA;
-            font-family: "Itim";
-            flex-direction: column;
-            overflow-y: scroll;
-            height: 100%;
-            
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .LearnPage::-webkit-scrollbar  , .container::-webkit-scrollbar{
-            display: none;
-        }
-        .head-text{
-            color: #ff914d;
-            font-size: 50px;
-            font-weight: 400;
-            align-self: center;
-            -webkit-text-stroke: 0.5px #FFE16A;
-            width: fit-content;
-            margin: 10px;
-        }
-        .section{
-            border-radius: 25px;
-            background-color: #FFE16A;
-            color: #FF3131;
-            padding: 5px 10px;
-            text-align: center;
-            width: fit-content;
-            margin-left: 36px;
-            margin-bottom: 8px;
-            font-size: 17px;
-        }
-        .ex{
-            text-decoration: underline;
-            font-size: 15px;
-            font-weight: 500;
-            margin-top: 3px;
-        }
-        .detailSets{
-            background-color: #FFE1BF;
-            border-radius: 15px;
-            padding: 10px;
-            margin: 0 15px;
-        }
-        .detail{
-            color: #6672e1;
-            font-size: 14px;
-            line-height: 1.5;
-            text-indent: 1.5rem;
-        }
-        .red{
-            color: red;
-            padding: 0;
-            margin: 0;
-            width: fit-content;
-            align-self: flex-start;
-            text-indent: 0;
-        }
-        .sub-section{
-            font-size: 15px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            background-color: #FFABE7;
-            color: #5271FF;
-            padding: 10px;
-        }
-        .sub-detail{
-            color: #72a0eb;
-            font-size: 14px;
-            line-height: 1.3;
-        }
-        p{
-            margin: 0;
-        }
-        .nonBackground{
-            margin:0 15px;
-            text-indent: 5px;
-            line-height: 1.5;
-            color: #FF4BE2;
-            display: flex;
-            flex-direction: column;
-        }
-        .nonBackground .ex , .intersection .ex{
-            color: #C886F8;
-        }
-        .warning{
-            font-size: 9.5px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .liner{
-            text-decoration: underline;
-        }
-        .intersection{
-            background-color: #ffdede;
-            border-radius: 10px 10px 0 0;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-        }
-        .intersection .liner{
-            color: #8C55F1;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .light-blue{
-            font-size: 16px;
-        }
-        .intersection .detail{
-            text-indent: 0;
-            font-size: 16px;
-        }
-        .intersection .detail .red{
-            font-size: 14px;
-        }
-        .intersection .sub-detail{
-            color: #6672e1;
-            line-height: 1.3;
-        }
-        .LearnPage .intersection img{
-            padding-bottom: 10px;
-            margin-right: 28px;
-        }
-        .LearnPage .nonBackground img{
-            align-self: center;
-            margin: 10px;
-        }
-        .LearnPage img{
-            width: 190px;
-            margin: 10px 18px 0 10px;
-            align-self: center;
-        }
-        .union {
-            background-color: #f0ffcc;
-            border-radius: 10px 10px 0px 0px;
-            padding: 0 10px 10px 10px;
-            display: flex;
-            flex-direction: column;
-        }
-        .union .detail{
-            text-indent: 0;
-        }
-        .complement{
-            background-color: #ffebc9;
-            border-radius: 10px 10px 0 0;
-            padding: 10px;
-            line-height: 1.5;
-            display: flex;
-            flex-direction: column;
-        }
-        .edit{
-            margin: 0 17.5px;
-        }
-        .LearnPage .edit-difference{
-            background-color: #ffebc9; 
-            margin-bottom: 20px;
-            border-radius: 0 0 10px 10px;
-        }
-        .difference{
-            background-color: #d5f5ff;
-            padding: 10px;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-        }
-        .property{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-bottom: 20px;
-        }
-        .property-box{
-            border-radius: 10px;
-            margin: 0 17.5px;
-            padding: 10px;
-            line-height: 1.5;
-        }
-        .property-liner{
-            text-decoration: underline;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .property-detail , .property-list{
-            font-size: 15px;
-        }
-        ol{
-            padding: 0 0 0 20px;
-            margin: 0;
-        }
-        .liner-section{
-            text-decoration: underline;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .LearnPage .gobackLearn{
-            height: 38px;
-            margin: 20px;
-            width: auto;
-            align-self: flex-start;
-            cursor: pointer;
-        }
-        .stage-container .body{
-            justify-content: space-evenly;
-            flex-wrap: wrap;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="tabBurger" style="z-index: 999;">
-            <div class="mainTabBurger">
-                <div class="Text-page" onclick="openPageTab()">Page</div>
-                <div class="line"></div>
-                <div class="Text-reset" onclick="openResetTab()">Reset</div>
-            </div>
-            <div class="PageSmallTab">
-                <div class="triangle"></div>
-                <div class="Page-box-container">
-                    <div class="Page-box" onclick="gotoMenu();gobackMenuGame();">Home</div>
-                    <div class="Page-box" onclick="goStageMode(); goBack();">Stage</div>
-                    <div class="Page-box" onclick="goTimerMode()">Timer</div>
-                    <div class="Page-box" onclick="gotoLearn()">Learn</div>
-                </div>
-            </div>
-            <div class="ResetSmallTab">
-                <div class="triangle"></div>
-                <div class="Page-box-container">
-                    <div class="Page-box" onclick="resetStageMode();resetTimerMode();">All</div>
-                    <div class="Page-box" onclick="resetStageMode();">Stage</div>
-                    <div class="Page-box" onclick="resetTimerMode()">Timer</div>
-                </div>
-            </div>
-        </div>
-        <div class="gif" onclick="dontUseGif()">
-            <h1>How to play</h1>
-            <img src="Vennly.gif" alt="">
-        </div>
-        <div class="menu">
-            <div class="app-page menuPage1">
-                <nav>
-                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
-                </nav>
-                <div class="body" style="justify-content: space-between;">
-                    <img src="logo.png" alt="logo">
-                    <div class="menuPage1Button">
-                        <div class="button" onclick="gotoLearn()">Learn</div>
-                        <div class="button" onclick="gotoMenuGame()">Game</div>
-                    </div>
-                </div>
-                <footer>
-                    <div style="height: 75px;"></div>
-                </footer>
-            </div>
-            <div class="app-page menuPage2">
-                <nav>
-                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
-                </nav>
-                <div class="body">
-                    <div class="text-box">
-                        Game
-                    </div>
-                    <div class="menuPage2Button">
-                        <div class="button-2" onclick="goStageMode()">Stage</div>
-                        <div class="button-2" onclick="goTimerMode()">Timer</div>
-                    </div>
-                    <div class="logo-menuPage2">
-                        <img src="logo.png" alt="logo" style="height: 200px;">
-                    </div>
-                </div>
-                <footer>
-                    <img src="go-back.png" alt="" onclick="gobackMenuGame()">
-                </footer>
-            </div>  
-        </div>
-        <div class="stage-container">
-            <div class="swiper mySwiper" id="menu-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="app-page page1">
-                            <nav>
-                                <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                                <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
-                            </nav>
-                            <div class="body">
-                                <div class="content-text">
-                                    <div class="stage">Stage</div>
-                                    <div class="level">Newbie</div>
-                                </div>
-                                <div class="grid">
-                                    <div class="number " onclick="trytogoQuestion(1)"><h1>1</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(2)"><h1>2</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(3)"><h1>3</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(4)"><h1>4</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(5)"><h1>5</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(6)"><h1>6</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(7)"><h1>7</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(8)"><h1>8</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(9)"><h1>9</h1></div>
-                                </div>
-                                <div class="gridLogo">
-                                    <img src="logo.png" alt="logo">
-                                </div>
-                            </div>
-                            <footer>
-                                <img src="go-back.png" alt="" onclick="gotoMenu()">
-                            </footer>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="app-page page2">
-                            <nav>
-                                <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                                <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
-                            </nav>
-                            <div class="body">
-                                <div class="content-text">
-                                    <div class="stage">Stage</div>
-                                    <div class="level">Practice</div>
-                                </div>
-                                <div class="grid">
-                                    <div class="number locked" onclick="trytogoQuestion(10)"><h1>1</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(11)"><h1>2</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(12)"><h1>3</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(13)"><h1>4</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(14)"><h1>5</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(15)"><h1>6</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(16)"><h1>7</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(17)"><h1>8</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(18)"><h1>9</h1></div>
-                                </div>
-                                <div class="gridLogo">
-                                    <img src="logo.png" alt="logo">
-                                </div>
-                            </div>
-                            <footer>
-                                <img src="go-back.png" alt="" onclick="gotoMenu()">
-                            </footer>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="app-page page3">
-                            <nav>
-                                <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                                <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
-                            </nav>
-                            <div class="body">
-                                <div class="content-text">
-                                    <div class="stage">Stage</div>
-                                    <div class="level">Expert</div>
-                                </div>
-                                <div class="grid">
-                                    <div class="number locked" onclick="trytogoQuestion(19)"><h1>1</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(20)"><h1>2</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(21)"><h1>3</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(22)"><h1>4</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(23)"><h1>5</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(24)"><h1>6</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(25)"><h1>7</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(26)"><h1>8</h1></div>
-                                    <div class="number locked" onclick="trytogoQuestion(27)"><h1>9</h1></div>
-                                </div>
-                                <div class="gridLogo">
-                                    <img src="logo.png" alt="logo">
-                                </div>
-                            </div>
-                            <footer>
-                                <img src="go-back.png" alt="" onclick="gotoMenu()">
-                            </footer>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-            <div class="venn-container" id="quiz-container">
-                <nav>
-                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
-                </nav>
-                <div class="body">
-                    <div class="question-info">
-                        <div class="question-info-row">
-                            <p id="question-number" style="background-color: #FFC0A5;">Stage ...</p>
-                            <p id="status" style="background-color: #AEB4FF;">3 Sets</p>
-                        </div>
-                        <p id="question">Question ...</p>
-                    </div>
+            @keyframes shakeText {
+                0% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                50% { transform: translateX(5px); }
+                75% { transform: translateX(-5px); }
+                100% { transform: translateX(0); }
+            }
 
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
-                        <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
-                        <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
-                        <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
-                        <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
-                        <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
-                        <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
-                        <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
-                        <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
-                        
-                        <text class="universe" x="112" y="10">U</text>
-                        <text x="18" y="18">A</text>
-                        <text x="102" y="18">B</text>
-                        <text x="60" y="115">C</text>
-                    </svg>
+            .shake {
+                animation: shakeText 0.5s;
+            }
 
-                    <button id="submit-btn" onclick="submitAnswer()">Enter</button>
+            .timer-container{
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+            }
+            .text-timer-all{
+                width: 100%;
+                display: flex;
+                position: relative;
+                justify-content: center;
+                height: auto;
+            }
+            .app-page .text-timer{
+                display: flex;
+                background-color: #C0E8BE;
+                color: white;
+                border-radius: 47px;
+                font-weight: bold;
+                width: 134px;
+                height: 57px;
+                align-items: center;
+                justify-content: center;
+                margin-top: 23px;
+                left: 22px;
+                align-self: flex-start;
+                position: absolute;
+            }
+            .app-page .big-logo-timer-page{
+                width: 264px;
+                height: 329px;
+                margin-top: 62px;
+            }
+            .text-sets3{
+                background-color: #AEB4FF;
+                color: white;
+                font-size: 25px;
+                font-weight: bold;
+                width: 133px;
+                height: 59px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 23px;
+                position: relative;
+            }
+            .text-sets3{
+                margin-top: 31px;
+            }
+            .bestTime{
+                display: flex;
+                flex-direction: row;
+                margin-top: 35px;
+                width: 266px;
+                height: 39px;
+            }
+            .bestTime p{
+                margin: 0;
+                color: #FF914D;
+                font-size: 25px;
+                font-weight: bold;
+            }
+            .whitebar-bestTime{
+                background-color: white;
+                height: 38px;
+                width: 132px;
+                display: flex;
+                border-radius: 21px;
+                margin-left: 5px;
+                justify-content: center;
+                align-items: center;
+            }
+            .whitebar-bestTime p{
+                text-align: center;
+            }
+            .timer-start{
+                background-color: #FF7A69;
+                color: white;
+                font-size: 30px;
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 35px 0;
+                width: 155px;
+                height: 69px;
+                border-radius: 23px;
+                cursor: pointer;
+            }
+            .twoTab{ 
+                height: 29px;
+            }
+            .timerStatus{
+                display: flex;
+                flex-direction: row;
+                width: 87px;
+                height: 17px;
+                font-size: 10px;
+                align-items: center;
+                gap: 7px;
+                color: #FFAD7A;
+                margin: 10px 0px 33px 15px;
+            }
+            .full-to-start{
+                display: flex;
+                align-items: flex-start;
+                width: 100%;
+                max-width: 390px;
+            }
+            .full-to-center{
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+            }
+            .timer-info{
+                display: flex;
+                font-size: 25px;
+                font-weight: bold;
+                color: white;
+                flex-direction: column;
+                width: 302px;
+                height: 180px;
+                justify-self: center;
+            }
+            .timer-info-row{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                margin-bottom: 42px;
+            }
+            .timer-info-row .timer-text{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #FFC0A5;
+                margin: 0;
+                width: 133px;
+                height: 69px;
+                border-radius: 23px;
+            }
+            .question-return-info{
+                display: flex;
+                flex-direction: row;
+                position: absolute;
+                align-items: center;
+                margin-top: 111px;
+                width: 302px;
+                z-index: 1;
+            }
+            .tPage2 #status-timer{
+                background-color: #AEB4FF;
+                margin: 0;
+                width: 133px;
+                height: 69px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 23px;
+            }
+            #timerQuestion{
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #FFD481;
+                width: 277px;
+                height: 69px;
+                border-radius: 23px;
+            }
+            .question-return-info img{
+                height: 50px;
+                position: absolute;
+                right: 0;
+                cursor: pointer;
+            }
+            .venn-diagram-timer{
+                display: flex;
+                margin: 29px 0 38px 0;
+                justify-content: center;
+            }
+            .tPage2-endtab{
+                width: 80%;
+                height: 69px;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                position: relative;
+                justify-content: center;
+                margin-bottom: 38.024px;
+                justify-self: center;
+            }
+
+            .tPage2-endtab div{
+                width: 55px;
+                height: 47px;
+                position: absolute;
+                right: 0;
+                justify-content: center;
+            }
+            .tPage2-endtab img{
+                height: 32px;
+                display: flex;
+                justify-self: center;
+                cursor: pointer;
+            }
+            .tPage2-endtab p{
+                width: 55px;
+                font-size: 10px;
+                color: #EABBD3;
+                margin: 2px;
+            }
+            .stage-container , .timer-container , .menuPage2 , .tPage2 , .tabBurger{
+                display: none;
+            }
+            .menu{
+                height: 100%;
+                width: 100%;
+            }
+            .body{
+                width: 100%;
+                max-width: 390px;
+                height: 694px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #FFF9CA;
+            }
+            .menuPage1 .body img{
+                height: 409px;
+                width: 330px;
+            }
+            .menuPage1Button .button{
+                border-radius: 40px;
+                padding: 12px 97.5px;
+                display: flex;
+                background-color: #C0E8BE;
+                justify-self: center;
+                color: white;
+                font-weight: bold;
+                font-size: 40px;
+                margin-bottom: 28px;
+                cursor: pointer;
+            }
+            .text-box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                font-size: 45px;
+                width: 216px;
+                height: 82.5px;
+                color: white;
+                background-color: #C0E8BE;
+                border-radius: 47px;
+            }
+            .menuPage2 .body{
+                justify-content: space-around;
+            }
+            .menuPage2Button{
+                height: 135px;
+                width: 307px;
+            }
+            .menuPage2Button .button-2{
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #FFC0A5;
+                border-radius: 47px;
+                font-size: 35px;
+                font-weight: bold;
+                margin-bottom: 31px;
+                cursor: pointer;
+            }
+            .logo-menuPage2 img{
+                height: 200px;
+            }
+            a{
+                text-decoration: none;
+            }  
+            .popup-full-to-center{
+                background-color: rgba(0,0,0, 0.2);
+                height: 100%;
+                width: 100%;
+                max-width: 390px;
+                display: none;
+                position: absolute;
+                justify-content: center;
+                align-items: center;
+                z-index: 10;
+                
+            }
+            .timer-pop-up{ 
+                height: 257px;
+                width: 250px;
+                background-color: #FFDEBD;
+                display: flex;
+                justify-content: center;
+                border-radius: 29px;
+                flex-wrap: wrap;
+                margin-top: 236px;
+                align-self: flex-start;
+            } 
+            .headTimerPopUp{
+                background-color: #FF914D;
+                border-radius: 29px 29px 0 0;
+                width: 250px;
+                height: 56px;
+
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                color: #FFDEBD;
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .headTimerPopUp .p2{
+                font-size: 31px;
+            }
+            .button-pop-up{
+                display: flex;
+                justify-content: space-evenly;
+                height: 201px;
+                width: 250px;
+                flex-direction: column;
+            }
+            .button-pop-up .line{
+                background-color: #FFAD7A;
+                height: 1px;
+                width: 171.9px;
+                justify-self: center;
+                align-self: center;
+            }
+            .restart-btn , .continue-btn{
+                font-size: 31px;
+                font-weight: bold;
+                color: #FF5757;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+            .gif{
+                background-color: rgba(0,0,0, 0.3);
+                height: 100%;
+                width: 100%;
+                max-width: 390px;
+                display: none;
+                position: absolute;
+                justify-content: center;
+                align-items: center;
+                z-index: 50;
+                flex-direction: column;
+                color: white;
+                font-style: italic;
+            }
+            .gif img{
+                width: 350px;
+                height: auto;
+                display: flex;
+                
+            }
+            .mainTabBurger{
+                width: 114px;
+                height: 176px;
+                border-radius: 20px;
+                opacity: 0.79;
+                background-color: white;
+                position: absolute;
+                display: flex;
+                top: 77px;
+                left: 9px;
+                font-size: 30px;
+                font-weight: bold;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+            .mainTabBurger .Text-page{
+                color: #5271FF;
+                cursor: pointer;
+            }
+            .mainTabBurger .Text-reset{
+                color: #FF5757;
+                cursor: pointer;
+            }
+            .mainTabBurger .line{
+                height: 1px;
+                width: 84px;
+                opacity: 0.35;
+                background-color: black;
+            }
+            .PageSmallTab{
+                position: absolute;
+                gap: 1px;
+                left: 124px;
+                top: 84px;
+            }
+            .triangle{
+                width: 16px;
+                height: 26px;
+                opacity: 0.79;
+                background-color: #5271FF;
+                clip-path: polygon(0 0 ,100% 100%,100% 0);
+                margin-top: 39px;
+            }
+            .Page-box-container{
+                background-color: rgba(82,133,255, 0.79);
+                display: flex;
+                border-radius: 10px;
+                width: 98px;
+                height: 138px;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+                cursor: pointer;
+            }
+            .Page-box{
+                opacity: 100%;
+                background-color: #82B1FF;
+                border-radius: 10px;
+                color: white;
+                font-size: 15px;
+                font-weight: bold;
+                width: 86px;
+                height: 27px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .ResetSmallTab{
+                position: absolute;
+                gap: 1px;
+                left: 124px;
+                top: 172px;
+            }
+            .ResetSmallTab .triangle{
+                background-color: #FF3131;
+                margin-top: 39px;
+            }
+            .ResetSmallTab .Page-box-container{
+                background-color: rgba(255, 49, 49, 0.79);
+                width: 98px;
+                height: 105px;
+            }
+            .ResetSmallTab .Page-box{
+                background-color: #FEBDBD;
+            }
+            .LearnPage{
+                display: none;
+                width: 100%;
+                max-width: 390px;
+                background-color: #FFF9CA;
+                font-family: "Itim";
+                flex-direction: column;
+                overflow-y: scroll;
+                height: 100%;
+                
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .LearnPage::-webkit-scrollbar  , .container::-webkit-scrollbar{
+                display: none;
+            }
+            .head-text{
+                color: #ff914d;
+                font-size: 50px;
+                font-weight: 400;
+                align-self: center;
+                -webkit-text-stroke: 0.5px #FFE16A;
+                width: fit-content;
+                margin: 10px;
+            }
+            .section{
+                border-radius: 25px;
+                background-color: #FFE16A;
+                color: #FF3131;
+                padding: 5px 10px;
+                text-align: center;
+                width: fit-content;
+                margin-left: 36px;
+                margin-bottom: 8px;
+                font-size: 17px;
+            }
+            .ex{
+                text-decoration: underline;
+                font-size: 15px;
+                font-weight: 500;
+                margin-top: 3px;
+            }
+            .detailSets{
+                background-color: #FFE1BF;
+                border-radius: 15px;
+                padding: 10px;
+                margin: 0 15px;
+            }
+            .detail{
+                color: #6672e1;
+                font-size: 14px;
+                line-height: 1.5;
+                text-indent: 1.5rem;
+            }
+            .red{
+                color: red;
+                padding: 0;
+                margin: 0;
+                width: fit-content;
+                align-self: flex-start;
+                text-indent: 0;
+            }
+            .sub-section{
+                font-size: 15px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                background-color: #FFABE7;
+                color: #5271FF;
+                padding: 10px;
+            }
+            .sub-detail{
+                color: #72a0eb;
+                font-size: 14px;
+                line-height: 1.3;
+            }
+            p{
+                margin: 0;
+            }
+            .nonBackground{
+                margin:0 15px;
+                text-indent: 5px;
+                line-height: 1.5;
+                color: #FF4BE2;
+                display: flex;
+                flex-direction: column;
+            }
+            .nonBackground .ex , .intersection .ex{
+                color: #C886F8;
+            }
+            .warning{
+                font-size: 9.5px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .liner{
+                text-decoration: underline;
+            }
+            .intersection{
+                background-color: #ffdede;
+                border-radius: 10px 10px 0 0;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+            }
+            .intersection .liner{
+                color: #8C55F1;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .light-blue{
+                font-size: 16px;
+            }
+            .intersection .detail{
+                text-indent: 0;
+                font-size: 16px;
+            }
+            .intersection .detail .red{
+                font-size: 14px;
+            }
+            .intersection .sub-detail{
+                color: #6672e1;
+                line-height: 1.3;
+            }
+            .LearnPage .intersection img{
+                padding-bottom: 10px;
+                margin-right: 28px;
+            }
+            .LearnPage .nonBackground img{
+                align-self: center;
+                margin: 10px;
+            }
+            .LearnPage img{
+                width: 190px;
+                margin: 10px 18px 0 10px;
+                align-self: center;
+            }
+            .union {
+                background-color: #f0ffcc;
+                border-radius: 10px 10px 0px 0px;
+                padding: 0 10px 10px 10px;
+                display: flex;
+                flex-direction: column;
+            }
+            .union .detail{
+                text-indent: 0;
+            }
+            .complement{
+                background-color: #ffebc9;
+                border-radius: 10px 10px 0 0;
+                padding: 10px;
+                line-height: 1.5;
+                display: flex;
+                flex-direction: column;
+            }
+            .edit{
+                margin: 0 17.5px;
+            }
+            .LearnPage .edit-difference{
+                background-color: #ffebc9; 
+                margin-bottom: 20px;
+                border-radius: 0 0 10px 10px;
+            }
+            .difference{
+                background-color: #d5f5ff;
+                padding: 10px;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+            }
+            .property{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding-bottom: 20px;
+            }
+            .property-box{
+                border-radius: 10px;
+                margin: 0 17.5px;
+                padding: 10px;
+                line-height: 1.5;
+            }
+            .property-liner{
+                text-decoration: underline;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .property-detail , .property-list{
+                font-size: 15px;
+            }
+            ol{
+                padding: 0 0 0 20px;
+                margin: 0;
+            }
+            .liner-section{
+                text-decoration: underline;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .LearnPage .gobackLearn{
+                height: 38px;
+                margin: 20px;
+                width: auto;
+                align-self: flex-start;
+                cursor: pointer;
+            }
+            .stage-container .body{
+                justify-content: space-evenly;
+                flex-wrap: wrap;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="tabBurger" style="z-index: 999;">
+                <div class="mainTabBurger">
+                    <div class="Text-page" onclick="openPageTab()">Page</div>
+                    <div class="line"></div>
+                    <div class="Text-reset" onclick="openResetTab()">Reset</div>
                 </div>
-                <footer>
-                    <img src="go-back.png" alt="" id="back-btn" onclick="goBack()">
-                    <div class="div-text-level"><p id="text-level">loading level...</p></div>
-                </footer>
+                <div class="PageSmallTab">
+                    <div class="triangle"></div>
+                    <div class="Page-box-container">
+                        <div class="Page-box" onclick="gotoMenu();gobackMenuGame();">Home</div>
+                        <div class="Page-box" onclick="goStageMode(); goBack();">Stage</div>
+                        <div class="Page-box" onclick="goTimerMode()">Timer</div>
+                        <div class="Page-box" onclick="gotoLearn()">Learn</div>
+                    </div>
+                </div>
+                <div class="ResetSmallTab">
+                    <div class="triangle"></div>
+                    <div class="Page-box-container">
+                        <div class="Page-box" onclick="resetStageMode();resetTimerMode();">All</div>
+                        <div class="Page-box" onclick="resetStageMode();">Stage</div>
+                        <div class="Page-box" onclick="resetTimerMode()">Timer</div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="timer-container">
-            <div class="app-page tPage1" >
-                <nav>
-                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
-                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
-                </nav>
-                <div class="body">
-                    <div class="text-timer-all">
-                        <div class="text-timer">Timer</div>
-                        <img src="logo.png" alt="logo" class="big-logo-timer-page">
-                    </div>
-                    <div class="text-sets3">
-                        3 Sets
-                    </div>
-                    <div class="bestTime">
-                        <p>BEST TIME   </p>
-                        <div class="whitebar-bestTime"><p id="highestTime">00 : 00</p></div>
-                    </div>
-                    <div class="timer-start" onclick="goTimerGame()">start</div>
-                </div>
-                <footer>
-                    <img src="go-back.png" alt="" onclick="gotoMenu()">
-                </footer>
+            <div class="gif" onclick="dontUseGif()">
+                <h1>How to play</h1>
+                <img src="Vennly.gif" alt="">
             </div>
-            <div class="app-page tPage2">
-                <div class="popup-full-to-center">
-                    <div class="timer-pop-up">
-                        <div class="headTimerPopUp">
-                                <div class="p1">pause</div>
-                                <div class="p2">Vennly</div>
-                        </div>
-                        <div class="button-pop-up">
-                            <div class="restart-btn" onclick="goTimerGame()">Restart</div>
-                            <div class="line"></div>
-                            <div class="continue-btn" onclick="showTimerPopup()" style="color: #C886F8;">Continue</div>
+            <div class="menu">
+                <div class="app-page menuPage1">
+                    <nav>
+                        <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
+                        <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
+                    </nav>
+                    <div class="body" style="justify-content: space-between;">
+                        <img src="logo.png" alt="logo">
+                        <div class="menuPage1Button">
+                            <div class="button" onclick="gotoLearn()">Learn</div>
+                            <div class="button" onclick="gotoMenuGame()">Game</div>
                         </div>
                     </div>
+                    <footer>
+                        <div style="height: 75px;"></div>
+                    </footer>
                 </div>
-                <nav>
-                    <img src="two-tap.png" alt="pause" onclick="showTimerPopup()" class="twoTab">
-                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
-                </nav>
-                <div class="body">
-                    <div class="full-to-start">
-                        <div class="timerStatus" >
-                            <img src="clock.png" alt="" style="width: 17px;">
-                            <div class="game-timer" id="game-timer-tab">00 : 00</div>
+                <div class="app-page menuPage2">
+                    <nav>
+                        <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
+                        <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
+                    </nav>
+                    <div class="body">
+                        <div class="text-box">
+                            Game
+                        </div>
+                        <div class="menuPage2Button">
+                            <div class="button-2" onclick="goStageMode()">Stage</div>
+                            <div class="button-2" onclick="goTimerMode()">Timer</div>
+                        </div>
+                        <div class="logo-menuPage2">
+                            <img src="logo.png" alt="logo" style="height: 200px;">
                         </div>
                     </div>
-                    <div class="full-to-center">
-                        <div class="timer-info">
-                            <div class="timer-info-row">
-                                <p class="timer-text" id="number-correct">Timer</p>
-                                <p id="status-timer">3 Sets</p>
+                    <footer>
+                        <img src="go-back.png" alt="" onclick="gobackMenuGame()">
+                    </footer>
+                </div>  
+            </div>
+            <div class="stage-container">
+                <div class="swiper mySwiper" id="menu-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="app-page page1">
+                                <nav>
+                                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
+                                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
+                                </nav>
+                                <div class="body">
+                                    <div class="content-text">
+                                        <div class="stage">Stage</div>
+                                        <div class="level">Newbie</div>
+                                    </div>
+                                    <div class="grid">
+                                        <div class="number " onclick="trytogoQuestion(1)"><h1>1</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(2)"><h1>2</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(3)"><h1>3</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(4)"><h1>4</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(5)"><h1>5</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(6)"><h1>6</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(7)"><h1>7</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(8)"><h1>8</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(9)"><h1>9</h1></div>
+                                    </div>
+                                    <div class="gridLogo">
+                                        <img src="logo.png" alt="logo">
+                                    </div>
+                                </div>
+                                <footer>
+                                    <img src="go-back.png" alt="" onclick="gotoMenu()">
+                                </footer>
                             </div>
-                            <div class="question-return-info">
-                                <p id="timerQuestion">Question...</p>
-                                <img src="newRandom.png" alt="" onclick="newQuestion()">
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="app-page page2">
+                                <nav>
+                                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
+                                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
+                                </nav>
+                                <div class="body">
+                                    <div class="content-text">
+                                        <div class="stage">Stage</div>
+                                        <div class="level">Practice</div>
+                                    </div>
+                                    <div class="grid">
+                                        <div class="number locked" onclick="trytogoQuestion(10)"><h1>1</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(11)"><h1>2</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(12)"><h1>3</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(13)"><h1>4</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(14)"><h1>5</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(15)"><h1>6</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(16)"><h1>7</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(17)"><h1>8</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(18)"><h1>9</h1></div>
+                                    </div>
+                                    <div class="gridLogo">
+                                        <img src="logo.png" alt="logo">
+                                    </div>
+                                </div>
+                                <footer>
+                                    <img src="go-back.png" alt="" onclick="gotoMenu()">
+                                </footer>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="app-page page3">
+                                <nav>
+                                    <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
+                                    <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
+                                </nav>
+                                <div class="body">
+                                    <div class="content-text">
+                                        <div class="stage">Stage</div>
+                                        <div class="level">Expert</div>
+                                    </div>
+                                    <div class="grid">
+                                        <div class="number locked" onclick="trytogoQuestion(19)"><h1>1</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(20)"><h1>2</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(21)"><h1>3</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(22)"><h1>4</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(23)"><h1>5</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(24)"><h1>6</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(25)"><h1>7</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(26)"><h1>8</h1></div>
+                                        <div class="number locked" onclick="trytogoQuestion(27)"><h1>9</h1></div>
+                                    </div>
+                                    <div class="gridLogo">
+                                        <img src="logo.png" alt="logo">
+                                    </div>
+                                </div>
+                                <footer>
+                                    <img src="go-back.png" alt="" onclick="gotoMenu()">
+                                </footer>
                             </div>
                         </div>
                     </div>
-                    <div class="venn-diagram-timer">
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="venn-container" id="quiz-container">
+                    <nav>
+                        <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
+                        <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
+                    </nav>
+                    <div class="body">
+                        <div class="question-info">
+                            <div class="question-info-row">
+                                <p id="question-number" style="background-color: #FFC0A5;">Stage ...</p>
+                                <p id="status" style="background-color: #AEB4FF;">3 Sets</p>
+                            </div>
+                            <p id="question">Question ...</p>
+                        </div>
+
                         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
                             <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
                             <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
@@ -1248,721 +1188,818 @@
                             <text x="102" y="18">B</text>
                             <text x="60" y="115">C</text>
                         </svg>
+
+                        <button id="submit-btn" onclick="submitAnswer()">Enter</button>
                     </div>
-                    <div class="full-to-center">
-                        <div class="tPage2-endtab">
-                            <button id="submit-btn" onclick="submitAnswerTimer()">Enter</button>
-                            <div class="img-clear" onclick="resetColor()">
-                                <img src="clearBoard.png" alt="">
-                                <p>clear board</p>
+                    <footer>
+                        <img src="go-back.png" alt="" id="back-btn" onclick="goBack()">
+                        <div class="div-text-level"><p id="text-level">loading level...</p></div>
+                    </footer>
+                </div>
+            </div>
+            <div class="timer-container">
+                <div class="app-page tPage1" >
+                    <nav>
+                        <img src="burger-tap.png" alt="" onclick="showBurgerTab()">
+                        <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
+                    </nav>
+                    <div class="body">
+                        <div class="text-timer-all">
+                            <div class="text-timer">Timer</div>
+                            <img src="logo.png" alt="logo" class="big-logo-timer-page">
+                        </div>
+                        <div class="text-sets3">
+                            3 Sets
+                        </div>
+                        <div class="bestTime">
+                            <p>BEST TIME   </p>
+                            <div class="whitebar-bestTime"><p id="highestTime"> - </p></div>
+                        </div>
+                        <div class="timer-start" onclick="goTimerGame()">start</div>
+                    </div>
+                    <footer>
+                        <img src="go-back.png" alt="" onclick="gotoMenu()">
+                    </footer>
+                </div>
+                <div class="app-page tPage2">
+                    <div class="popup-full-to-center">
+                        <div class="timer-pop-up">
+                            <div class="headTimerPopUp">
+                                    <div class="p1">pause</div>
+                                    <div class="p2">Vennly</div>
+                            </div>
+                            <div class="button-pop-up">
+                                <div class="restart-btn" onclick="goTimerGame()">Restart</div>
+                                <div class="line"></div>
+                                <div class="continue-btn" onclick="showTimerPopup()" style="color: #C886F8;">Continue</div>
                             </div>
                         </div>
                     </div>
+                    <nav>
+                        <img src="two-tap.png" alt="pause" onclick="showTimerPopup()" class="twoTab">
+                        <img src="question-logo.png" alt="?" class="question-logo" onclick="showGif()">
+                    </nav>
+                    <div class="body">
+                        <div class="full-to-start">
+                            <div class="timerStatus" >
+                                <img src="clock.png" alt="" style="width: 17px;">
+                                <div class="game-timer" id="game-timer-tab">00 : 00</div>
+                                <div class="timerScore" id="timerScore">1 / 10</div>
+                            </div>
+                        </div>
+                        <div class="full-to-center">
+                            <div class="timer-info">
+                                <div class="timer-info-row">
+                                    <p class="timer-text" id="number-correct">Timer</p>
+                                    <p id="status-timer">3 Sets</p>
+                                </div>
+                                <div class="question-return-info">
+                                    <p id="timerQuestion">Question...</p>
+                                    <img src="newRandom.png" alt="" onclick="newQuestion()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="venn-diagram-timer">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="280px" width="80%" viewBox="0 0 120 120">
+                                <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
+                                <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
+                                <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
+                                <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
+                                <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
+                                <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
+                                <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
+                                <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
+                                
+                                <text class="universe" x="112" y="10">U</text>
+                                <text x="18" y="18">A</text>
+                                <text x="102" y="18">B</text>
+                                <text x="60" y="115">C</text>
+                            </svg>
+                        </div>
+                        <div class="full-to-center">
+                            <div class="tPage2-endtab">
+                                <button id="submit-btn" onclick="submitAnswerTimer()">Enter</button>
+                                <div class="img-clear" onclick="resetColor()">
+                                    <img src="clearBoard.png" alt="">
+                                    <p>clear board</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                        <img src="go-back.png" alt="" id="back-btn" onclick="goTimerMenu()">
+                    </footer>
                 </div>
-                <footer>
-                    <img src="go-back.png" alt="" id="back-btn" onclick="goTimerMenu()">
-                </footer>
             </div>
         </div>
-    </div>
-    <div class="LearnPage">
-        <div class="head-text">Let's Learn</div>
-        <div class="section">เซต (Set)</div>
-        <div class="detailSets">
-            <div class="detail">
-                เซต ในวิชาคณิตศาสตร์ใช้กล่าวถึงกลุ่มของสิ่งต่างๆ และเมื่อกล่าวถึงกลุ่มใดแล้ว สามารถทราบได้แน่นอนว่าสิ่งใดอยู่ในกลุ่ม และสิ่งใดไม่อยู่ในกลุ่ม
-                <br>
-                <span class="ex">Example</span> เซตของชื่อวันในสัปดาห์ มีสมาชิก ได้แก่
-                <p class="red">จันทร์ อังคาร พุธ พฤหัสบดี ศุกร์ เสาร์ และอาทิตย์</p>
-            </div>
-        </div>
-        <div class="sub-section section">การกำหนดเซตโดยใช้แผนภาพเวนน์-ออยเลอร์</div>
-        <div class="sub-detail detailSets">
-            <div class="detail"><p class="ex">แผนภาพเวนน์-ออยเลอร์ (Venn-Euler Diagram)</p>
-            คือ แผนภาพที่นิยมใช้แสดงความสัมพันธ์ระหว่างเซต โดยนิยมใช้วงกลมหรือวงรีแทนเซต ซึ่งมีสมาชิกของเซตอยู่ภายในวงกลม และใช้รูปสี่เหลี่ยมผืนผ้าแทนเอกภพสัมพัทธ์</div>
-        </div>
-        <div class="nonBackground sub-detail">
-            <span class="ex">Example</span> แผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของทั้งเซต A B และ C ซึ่งแทนด้วยสัญลักษณ์ A∩B∩C แทนด้วยพื้นที่ที่มองเห็นบริเวณที่ซ้อนทับกันระหว่างเซต A B และ C
-            <img src="diagram1.png" alt="" class="main-picture">
-        </div>
-        
-        <div class="red warning" >** ในการเขียนเซตจะต้องกำหนดเขตที่บ่งบอกถึงขอบเขตของสิ่งที่จะพิจารณา เรียกเซตกำหนดเขตนี้ว่า <span class="liner">เอกภพสัมพัทธ์ (Relative Universe)</span> ซึ่งมักเขียนแทนด้วย U</div>
-        <div class="section">การดำเนินการระหว่างเซต ( Operation on Set )</div>
-        <div class="edit">
-            <div class="intersection">
+        <div class="LearnPage">
+            <div class="head-text">Let's Learn</div>
+            <div class="section">เซต (Set)</div>
+            <div class="detailSets">
                 <div class="detail">
-                    <div class="liner-section" style="color: #8c52ff;">อินเตอร์เซกชัน( intersection )</div>
-                    <div class="light-blue">เขียนแทนด้วย A ∩ B</div>
-                    <div style="color: black;">มีบทนิยามว่า   A ∩ B = { x | x ∈ A และ x ∈ B }</div>
-                    <div class="red">( x อยู่ในเซต A และเซต B )</div>
+                    เซต ในวิชาคณิตศาสตร์ใช้กล่าวถึงกลุ่มของสิ่งต่างๆ และเมื่อกล่าวถึงกลุ่มใดแล้ว สามารถทราบได้แน่นอนว่าสิ่งใดอยู่ในกลุ่ม และสิ่งใดไม่อยู่ในกลุ่ม
+                    <br>
+                    <span class="ex">Example</span> เซตของชื่อวันในสัปดาห์ มีสมาชิก ได้แก่
+                    <p class="red">จันทร์ อังคาร พุธ พฤหัสบดี ศุกร์ เสาร์ และอาทิตย์</p>
                 </div>
-                <div class="ex">Example</div>
-                <div class="sub-detail"><p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 } </p>
-                    สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของทั้งเซต A และ B  ด้วยพื้นที่ที่มองเห็นบริเวณที่ซ้อนทับกันระหว่างเซต A และ B คือ 2 และ 4 จะเห็นว่า 2 และ 4 เป็นสมาชิกของทั้งเซต A และ B ดังภาพ
-                    เขียนแทนด้วย  A ∩ B
+            </div>
+            <div class="sub-section section">การกำหนดเซตโดยใช้แผนภาพเวนน์-ออยเลอร์</div>
+            <div class="sub-detail detailSets">
+                <div class="detail"><p class="ex">แผนภาพเวนน์-ออยเลอร์ (Venn-Euler Diagram)</p>
+                คือ แผนภาพที่นิยมใช้แสดงความสัมพันธ์ระหว่างเซต โดยนิยมใช้วงกลมหรือวงรีแทนเซต ซึ่งมีสมาชิกของเซตอยู่ภายในวงกลม และใช้รูปสี่เหลี่ยมผืนผ้าแทนเอกภพสัมพัทธ์</div>
+            </div>
+            <div class="nonBackground sub-detail">
+                <span class="ex">Example</span> แผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของทั้งเซต A B และ C ซึ่งแทนด้วยสัญลักษณ์ A∩B∩C แทนด้วยพื้นที่ที่มองเห็นบริเวณที่ซ้อนทับกันระหว่างเซต A B และ C
+                <img src="diagram1.png" alt="" class="main-picture">
+            </div>
+            
+            <div class="red warning" >** ในการเขียนเซตจะต้องกำหนดเขตที่บ่งบอกถึงขอบเขตของสิ่งที่จะพิจารณา เรียกเซตกำหนดเขตนี้ว่า <span class="liner">เอกภพสัมพัทธ์ (Relative Universe)</span> ซึ่งมักเขียนแทนด้วย U</div>
+            <div class="section">การดำเนินการระหว่างเซต ( Operation on Set )</div>
+            <div class="edit">
+                <div class="intersection">
+                    <div class="detail">
+                        <div class="liner-section" style="color: #8c52ff;">อินเตอร์เซกชัน( intersection )</div>
+                        <div class="light-blue">เขียนแทนด้วย A ∩ B</div>
+                        <div style="color: black;">มีบทนิยามว่า   A ∩ B = { x | x ∈ A และ x ∈ B }</div>
+                        <div class="red">( x อยู่ในเซต A และเซต B )</div>
+                    </div>
+                    <div class="ex">Example</div>
+                    <div class="sub-detail"><p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 } </p>
+                        สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของทั้งเซต A และ B  ด้วยพื้นที่ที่มองเห็นบริเวณที่ซ้อนทับกันระหว่างเซต A และ B คือ 2 และ 4 จะเห็นว่า 2 และ 4 เป็นสมาชิกของทั้งเซต A และ B ดังภาพ
+                        เขียนแทนด้วย  A ∩ B
+                    </div>
+                <img src="diagram2.png" alt="">
+            </div>
+            </div>
+            <div class="edit" style="background-color: #ffdede;">
+                <div class="union">
+                    <div class="detail">
+                        <div class="liner-section" style="color: #ff6100;">ยูเนียน (union)</div>
+                        <div style="color: #ff863c;">เขียนแทนด้วย A ∪ B</div>
+                        <div style="color: black;">มีบทนิยามว่า  A ∪ B = { x | x ∈ A หรือ x ∈ B }</div>
+                        <div class="red">( x อยู่ในเซต A หรือเซต B )</div>
+                    </div>
+                    <div class="ex" style="color: #ff7927;">Example</div>
+                    <div class="sub-detail">
+                        <span style="color: #ff863c;">
+                            <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 } </p>
+                            สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของเซต A หรือ B  ด้วยพื้นที่ที่มองเห็นบริเวณของเซต A และ B คือ 1,2,3,4,6และ 8
+                            จะเห็นว่า 1,2,3,4,6 และ 8 เป็นสมาชิกของเซต A หรือ B ดังภาพ
+                            เขียนแทนด้วย  A ∪ B
+                        </span>
+                    </div>
+                    <img src="diagram3.png" alt="">
                 </div>
-            <img src="diagram2.png" alt="">
+            </div>
+            <div class="edit" style="background-color: #f0ffcc;">
+                <div class="complement">
+                    <div class="liner-section" style="color: #0F27FF;">คอมพลีเมนต์ (complement)</div>
+                    <div class="detail" style="text-indent: 0;">
+                        <div style="color: #2985FF;">เขียนแทนด้วย A′</div>
+                        <div style="color: black;">มีบทนิยามว่า   A′ = { x | x ∈ U และ x ∉ A } </div>
+                        <div class="red">( x ไม่อยู่ในเซต A)</div>
+                    </div>
+                    <div class="ex" style="color: #2985ff;">Example</div>
+                    <div class="sub-detail">
+                        <span style="color: #3c4ce4;">
+                            <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 }</p>
+                            สร้างแผนภาพเวนน์ - ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่ไม่เป็นสมาชิกของเซต A ด้วยพื้นที่ที่มองเห็นบริเวณที่ไม่ซ้อนทับกับเซต A และ B คือ 6 และ 8 จะเห็นว่า 6 และ 8 ไม่เป็นสมาชิกของเซต A ดังภาพ
+                            เขียนแทนด้วย A′
+                        </span>
+                    </div>
+                    <img src="diagram4.png" alt="">
+                </div>
+            </div>
+            <div class="edit edit-difference" >
+                <div class="difference">
+                    <div class="liner-section" style="color: #ff1c7c;">ผลต่างระหว่างเซต (difference of sets)</div>
+                    <div class="detail" style="text-indent: 0;">
+                        <div style="color: #ff70c5;">เขียนแทนด้วย A - B</div>
+                        <div style="color: black;">มีบทนิยามว่า   A - B = { x | x ∈ A และ x ∉ B }</div>
+                        <div class="red">( x อยู่ในเซต A แต่ไม่อยู่ในเซต B )</div>
+                    </div>
+                    <div class="ex" style="color: #ff3fb2;">Example</div>
+                    <div class="sub-detail">
+                        <span style="color: #ff3fb2;">
+                            <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 }</p>
+                            สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของเซต A 
+                            แต่ไม่เป็นสมาชิกของเซต B  ด้วยพื้นที่ที่มองเห็นบริเวณของเซต A แต่ไม่ซ้อนทับกับบริเวณของเซต B คือ 1 และ 3 จะเห็นว่า 1 และ 3 เป็นสมาชิกของเซต A หรือ B ดังภาพ
+                            เขียนแทนด้วย  A - B
+                        </span>
+                    </div>
+                    <img src="diagram5.png" alt="">
+                </div>
+            </div>
+            <div class="section">สมบัติการดำเนินการระหว่างเซต</div>
+            <div class="property">
+                <div class="property-box" style="background-color: #ffdede;">
+                    <div class="property-liner" style="color: #8c52ff;">สมบัติของอินเตอร์เซกชัน</div>
+                    <div class="property-detail" style="color: #6672e1;">กำหนดให้ A และ B เป็นสับเซตของเอกภพสัมพัทธ์ U แล้ว</div>
+                    <div class="property-list">
+                        <ol>
+                            <li> A ∩ A = A</li>
+                            <li> A ∩ Ø = Ø</li>
+                            <li> A ∩ U = A</li>
+                            <li> (A ∩ B) ⊂ A และ (B ∩ A) ⊂ B <span class="red"> เมื่อ A = B</span></li>
+                            <li>A ∩ B = B ∩ A (สมบัติการสลับที่)</li>
+                            <li>A ∩ (B ∩ C) = (A ∩ B) ∩ C (สมบัติการเปลี่ยนกลุ่ม)</li>
+                            <li>A ⊂ B ก็ต่อเมื่อ A ∩ B = A</li>
+                            <li>ถ้า A ⊂ C และ B ⊂ C แล้ว (A ∩ B) ⊂ C</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="property-box" style="background-color: #f0ffcc;">
+                    <div class="property-liner" style="color: #ff6100;">สมบัติของยูเนียน</div>
+                    <div class="property-detail" style="color: #ff914d;">กำหนดให้ A และ B เป็นสับเซตเอกภพสัมพัทธ์ U แล้ว</div>
+                    <div class="property-list">
+                        <ol>
+                            <li> A ∪ A = A</li>
+                            <li> A ∪ Ø = A</li>
+                            <li> A ∪ U = U</li>
+                            <li> A ⊂ (A ∪ B) และ B ⊂ (A ∪ B)</li>
+                            <li> A ∪ B = B ∪ A (สมบัติการสลับที่)</li>
+                            <li> A ∪ (B ∪ C) = (A ∪ B) ∪ C (สมบัติการเปลี่ยนกลุ่ม)</li>
+                            <li> A ⊂ B ก็ต่อเมื่อ A ∪ B = B</li>
+                            <li> ถ้า B ⊂ A และ C ⊂ A แล้ว (B ∪ C) ⊂ A</li>
+                            <li> ถ้า A ∪ B = Ø ก็ต่อเมื่อ A = Ø และ B = Ø</li>
+                            <li> A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C) (สมบัติการกระจาย)</li>
+                            <li> A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C) (สมบัติการกระจาย)</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="property-box" style="background-color: #ffebc9;">
+                    <div class="property-liner" style="color: #0f27ff;">สมบัติของคอมพลีเมนต์</div>
+                    <div class="property-detail" style="color: #2985ff;">กำหนดให้ A และ B เป็นสับเซตของเอกภพสัมพัทธ์ U แล้ว</div>
+                    <div class="property-list">
+                        <ol>
+                            <li> ( A′ )′ = A</li>
+                            <li> Ø′ = U และ U′ = Ø</li>
+                            <li> A ∩ A′ = Ø</li>
+                            <li> A ∪ A′ = U</li>
+                            <li> (A ∪ B)′ = A′ ∩ B′  (กฎของ เดอ มอร์กอง)</li>
+                            <li> (A ∩ B)′ = A′ ∪ B′  (กฎของ เดอ มอร์กอง)</li>
+                            <li> A ⊂ B ก็ต่อเมื่อ B′ ⊂ A′</li>
+                            <li> A ∩ B = Ø ก็ต่อเมื่อ A ⊂ B′</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="property-box" style="background-color: #d5f5ff;">
+                    <div class="property-liner" style="color: #ff1c7c;">สมบัติของผลต่าง</div>
+                    <div class="property-detail" style="color: #ff3fb2;">กำหนดให้ A และ B เป็นสับเซตเอกภพสัมพัทธ์ U แล้ว</div>
+                    <div class="property-list">
+                        <ol>
+                            <li> A - B ⊂ A</li>
+                            <li> A - B = A ก็ต่อเมื่อ A ∩ B = Ø</li>
+                            <li> A - B = Ø ก็ต่อเมื่อ A ⊂ B</li>
+                            <li> A - A = Ø</li>
+                            <li> A - B = A ∩ B′</li>
+                            <li> A - (B ∪ C) = (A - B) ∩ (A - C)</li>
+                            <li> A - (B ∩ C) = (A - B) ∪ (A - C)</li>
+                            <li> (A ∩ B) - C = (A - C) ∩ (B - C)</li>
+                            <li> (A ∪ B) - C = (A - C) ∪ (B - C) </li>
+                            <li> A - Ø = A และ Ø - A = Ø</li>
+                            <li> A′ - B′ = B - A</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <img src="go-back.png" alt="" class="gobackLearn" onclick="closeLearn()">
         </div>
-        </div>
-        <div class="edit" style="background-color: #ffdede;">
-            <div class="union">
-                <div class="detail">
-                    <div class="liner-section" style="color: #ff6100;">ยูเนียน (union)</div>
-                    <div style="color: #ff863c;">เขียนแทนด้วย A ∪ B</div>
-                    <div style="color: black;">มีบทนิยามว่า  A ∪ B = { x | x ∈ A หรือ x ∈ B }</div>
-                    <div class="red">( x อยู่ในเซต A หรือเซต B )</div>
-                </div>
-                <div class="ex" style="color: #ff7927;">Example</div>
-                <div class="sub-detail">
-                    <span style="color: #ff863c;">
-                        <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 } </p>
-                        สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของเซต A หรือ B  ด้วยพื้นที่ที่มองเห็นบริเวณของเซต A และ B คือ 1,2,3,4,6และ 8
-                        จะเห็นว่า 1,2,3,4,6 และ 8 เป็นสมาชิกของเซต A หรือ B ดังภาพ
-                        เขียนแทนด้วย  A ∪ B
-                    </span>
-                </div>
-                <img src="diagram3.png" alt="">
-            </div>
-        </div>
-        <div class="edit" style="background-color: #f0ffcc;">
-            <div class="complement">
-                <div class="liner-section" style="color: #0F27FF;">คอมพลีเมนต์ (complement)</div>
-                <div class="detail" style="text-indent: 0;">
-                    <div style="color: #2985FF;">เขียนแทนด้วย A′</div>
-                    <div style="color: black;">มีบทนิยามว่า   A′ = { x | x ∈ U และ x ∉ A } </div>
-                    <div class="red">( x ไม่อยู่ในเซต A)</div>
-                </div>
-                <div class="ex" style="color: #2985ff;">Example</div>
-                <div class="sub-detail">
-                    <span style="color: #3c4ce4;">
-                        <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 }</p>
-                        สร้างแผนภาพเวนน์ - ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่ไม่เป็นสมาชิกของเซต A ด้วยพื้นที่ที่มองเห็นบริเวณที่ไม่ซ้อนทับกับเซต A และ B คือ 6 และ 8 จะเห็นว่า 6 และ 8 ไม่เป็นสมาชิกของเซต A ดังภาพ
-                        เขียนแทนด้วย A′
-                    </span>
-                </div>
-                <img src="diagram4.png" alt="">
-            </div>
-        </div>
-        <div class="edit edit-difference" >
-            <div class="difference">
-                <div class="liner-section" style="color: #ff1c7c;">ผลต่างระหว่างเซต (difference of sets)</div>
-                <div class="detail" style="text-indent: 0;">
-                    <div style="color: #ff70c5;">เขียนแทนด้วย A - B</div>
-                    <div style="color: black;">มีบทนิยามว่า   A - B = { x | x ∈ A และ x ∉ B }</div>
-                    <div class="red">( x อยู่ในเซต A แต่ไม่อยู่ในเซต B )</div>
-                </div>
-                <div class="ex" style="color: #ff3fb2;">Example</div>
-                <div class="sub-detail">
-                    <span style="color: #ff3fb2;">
-                        <p>กำหนด A = { 1,2,3,4 }  B = { 2,4,6,8 }</p>
-                        สร้างแผนภาพเวนน์-ออยเลอร์แสดงเซตของสมาชิกทั้งหมดที่เป็นสมาชิกของเซต A 
-                        แต่ไม่เป็นสมาชิกของเซต B  ด้วยพื้นที่ที่มองเห็นบริเวณของเซต A แต่ไม่ซ้อนทับกับบริเวณของเซต B คือ 1 และ 3 จะเห็นว่า 1 และ 3 เป็นสมาชิกของเซต A หรือ B ดังภาพ
-                        เขียนแทนด้วย  A - B
-                    </span>
-                </div>
-                <img src="diagram5.png" alt="">
-            </div>
-        </div>
-        <div class="section">สมบัติการดำเนินการระหว่างเซต</div>
-        <div class="property">
-            <div class="property-box" style="background-color: #ffdede;">
-                <div class="property-liner" style="color: #8c52ff;">สมบัติของอินเตอร์เซกชัน</div>
-                <div class="property-detail" style="color: #6672e1;">กำหนดให้ A และ B เป็นสับเซตของเอกภพสัมพัทธ์ U แล้ว</div>
-                <div class="property-list">
-                    <ol>
-                        <li> A ∩ A = A</li>
-                        <li> A ∩ Ø = Ø</li>
-                        <li> A ∩ U = A</li>
-                        <li> (A ∩ B) ⊂ A และ (B ∩ A) ⊂ B <span class="red"> เมื่อ A = B</span></li>
-                        <li>A ∩ B = B ∩ A (สมบัติการสลับที่)</li>
-                        <li>A ∩ (B ∩ C) = (A ∩ B) ∩ C (สมบัติการเปลี่ยนกลุ่ม)</li>
-                        <li>A ⊂ B ก็ต่อเมื่อ A ∩ B = A</li>
-                        <li>ถ้า A ⊂ C และ B ⊂ C แล้ว (A ∩ B) ⊂ C</li>
-                    </ol>
-                </div>
-            </div>
-            <div class="property-box" style="background-color: #f0ffcc;">
-                <div class="property-liner" style="color: #ff6100;">สมบัติของยูเนียน</div>
-                <div class="property-detail" style="color: #ff914d;">กำหนดให้ A และ B เป็นสับเซตเอกภพสัมพัทธ์ U แล้ว</div>
-                <div class="property-list">
-                    <ol>
-                        <li> A ∪ A = A</li>
-                        <li> A ∪ Ø = A</li>
-                        <li> A ∪ U = U</li>
-                        <li> A ⊂ (A ∪ B) และ B ⊂ (A ∪ B)</li>
-                        <li> A ∪ B = B ∪ A (สมบัติการสลับที่)</li>
-                        <li> A ∪ (B ∪ C) = (A ∪ B) ∪ C (สมบัติการเปลี่ยนกลุ่ม)</li>
-                        <li> A ⊂ B ก็ต่อเมื่อ A ∪ B = B</li>
-                        <li> ถ้า B ⊂ A และ C ⊂ A แล้ว (B ∪ C) ⊂ A</li>
-                        <li> ถ้า A ∪ B = Ø ก็ต่อเมื่อ A = Ø และ B = Ø</li>
-                        <li> A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C) (สมบัติการกระจาย)</li>
-                        <li> A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C) (สมบัติการกระจาย)</li>
-                    </ol>
-                </div>
-            </div>
-            <div class="property-box" style="background-color: #ffebc9;">
-                <div class="property-liner" style="color: #0f27ff;">สมบัติของคอมพลีเมนต์</div>
-                <div class="property-detail" style="color: #2985ff;">กำหนดให้ A และ B เป็นสับเซตของเอกภพสัมพัทธ์ U แล้ว</div>
-                <div class="property-list">
-                    <ol>
-                        <li> ( A′ )′ = A</li>
-                        <li> Ø′ = U และ U′ = Ø</li>
-                        <li> A ∩ A′ = Ø</li>
-                        <li> A ∪ A′ = U</li>
-                        <li> (A ∪ B)′ = A′ ∩ B′  (กฎของ เดอ มอร์กอง)</li>
-                        <li> (A ∩ B)′ = A′ ∪ B′  (กฎของ เดอ มอร์กอง)</li>
-                        <li> A ⊂ B ก็ต่อเมื่อ B′ ⊂ A′</li>
-                        <li> A ∩ B = Ø ก็ต่อเมื่อ A ⊂ B′</li>
-                    </ol>
-                </div>
-            </div>
-            <div class="property-box" style="background-color: #d5f5ff;">
-                <div class="property-liner" style="color: #ff1c7c;">สมบัติของผลต่าง</div>
-                <div class="property-detail" style="color: #ff3fb2;">กำหนดให้ A และ B เป็นสับเซตเอกภพสัมพัทธ์ U แล้ว</div>
-                <div class="property-list">
-                    <ol>
-                        <li> A - B ⊂ A</li>
-                        <li> A - B = A ก็ต่อเมื่อ A ∩ B = Ø</li>
-                        <li> A - B = Ø ก็ต่อเมื่อ A ⊂ B</li>
-                        <li> A - A = Ø</li>
-                        <li> A - B = A ∩ B′</li>
-                        <li> A - (B ∪ C) = (A - B) ∩ (A - C)</li>
-                        <li> A - (B ∩ C) = (A - B) ∪ (A - C)</li>
-                        <li> (A ∩ B) - C = (A - C) ∩ (B - C)</li>
-                        <li> (A ∪ B) - C = (A - C) ∪ (B - C) </li>
-                        <li> A - Ø = A และ Ø - A = Ø</li>
-                        <li> A′ - B′ = B - A</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-        <img src="go-back.png" alt="" class="gobackLearn" onclick="closeLearn()">
-    </div>
-</body>
-<script>
-    
-    var swiper = new Swiper(".mySwiper",{
-        slidePerView: 1,
-        spaceBetween: 0,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        effect: 'slide',
-        speed: 500,
-
-    });
-
-    const menuContainer = document.getElementById("menu-container");
-    const quizContainer = document.getElementById("quiz-container");
-
-    let selectedState = 0;
-    let completedQuestions = {};
-    let highestUnlockedQuestion = 1;
-    let questions = [];
-
-    let questionsTimer = [];
-    let currentQuestionTimerIndex = 0;
-    let randomQuestionsTimer = [];
-    let correctTimerQuestions = 0;
-
-    let elapsedTime = 0;
-    let isRunning = false;
-    let startTime;
-    let timerInterval;
-    let nowTime =0;
-    let bestTime = 0;
-
-    let timerPopupRunning = false;
-    let burgerRunning = false;
-
-    async function loadQuestions(){
-        try{
-            let response = await fetch("questions.json");
-            questions = await response.json();
-            console.log("Questions loaded successfully: ",questions)
-
-        }
-        catch(error){
-            console.error("Error loading questions: ",error)
-            console.log("Using mock questions:", questions);
-
-        }
-        loadProgress();
-        updateButtonStatus();
-    }
-    async function loadTimerQuestion() {
-        try{
-            let timerRespone = await fetch("questionsTimer.json");
-            questionsTimer = await timerRespone.json();
-            console.log("Questions timer loaded successfully: ",questionsTimer); 
-        }   
-        catch(error){
-            console.log("Error loading questions timer: ",error);x
-            console.log("Using mock questions timer", questionsTimer);
-        }   
-    }
-
-    function trytogoQuestion(questionNumber){
-        if(questionNumber>highestUnlockedQuestion){
-            alert("คุณไม่สามารถทำข้อนี้ได้ โปรดทำข้อก่อนหน้าให้เสร็จก่อน");
-            return;
-        }
-        gotoQuestion(questionNumber);
-    }
-
-    function gotoQuestion(questionNumber){
-        if(!questions || questions.length===0){
-            alert("โหลดโจทย์ไม่สำเร็จ");
-            return;
-        }
+    </body>
+    <script>
         
-        currentIndex = questionNumber-1;
+        var swiper = new Swiper(".mySwiper",{
+            slidePerView: 1,
+            spaceBetween: 0,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            effect: 'slide',
+            speed: 500,
 
-        if(currentIndex < 0 || currentIndex>questions.length){
-            alert("ไม่พบข้อนี้");
-            return;
+        });
+
+        const menuContainer = document.getElementById("menu-container");
+        const quizContainer = document.getElementById("quiz-container");
+
+        let selectedState = 0;
+        let completedQuestions = {};
+        let highestUnlockedQuestion = 1;
+        let questions = [];
+        const setCountItem = 10;
+
+        let questionsTimer = [];
+        let currentQuestionTimerIndex = 0;
+        let randomQuestionsTimer = [];
+        let correctTimerQuestions = 0;
+
+        let elapsedTime = 0;
+        let isRunning = false;
+        let startTime;
+        let timerInterval;
+        let nowTime =0;
+        let bestTime = 0;
+
+        let timerPopupRunning = false;
+        let burgerRunning = false;
+
+        async function loadQuestions(){
+            try{
+                let response = await fetch("questions.json");
+                questions = await response.json();
+                console.log("Questions loaded successfully: ",questions)
+
+            }
+            catch(error){
+                console.error("Error loading questions: ",error)
+                console.log("Using mock questions:", questions);
+
+            }
+            loadProgress();
+            updateButtonStatus();
+        }
+        async function loadTimerQuestion() {
+            try{
+                let timerRespone = await fetch("questionsTimer.json");
+                questionsTimer = await timerRespone.json();
+                console.log("Questions timer loaded successfully: ",questionsTimer); 
+            }   
+            catch(error){
+                console.log("Error loading questions timer: ",error);x
+                console.log("Using mock questions timer", questionsTimer);
+            }   
         }
 
-        menuContainer.style.display = "none";
-        quizContainer.style.display = "flex";
-
-        resetColor();
-        showQuestions();
-    }
-
-    function goBack(){
-        menuContainer.style.display = "block";
-        quizContainer.style.display = "none";
-
-        updateButtonStatus();
-    }
-
-    function showQuestions(){
-        if(currentIndex>=questions.length){
-            document.getElementById('question').innerText="คุณทำครบทุกข้อแล้ว";
-            alert("เกมจบลงแล้ว")
-            return;
+        function trytogoQuestion(questionNumber){
+            if(questionNumber>highestUnlockedQuestion){
+                alert("คุณไม่สามารถทำข้อนี้ได้ โปรดทำข้อก่อนหน้าให้เสร็จก่อน");
+                return;
+            }
+            gotoQuestion(questionNumber);
         }
 
-        let currentQuestion = questions[currentIndex]
-        if(((currentIndex+1)%9)=== 0){
-            document.getElementById("question-number").innerText = `Stage ${((currentIndex )%9)+1}`;
-        }
-        else{
-            document.getElementById("question-number").innerText = `Stage ${((currentIndex + 1)%9)}`;
-        }
-        if((currentIndex+1)<=9 && (currentIndex+1)>0){
-            document.getElementById('text-level').innerText = "Newbie"
-        }
-        else if((currentIndex+1)<=18 && (currentIndex+1)>9){
-            document.getElementById('text-level').innerText = "Practice"
-        }
-        else if((currentIndex+1)<=27 && (currentIndex+1)>18){
-            document.getElementById('text-level').innerText = "Expert"
-        }
-        document.getElementById('question').innerText = `${currentQuestion.text}`;
-        
-        document.getElementById('status').innerText = "3 Sets"
-        if(completedQuestions[currentIndex]){
-            selectedState =completedQuestions[currentIndex];
-            lockSelectedArea();
-        }
-        else{
+        function gotoQuestion(questionNumber){
+            if(!questions || questions.length===0){
+                alert("โหลดโจทย์ไม่สำเร็จ");
+                return;
+            }
+            
+            currentIndex = questionNumber-1;
+
+            if(currentIndex < 0 || currentIndex>questions.length){
+                alert("ไม่พบข้อนี้");
+                return;
+            }
+
+            menuContainer.style.display = "none";
+            quizContainer.style.display = "flex";
+
             resetColor();
+            showQuestions();
         }
-    }
-    function resetColor(){
-        document.querySelectorAll("path , .rect-clickable").forEach(el =>{
-            el.classList.remove("clicked");
-        });
-        selectedState = 0;
-    }
-    function lockSelectedArea(){
-        const elements = document.querySelectorAll("path , .rect-clickable");
-        const values = [ 128 , 1 , 2 , 4 , 8 , 16 , 32 , 64 ];
 
-        elements.forEach(el =>{
-            el.classList.remove("clicked");
-        });
-        elements.forEach((el, index) =>{
-            if(index<values.length && (selectedState & values[index])){
-                el.classList.add("clicked");
-            }
-        })
+        function goBack(){
+            menuContainer.style.display = "block";
+            quizContainer.style.display = "none";
 
-    }
-
-    function toggleColor(element, value) {
-        if(element.classList.contains("clicked")){
-            element.classList.remove("clicked");
-            selectedState &= ~value;
+            updateButtonStatus();
         }
-        else{
-            element.classList.add("clicked");
-            selectedState |= value
-        }
-    }
 
-    function submitAnswer(){
-        if(currentIndex>=questions.length) return;
-        let correctAnswer = questions[currentIndex].answer.reduce((acc,val)=> acc | val,0);
-        if (selectedState === correctAnswer){
-            document.getElementById('status').innerText="ถูกต้อง";
-
-            completedQuestions[currentIndex] = selectedState;
-
-            if(currentIndex+1 === highestUnlockedQuestion){
-                highestUnlockedQuestion++;
+        function showQuestions(){
+            if(currentIndex>=questions.length){
+                document.getElementById('question').innerText="คุณทำครบทุกข้อแล้ว";
+                alert("เกมจบลงแล้ว")
+                return;
             }
 
-            saveProgress();
+            let currentQuestion = questions[currentIndex]
+            if(((currentIndex+1)%9)=== 0){
+                document.getElementById("question-number").innerText = `Stage ${((currentIndex )%9)+1}`;
+            }
+            else{
+                document.getElementById("question-number").innerText = `Stage ${((currentIndex + 1)%9)}`;
+            }
+            if((currentIndex+1)<=9 && (currentIndex+1)>0){
+                document.getElementById('text-level').innerText = "Newbie"
+            }
+            else if((currentIndex+1)<=18 && (currentIndex+1)>9){
+                document.getElementById('text-level').innerText = "Practice"
+            }
+            else if((currentIndex+1)<=27 && (currentIndex+1)>18){
+                document.getElementById('text-level').innerText = "Expert"
+            }
+            document.getElementById('question').innerText = `${currentQuestion.text}`;
+            
+            document.getElementById('status').innerText = "3 Sets"
+            if(completedQuestions[currentIndex]){
+                selectedState =completedQuestions[currentIndex];
+                lockSelectedArea();
+            }
+            else{
+                resetColor();
+            }
+        }
+        function resetColor(){
+            document.querySelectorAll("path , .rect-clickable").forEach(el =>{
+                el.classList.remove("clicked");
+            });
+            selectedState = 0;
+        }
+        function lockSelectedArea(){
+            const elements = document.querySelectorAll("path , .rect-clickable");
+            const values = [ 128 , 1 , 2 , 4 , 8 , 16 , 32 , 64 ];
 
-            setTimeout(()=>{
-                if(currentIndex+1 < questions.length && currentIndex+1 < highestUnlockedQuestion){
-                    currentIndex++;
-                    showQuestions();
+            elements.forEach(el =>{
+                el.classList.remove("clicked");
+            });
+            elements.forEach((el, index) =>{
+                if(index<values.length && (selectedState & values[index])){
+                    el.classList.add("clicked");
                 }
-                else{
-                    if(currentIndex+1 >= questions.length){
-                        alert("คุณทำครบทุกข้อแล้ว");
-                        goBack();
-                        swiper.slideTo(2);
+            })
+
+        }
+
+        function toggleColor(element, value) {
+            if(element.classList.contains("clicked")){
+                element.classList.remove("clicked");
+                selectedState &= ~value;
+            }
+            else{
+                element.classList.add("clicked");
+                selectedState |= value
+            }
+        }
+
+        function submitAnswer(){
+            if(currentIndex>=questions.length) return;
+            let correctAnswer = questions[currentIndex].answer.reduce((acc,val)=> acc | val,0);
+            if (selectedState === correctAnswer){
+                document.getElementById('status').innerText="ถูกต้อง";
+
+                completedQuestions[currentIndex] = selectedState;
+
+                if(currentIndex+1 === highestUnlockedQuestion){
+                    highestUnlockedQuestion++;
+                }
+
+                saveProgress();
+
+                setTimeout(()=>{
+                    if(currentIndex+1 < questions.length && currentIndex+1 < highestUnlockedQuestion){
+                        currentIndex++;
+                        showQuestions();
                     }
                     else{
-                        alert("error");
+                        if(currentIndex+1 >= questions.length){
+                            alert("คุณทำครบทุกข้อแล้ว");
+                            goBack();
+                            swiper.slideTo(2);
+                        }
+                        else{
+                            alert("error");
+                        }
                     }
-                }
-            },1000)
-        }
-        else{
-            document.getElementById('status').innerText='ลองอีกครั้ง'
-            document.getElementById('status').classList.remove('shake');
-            void document.getElementById('status').offsetWidth;
-            document.getElementById('status').classList.add('shake');
-            resetColor();
-        }
-
-    }
-
-    function updateButtonStatus(){
-        for(let i = 1 ; i <= 27 ; i++){
-            const questionIndex = i - 1;
-            const pageIndex = Math.floor(questionIndex / 9);
-            const buttonIndex = questionIndex % 9;
-
-            const page = document.querySelector(`.page${pageIndex+1}`);
-            if(!page) continue;
-
-            const buttons = page.querySelectorAll('.number');
-            if(buttonIndex >= buttons.length) continue;
-
-            const button = buttons[buttonIndex];
-
-            button.classList.remove('locked','completed');
-
-            if(completedQuestions[questionIndex]){
-                button.classList.add('completed');
+                },1000)
             }
-            else if(i > highestUnlockedQuestion){
-                button.classList.add('locked');
-            }
-        }
-    }
-
-    function saveProgress(){
-        localStorage.setItem('vennQuizCompleted',JSON.stringify(completedQuestions));
-        localStorage.setItem('vennQuizHighestUnlocked', highestUnlockedQuestion);
-    }
-
-    function loadProgress(){
-        try{
-            const savedCompleted = localStorage.getItem('vennQuizCompleted')
-            const savedHighest = localStorage.getItem('vennQuizHighestUnlocked')
-
-            if (savedCompleted){
-                completedQuestions = JSON.parse(savedCompleted);
-            }
-            if (savedHighest) {
-                highestUnlockedQuestion = parseInt(savedHighest);
-            }
-        }
-        catch (e){
-            console.error('Error loading saved progress:', e);
-        }
-    }
-
-    function goTimerGame(){
-        document.querySelector(".tPage1").style.display="none";
-        document.querySelector(".tPage2").style.display="block";
-
-        if(timerPopupRunning){
-            stopTimer();
-            showTimerPopup();
-        }
-        correctTimerQuestions = 0;
-        currentQuestionTimerIndex = 0;
-        resetColor();
-        changeOrder();
-        showTimerQuestions();
-        startTimer();
-
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-
-    }
-    function goTimerMenu(){
-        document.querySelector(".tPage2").style.display="none";
-        document.querySelector(".tPage1").style.display="flex";
-
-        stopTimer();
-        loadBestTimer();
-        document.getElementById("highestTime").innerText = displayTime(bestTime);
-
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-    }
-    function changeOrder(){
-        if(!randomQuestionsTimer.length || randomQuestionsTimer.length === questionsTimer.length){
-            randomQuestionsTimer = [...questionsTimer];
-        }
-
-        for(let i = randomQuestionsTimer.length - 1 ; i >= 0 ; i--){
-            const j = Math.floor(Math.random() * (i + 1));
-            [randomQuestionsTimer[i], randomQuestionsTimer[j]] = [randomQuestionsTimer[j], randomQuestionsTimer[i]];
-        }
-    }
-    function showTimerQuestions(){
-        if(correctTimerQuestions >= 10){
-            stopTimer();
-            alert("ทำครบแล้ว");
-            goTimerMenu();
-        }
-        document.getElementById("timerQuestion").innerText = (randomQuestionsTimer[currentQuestionTimerIndex].text);
-        document.getElementById("status-timer").innerText = "3 Sets"
-        document.getElementById("number-correct").innerText = "Timer"
-
-    }
-    function submitAnswerTimer(){
-        let correctAnswerTimer = randomQuestionsTimer[currentQuestionTimerIndex].answer.reduce((acc,val)=> acc|val,0);
-        if(selectedState === correctAnswerTimer){
-            document.getElementById("status-timer").innerText = "ถูกต้อง"
-            correctTimerQuestions++;
-            document.getElementById("number-correct").innerText = `${correctTimerQuestions} / 10`
-            setTimeout(()=>{
-                currentQuestionTimerIndex++;
-                showTimerQuestions();
+            else{
+                document.getElementById('status').innerText='ลองอีกครั้ง'
+                document.getElementById('status').classList.remove('shake');
+                void document.getElementById('status').offsetWidth;
+                document.getElementById('status').classList.add('shake');
                 resetColor();
-            },1000)
-        }
-        else{
-            document.getElementById("status-timer").innerText = "ลองอีกครั้ง";
-            document.getElementById("status-timer").classList.remove('shake');
-            void document.getElementById("status-timer").offsetWidth;
-            document.getElementById("status-timer").classList.add("shake");
-            resetColor();
-        }
-    }
-    function startTimer(){
-        if(isRunning) return;
-        startTime = Date.now() - elapsedTime;
-        timerInterval = setInterval(updateTimer, 10);
-        isRunning = true;
-    }
-    function stopTimer(){
-        clearInterval(timerInterval);
-        nowTime = Date.now() - startTime;
-        elapsedTime = 0;
-        if(correctTimerQuestions >= 10){saveBestTimer();}
-        isRunning = false;
-        displayTime(0);
-    }
-    function pauseTimer(){
-        if(!isRunning){
-            startTimer();
-        }
-        else if(isRunning){
-            clearInterval(timerInterval);
-            elapsedTime = Date.now() - startTime;
-            isRunning = false;
-        }
-    }
-    function updateTimer(){
-        const currentTime = Date.now() - startTime;
-        displayTime(currentTime);
-    }
-    function displayTime(time){
-        const milliseconds = time;
-        const seconds = Math.floor((time / 1000) % 60);
-        const minutes = Math.floor((time / (1000 * 60)) % 60);
+            }
 
-        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-        const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-        
-        document.getElementById("game-timer-tab").innerText = `${formattedMinutes} : ${formattedSeconds}`;
-        return `${formattedMinutes} : ${formattedSeconds}`;
-        
-    }
-    function newQuestion(){
-        currentQuestionTimerIndex++;
-        resetColor();
-        showTimerQuestions();
-        if(currentQuestionTimerIndex+1 >= randomQuestionsTimer.length){
-            changeOrder();
-            currentQuestionTimerIndex = 0;
         }
-    }
-    function saveBestTimer(){
-        if(nowTime < bestTime || !bestTime){
-            bestTime = nowTime;
-            localStorage.setItem('bestTimer' , bestTime);
-        }
-        return;
-    }
-    function loadBestTimer(){
-        try{
-            const savedBestTimer = localStorage.getItem('bestTimer');
-            if(savedBestTimer){
-                bestTime = parseInt(savedBestTimer);
+
+        function updateButtonStatus(){
+            for(let i = 1 ; i <= 27 ; i++){
+                const questionIndex = i - 1;
+                const pageIndex = Math.floor(questionIndex / 9);
+                const buttonIndex = questionIndex % 9;
+
+                const page = document.querySelector(`.page${pageIndex+1}`);
+                if(!page) continue;
+
+                const buttons = page.querySelectorAll('.number');
+                if(buttonIndex >= buttons.length) continue;
+
+                const button = buttons[buttonIndex];
+
+                button.classList.remove('locked','completed');
+
+                if(completedQuestions[questionIndex]){
+                    button.classList.add('completed');
+                }
+                else if(i > highestUnlockedQuestion){
+                    button.classList.add('locked');
+                }
             }
         }
-        catch(e){
-            console.error('Error loading saved progress:', e);
-        }
-    }
-    function resetTimerMode(){
-        const isConfirmed = confirm("คุณต้องการเริ่มต้นเวลาที่ดีที่สุดใหม่ใน Timer ใช่หรือไม่?");
-        if(isConfirmed){    
-            localStorage.removeItem("bestTimer");
-            bestTime = 0;
-            document.getElementById("highestTime").innerText = "00 : 00";
+
+        function saveProgress(){
+            localStorage.setItem('vennQuizCompleted',JSON.stringify(completedQuestions));
+            localStorage.setItem('vennQuizHighestUnlocked', highestUnlockedQuestion);
         }
 
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-    }
-    function resetStageMode(){
-        const ConfirmStage = confirm("คุณต้องการเริ่มต้นใหม่ในโหมด Stage ใช่หรือไม่?")
-        if(ConfirmStage){
-            localStorage.removeItem('vennQuizCompleted');
-            localStorage.removeItem('vennQuizHighestUnlocked');
-            highestUnlockedQuestion = 1;
-            completedQuestions = {};
-            goBack();
+        function loadProgress(){
+            try{
+                const savedCompleted = localStorage.getItem('vennQuizCompleted')
+                const savedHighest = localStorage.getItem('vennQuizHighestUnlocked')
+
+                if (savedCompleted){
+                    completedQuestions = JSON.parse(savedCompleted);
+                }
+                if (savedHighest) {
+                    highestUnlockedQuestion = parseInt(savedHighest);
+                }
+            }
+            catch (e){
+                console.error('Error loading saved progress:', e);
+            }
         }
-        
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-    }
 
-    function goTimerMode(){
-        document.querySelector(".menu").style.display="none";
-        document.querySelector(".stage-container").style.display="none";
-        document.querySelector(".timer-container").style.display="flex";
-        document.querySelector(".LearnPage").style.display="none";
+        function goTimerGame(){
+            document.querySelector(".tPage1").style.display="none";
+            document.querySelector(".tPage2").style.display="block";
 
-        loadBestTimer();
-        document.getElementById("highestTime").innerText = displayTime(bestTime);
+            if(timerPopupRunning){
+                stopTimer();
+                showTimerPopup();
+            }
+            correctTimerQuestions = 0;
+            currentQuestionTimerIndex = 0;
+            resetColor();
+            changeOrder();
+            showTimerQuestions();
+            startTimer();
 
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-    }
-    function gotoMenuGame(){
-        document.querySelector(".menuPage1").style.display="none";
-        document.querySelector(".menuPage2").style.display="block";
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
 
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-    }
-    function gobackMenuGame(){
-        document.querySelector(".menuPage2").style.display="none";
-        document.querySelector(".menuPage1").style.display="flex";
-        
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-    }
-    function gotoMenu(){
-        document.querySelector(".menu").style.display="flex";
-        document.querySelector(".stage-container").style.display="none";
-        document.querySelector(".timer-container").style.display="none";
-        document.querySelector(".LearnPage").style.display="none";
-
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-    }
-    function goStageMode(){
-        document.querySelector(".stage-container").style.display="block";
-        document.querySelector(".timer-container").style.display="none";
-        document.querySelector(".menu").style.display="none";
-        document.querySelector(".LearnPage").style.display="none";
-
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-    }
-    function showTimerPopup(){
-        if(!timerPopupRunning){
-            document.querySelector(".popup-full-to-center").style.display="flex";
-            timerPopupRunning = true;
         }
-        else if(timerPopupRunning){
-            document.querySelector(".popup-full-to-center").style.display="none";
-            timerPopupRunning = false;
-        }
-        pauseTimer();
-    }
-    function showGif(){
-        setTimeout(()=>{
-            document.querySelector(".gif img").setAttribute("src", document.querySelector(".gif img").getAttribute("src").split('?')[0] + '?t=' + new Date().getTime());
-        },10)
-        document.querySelector(".gif").style.display = "flex";
-        document.querySelector(".tabBurger").style.display="none";
-        
-        burgerRunning = false;
-        if(isRunning){
-            showTimerPopup();
-        }
-    }
-    function dontUseGif(){
-        document.querySelector(".gif").style.display="none";
-    }
-    function showBurgerTab(){
-        if(!burgerRunning){
-            document.querySelector(".tabBurger").style.display="flex";
-            document.querySelector(".PageSmallTab").style.display="none";
-            document.querySelector(".ResetSmallTab").style.display="none";
-            burgerRunning = true;
-        }
-        else if(burgerRunning){
+        function goTimerMenu(){
+            document.querySelector(".tPage2").style.display="none";
+            document.querySelector(".tPage1").style.display="flex";
+
+            stopTimer();
+            loadBestTimer();
+            document.getElementById("highestTime").innerText = displayTime(bestTime);
+
             document.querySelector(".tabBurger").style.display="none";
             burgerRunning = false;
         }
-    }
-    function openPageTab(){
-        document.querySelector(".PageSmallTab").style.display="flex";
-        document.querySelector(".ResetSmallTab").style.display="none";
-    }
-    function openResetTab(){
-        document.querySelector(".PageSmallTab").style.display="none";
-        document.querySelector(".ResetSmallTab").style.display="flex";
-    }
-    function gotoLearn(){
-        document.querySelector(".LearnPage").style.display="flex"
-        document.querySelector(".container").style.display="none"
-        burgerRunning = false;
-    }
-    function closeLearn(){
-        document.querySelector(".LearnPage").style.display="none"
-        document.querySelector(".container").style.display="flex"
-        document.querySelector(".tabBurger").style.display="none";
-        burgerRunning = false;
-    }
-    function wtf(){
-        alert("กำลังพัฒนา")
-    }
+        function changeOrder(){
+            if(!randomQuestionsTimer.length || randomQuestionsTimer.length === questionsTimer.length){
+                randomQuestionsTimer = [...questionsTimer];
+            }
 
-window.onload = function(){
-    loadQuestions();
-    loadTimerQuestion();
-}
-</script>
-</html>
+            for(let i = randomQuestionsTimer.length - 1 ; i >= 0 ; i--){
+                const j = Math.floor(Math.random() * (i + 1));
+                [randomQuestionsTimer[i], randomQuestionsTimer[j]] = [randomQuestionsTimer[j], randomQuestionsTimer[i]];
+            }
+        }
+        function showTimerQuestions(){
+            if(correctTimerQuestions >= setCountItem){
+                stopTimer();
+                goTimerMenu();
+            }
+            document.getElementById("timerQuestion").innerText = (randomQuestionsTimer[currentQuestionTimerIndex].text);
+            document.getElementById("status-timer").innerText = "3 Sets"
+            document.getElementById("number-correct").innerText = `${correctTimerQuestions + 1} / 10`
+            document.getElementById("timerScore").innerText = `${correctTimerQuestions + 1} / 10`
+            setTimeout(() => {
+                document.getElementById("number-correct").innerText = "Timer"
+            }, 1000);
+        }
+        function submitAnswerTimer(){
+            let correctAnswerTimer = randomQuestionsTimer[currentQuestionTimerIndex].answer.reduce((acc,val)=> acc|val,0);
+            if(selectedState === correctAnswerTimer){
+                document.getElementById("status-timer").innerText = "ถูกต้อง"
+                correctTimerQuestions++;
+                if(correctTimerQuestions >= setCountItem){
+                    document.getElementById("number-correct").innerText = "ทำครบแล้ว"
+                }
+                setTimeout(()=>{
+                    currentQuestionTimerIndex++;
+                    showTimerQuestions();
+                    resetColor();
+                },1000)
+            }
+            else{
+                document.getElementById("status-timer").innerText = "ลองอีกครั้ง";
+                document.getElementById("status-timer").classList.remove('shake');
+                void document.getElementById("status-timer").offsetWidth;
+                document.getElementById("status-timer").classList.add("shake");
+                resetColor();
+            }
+        }
+        function startTimer(){
+            if(isRunning) return;
+            startTime = Date.now() - elapsedTime;
+            timerInterval = setInterval(updateTimer, 10);
+            isRunning = true;
+        }
+        function stopTimer(){
+            clearInterval(timerInterval);
+            nowTime = Date.now() - startTime;
+            elapsedTime = 0;
+            if(correctTimerQuestions >= setCountItem){
+                saveBestTimer();
+            }
+            isRunning = false;
+            displayTime(0);
+        }
+        function pauseTimer(){
+            if(!isRunning){
+                startTimer();
+            }
+            else if(isRunning){
+                clearInterval(timerInterval);
+                elapsedTime = Date.now() - startTime;
+                isRunning = false;
+            }
+        }
+        function updateTimer(){
+            const currentTime = Date.now() - startTime;
+            displayTime(currentTime);
+        }
+        function displayTime(time){
+            if (!time){
+                return " - ";
+            }
+            const milliseconds = time;
+            const seconds = Math.floor((time / 1000) % 60);
+            const minutes = Math.floor((time / (1000 * 60)) % 60);
+
+            const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+            const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+            
+            document.getElementById("game-timer-tab").innerText = `${formattedMinutes} : ${formattedSeconds}`;
+            return `${formattedMinutes} : ${formattedSeconds}`;
+            
+        }
+        function newQuestion(){
+            currentQuestionTimerIndex++;
+            resetColor();
+            showTimerQuestions();
+            if(currentQuestionTimerIndex+1 >= randomQuestionsTimer.length){
+                changeOrder();
+                currentQuestionTimerIndex = 0;
+            }
+        }
+        function saveBestTimer(){
+            if(nowTime < bestTime || !bestTime){
+                bestTime = nowTime;
+                localStorage.setItem('bestTimer' , bestTime);
+            }
+            return;
+        }
+        function loadBestTimer(){
+            try{
+                const savedBestTimer = localStorage.getItem('bestTimer');
+                if(savedBestTimer){
+                    bestTime = parseInt(savedBestTimer);
+                }
+            }
+            catch(e){
+                console.error('Error loading saved progress:', e);
+            }
+        }
+        function resetTimerMode(){
+            const isConfirmed = confirm("คุณต้องการเริ่มต้นเวลาที่ดีที่สุดใหม่ใน Timer ใช่หรือไม่?");
+            if(isConfirmed){    
+                localStorage.removeItem("bestTimer");
+                bestTime = 0;
+                document.getElementById("highestTime").innerText = " - ";
+            }
+
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
+        }
+        function resetStageMode(){
+            const ConfirmStage = confirm("คุณต้องการเริ่มต้นใหม่ในโหมด Stage ใช่หรือไม่?")
+            if(ConfirmStage){
+                localStorage.removeItem('vennQuizCompleted');
+                localStorage.removeItem('vennQuizHighestUnlocked');
+                highestUnlockedQuestion = 1;
+                completedQuestions = {};
+                goBack();
+            }
+            
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
+        }
+
+        function goTimerMode(){
+            document.querySelector(".menu").style.display="none";
+            document.querySelector(".stage-container").style.display="none";
+            document.querySelector(".timer-container").style.display="flex";
+            document.querySelector(".LearnPage").style.display="none";
+
+            loadBestTimer();
+            document.getElementById("highestTime").innerText = displayTime(bestTime);
+
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
+        }
+        function gotoMenuGame(){
+            document.querySelector(".menuPage1").style.display="none";
+            document.querySelector(".menuPage2").style.display="block";
+
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
+        }
+        function gobackMenuGame(){
+            document.querySelector(".menuPage2").style.display="none";
+            document.querySelector(".menuPage1").style.display="flex";
+            
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
+        }
+        function gotoMenu(){
+            document.querySelector(".menu").style.display="flex";
+            document.querySelector(".stage-container").style.display="none";
+            document.querySelector(".timer-container").style.display="none";
+            document.querySelector(".LearnPage").style.display="none";
+
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
+        }
+        function goStageMode(){
+            document.querySelector(".stage-container").style.display="block";
+            document.querySelector(".timer-container").style.display="none";
+            document.querySelector(".menu").style.display="none";
+            document.querySelector(".LearnPage").style.display="none";
+
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
+        }
+        function showTimerPopup(){
+            if(!timerPopupRunning){
+                document.querySelector(".popup-full-to-center").style.display="flex";
+                timerPopupRunning = true;
+            }
+            else if(timerPopupRunning){
+                document.querySelector(".popup-full-to-center").style.display="none";
+                timerPopupRunning = false;
+            }
+            pauseTimer();
+        }
+        function showGif(){
+            setTimeout(()=>{
+                document.querySelector(".gif img").setAttribute("src", document.querySelector(".gif img").getAttribute("src").split('?')[0] + '?t=' + new Date().getTime());
+            },10)
+            document.querySelector(".gif").style.display = "flex";
+            document.querySelector(".tabBurger").style.display="none";
+            
+            burgerRunning = false;
+            if(isRunning){
+                showTimerPopup();
+            }
+        }
+        function dontUseGif(){
+            document.querySelector(".gif").style.display="none";
+        }
+        function showBurgerTab(){
+            if(!burgerRunning){
+                document.querySelector(".tabBurger").style.display="flex";
+                document.querySelector(".PageSmallTab").style.display="none";
+                document.querySelector(".ResetSmallTab").style.display="none";
+                burgerRunning = true;
+            }
+            else if(burgerRunning){
+                document.querySelector(".tabBurger").style.display="none";
+                burgerRunning = false;
+            }
+        }
+        function openPageTab(){
+            document.querySelector(".PageSmallTab").style.display="flex";
+            document.querySelector(".ResetSmallTab").style.display="none";
+        }
+        function openResetTab(){
+            document.querySelector(".PageSmallTab").style.display="none";
+            document.querySelector(".ResetSmallTab").style.display="flex";
+        }
+        function gotoLearn(){
+            document.querySelector(".LearnPage").style.display="flex"
+            document.querySelector(".container").style.display="none"
+            burgerRunning = false;
+        }
+        function closeLearn(){
+            document.querySelector(".LearnPage").style.display="none"
+            document.querySelector(".container").style.display="flex"
+            document.querySelector(".tabBurger").style.display="none";
+            burgerRunning = false;
+        }
+        function wtf(){
+            alert("กำลังพัฒนา")
+        }
+
+    window.onload = function(){
+        loadQuestions();
+        loadTimerQuestion();
+    }
+    </script>
+    </html>
