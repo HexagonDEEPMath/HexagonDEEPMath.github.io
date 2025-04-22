@@ -978,16 +978,27 @@
                 font-size: 18px;
                 font-weight: bold;
             }
-            .LearnPage .gobackLearn{
-                height: 38px;
-                margin: 20px;
+            .LearnPage .fixedLearnFooter .gobackLearn{
+                height: 70%;
+                margin: 0 0 0 20px;
                 width: auto;
                 align-self: flex-start;
                 cursor: pointer;
+                opacity: 100%;
             }
             .stage-container .body{
                 justify-content: space-evenly;
                 flex-wrap: wrap;
+            }
+            .fixedLearnFooter{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 390px;
+                height: 8%;
+                background-color: rgba(255,255,255,0.8);
+                position: fixed;
+                bottom: 0;
             }
         </style>
     </head>
@@ -1463,7 +1474,10 @@
                     </div>
                 </div>
             </div>
-            <img src="go-back.png" alt="" class="gobackLearn" onclick="closeLearn()">
+            <div style="height: 70px;"></div>
+            <div class="fixedLearnFooter">
+                <img src="go-back.png" alt="" class="gobackLearn" onclick="closeLearn()">
+            </div>
         </div>
     </body>
     <script>
