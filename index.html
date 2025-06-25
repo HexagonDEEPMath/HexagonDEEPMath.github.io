@@ -1650,6 +1650,7 @@
             let correctAnswer = questions[currentIndex].answer.reduce((acc,val)=> acc | val,0);
             if (selectedState === correctAnswer){
                 document.getElementById('status').innerText="ถูกต้อง";
+                alert("ถูกต้อง");
 
                 completedQuestions[currentIndex] = selectedState;
 
