@@ -105,6 +105,9 @@
                 fill: white;
                 stroke: black;
             }
+            .correct{
+                stroke: green;
+            }
             .clicked {
                 fill: #a5b375 !important;
             }
@@ -1650,8 +1653,10 @@
             let correctAnswer = questions[currentIndex].answer.reduce((acc,val)=> acc | val,0);
             if (selectedState === correctAnswer){
                 document.getElementById('status').innerText="ถูกต้อง";
-                alert("ถูกต้อง");
-
+                const elements = document.querySelectorAll("path, .rect-clickable");
+                elements.forEach(element => {
+                    element.classList.add("correct");
+                });
                 completedQuestions[currentIndex] = selectedState;
 
                 if(currentIndex+1 === highestUnlockedQuestion){
@@ -1661,6 +1666,9 @@
                 saveProgress();
 
                 setTimeout(()=>{
+                    elements.forEach(element => {
+                        element.classList.remove("correct");
+                    });
                     if(currentIndex+1 < questions.length && currentIndex+1 < highestUnlockedQuestion){
                         currentIndex++;
                         showQuestions();
