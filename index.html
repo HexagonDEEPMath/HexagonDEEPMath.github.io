@@ -108,6 +108,9 @@
             .correct{
                 stroke: green;
             }
+            .wrong{
+                storke: red;
+            }
             .clicked {
                 fill: #a5b375 !important;
             }
@@ -1687,10 +1690,18 @@
             }
             else{
                 document.getElementById('status').innerText='ลองอีกครั้ง'
+                elements.forEach(element => {
+                    element.classList.add("wrong")
+                })
                 document.getElementById('status').classList.remove('shake');
                 void document.getElementById('status').offsetWidth;
                 document.getElementById('status').classList.add('shake');
                 resetColor();
+                setTimeout(() =>{
+                    elements.forEach(element =>{
+                        element.classList.remove("wrong")
+                    })
+                },1000)
             }
 
         }
