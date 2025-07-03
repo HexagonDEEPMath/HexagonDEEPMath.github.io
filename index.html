@@ -1653,10 +1653,10 @@
 
         function submitAnswer(){
             if(currentIndex>=questions.length) return;
+            const elements = document.querySelectorAll("path, .rect-clickable");
             let correctAnswer = questions[currentIndex].answer.reduce((acc,val)=> acc | val,0);
             if (selectedState === correctAnswer){
                 document.getElementById('status').innerText="ถูกต้อง";
-                const elements = document.querySelectorAll("path, .rect-clickable");
                 elements.forEach(element => {
                     element.classList.add("correct");
                 });
