@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -1691,16 +1691,16 @@
             else{
                 document.getElementById('status').innerText='ลองอีกครั้ง'
                 elements.forEach(element => {
-                    element.classList.add("wrong")
-                })
+                    element.classList.add("wrong");
+                });
                 document.getElementById('status').classList.remove('shake');
                 void document.getElementById('status').offsetWidth;
                 document.getElementById('status').classList.add('shake');
                 resetColor();
                 setTimeout(() =>{
                     elements.forEach(element =>{
-                        element.classList.remove("wrong")
-                    })
+                        element.classList.remove("wrong");
+                    });
                 },1000)
             }
 
